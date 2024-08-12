@@ -7,6 +7,7 @@
     android:paddingVertical="7dp">
 
     <ImageView
+        android:id="@+id/iv_toolbar_main_logo"
         android:layout_width="94dp"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
@@ -14,6 +15,22 @@
         android:src="@mipmap/ic_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_toolbar_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비디오"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_toolbar_tour_spot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="여행지"
+        app:layout_constraintEnd_toStartOf="@id/btn_toolbar_video"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

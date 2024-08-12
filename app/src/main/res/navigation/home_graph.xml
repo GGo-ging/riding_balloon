@@ -32,13 +32,9 @@
         tools:layout="@layout/fragment_video_detail" />
     <action
         android:id="@+id/action_global_tour_spot_detail"
-        app:destination="@id/navigation_tour_spot_detail"
-        app:enterAnim="@android:anim/fade_in"
-        app:exitAnim="@android:anim/fade_out" />
+        app:destination="@id/navigation_tour_spot_detail" />
     <action
         android:id="@+id/action_global_video_detail"
-        app:destination="@id/navigation_video_detail"
-        app:enterAnim="@android:anim/fade_in"
-        app:exitAnim="@android:anim/fade_out" />
+        app:destination="@id/navigation_video_detail" />
 
 </navigation>

@@ -6,10 +6,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.ActivityMainBinding
+import com.example.riding_balloon.presentation.home.HomeFragmentDirections
+import com.example.riding_balloon.presentation.tourspotdetail.TourSpotDetailFragment
+import com.example.riding_balloon.presentation.videodetail.VideoDetailFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         setBottomNavigation()
+        initButton()
     }
 
     private fun setBottomNavigation() = with(binding) {
@@ -39,11 +45,23 @@ class MainActivity : AppCompatActivity() {
                     bottomNavigationMain.visibility = View.VISIBLE
                     layoutToolbarMain.root.visibility = View.VISIBLE
                 }
+
                 else -> {
                     bottomNavigationMain.visibility = View.GONE
                     layoutToolbarMain.root.visibility = View.GONE
                 }
             }
+        }
+    }
+
+    private fun initButton() = with(binding) {
+        layoutToolbarMain.btnToolbarTourSpot.setOnClickListener {
+            val action = HomeFragmentDirections.actionGlobalTourSpotDetail()
+            findNavController(R.id.container_main).navigate(action)
+        }
+        layoutToolbarMain.btnToolbarVideo.setOnClickListener {
+            val action = HomeFragmentDirections.actionGlobalVideoDetail()
+            findNavController(R.id.container_main).navigate(action)
         }
     }
 }
