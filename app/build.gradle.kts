@@ -70,6 +70,9 @@ dependencies {
     // Paging 3
     implementation(libs.androidx.paging)
 
+    // Dot indicator
+    implementation(libs.dotindicator)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
