@@ -1,15 +1,15 @@
-package com.example.riding_balloon.presentation.tourspotdetail
+package com.example.riding_balloon.presentation.travelspotdetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.riding_balloon.databinding.FragmentTourSpotDetailBinding
+import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
 
-class TourSpotDetailFragment : Fragment() {
+class TravelSpotDetailFragment : Fragment() {
 
-    private var _binding: FragmentTourSpotDetailBinding? = null
+    private var _binding: FragmentTravelSpotDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class TourSpotDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTourSpotDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentTravelSpotDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 

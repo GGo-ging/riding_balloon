@@ -1,6 +1,6 @@
 package com.jeongu.imagesearchapp.network
 
-import com.example.riding_balloon.data.remote.YoutubeApi
+import com.example.riding_balloon.data.source.remote.YoutubeApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

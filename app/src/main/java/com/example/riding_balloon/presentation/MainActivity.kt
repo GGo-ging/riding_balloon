@@ -6,15 +6,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.commit
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.ActivityMainBinding
 import com.example.riding_balloon.presentation.home.HomeFragmentDirections
-import com.example.riding_balloon.presentation.tourspotdetail.TourSpotDetailFragment
-import com.example.riding_balloon.presentation.videodetail.VideoDetailFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,8 +52,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButton() = with(binding) {
-        layoutToolbarMain.btnToolbarTourSpot.setOnClickListener {
-            val action = HomeFragmentDirections.actionGlobalTourSpotDetail()
+        layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
+            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail()
             findNavController(R.id.container_main).navigate(action)
         }
         layoutToolbarMain.btnToolbarVideo.setOnClickListener {

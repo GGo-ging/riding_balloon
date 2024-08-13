@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_toolbar_tour_spot"
+        android:id="@+id/btn_toolbar_travel_spot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="여행지"
