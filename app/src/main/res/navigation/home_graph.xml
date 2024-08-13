@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.riding_balloon.presentation.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.riding_balloon.presentation.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/navigation_my_page"
+        android:name="com.example.riding_balloon.presentation.mypage.MyPageFragment"
+        android:label="MyPageFragment"
+        tools:layout="@layout/fragment_my_page" />
+    <fragment
+        android:id="@+id/navigation_travel_spot_detail"
+        android:name="com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailFragment"
+        android:label="TravelSpotDetailFragment"
+        tools:layout="@layout/fragment_travel_spot_detail" />
+    <fragment
+        android:id="@+id/navigation_video_detail"
+        android:name="com.example.riding_balloon.presentation.videodetail.VideoDetailFragment"
+        android:label="VideoDetailFragment"
+        tools:layout="@layout/fragment_video_detail" />
+    <action
+        android:id="@+id/action_global_travel_spot_detail"
+        app:destination="@id/navigation_travel_spot_detail" />
+    <action
+        android:id="@+id/action_global_video_detail"
+        app:destination="@id/navigation_video_detail" />
+
+</navigation>
