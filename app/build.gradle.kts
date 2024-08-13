@@ -58,20 +58,22 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     // Jetpack Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation(libs.bundles.navigation)
 
     // Glide
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation (libs.glide)
 
     // Network
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation(libs.bundles.retrofit)
+    implementation(platform(libs.okhttp.bom))
+
+    // Paging 3
+    implementation(libs.androidx.paging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
 }
