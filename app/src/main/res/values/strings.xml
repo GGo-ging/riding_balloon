@@ -14,6 +14,7 @@
     <!-- My Page -->
 
     <!-- Travel Spot Detail -->
+    <string name="description_back_image">뒤로 가기 이미지</string>
 
     <!-- Video Detail -->
     <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>
