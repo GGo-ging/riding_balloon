@@ -1,10 +1,12 @@
 package com.example.riding_balloon.presentation.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 
@@ -16,6 +18,7 @@ class MyPageFragment : Fragment() {
         FavoriteVideoListAdapter { favoriteVideoInfo ->
         }
     }
+    private val favoriteVideoViewModel by activityViewModels<FavoriteVideoViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +32,7 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initViewModel()
     }
 
     private fun initView() = with(binding) {
@@ -42,6 +46,36 @@ class MyPageFragment : Fragment() {
             FavoriteVideoInfo(6, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
         )
         favoriteVideoListAdapter.submitList(list)
+    }
+
+    private fun initViewModel() {
+        favoriteVideoViewModel.fetchSearchResult("일본여행")
+        favoriteVideoViewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
+            searchResult?.let {
+                it.forEach { item ->
+                    Log.d("MyPageFragment", "searchResult: ${item.snippet?.title}")
+                }
+            }
+        }
+        favoriteVideoViewModel.trendingResult.observe(viewLifecycleOwner) { trendingResult ->
+            trendingResult?.let {
+                it.forEach { item ->
+                    Log.d("MyPageFragment", "trendingResult: ${item.snippet?.title}")
+                }
+            }
+        }
+        favoriteVideoViewModel.searchResultOrderByViewCount.observe(viewLifecycleOwner) { searchResultOrderByViewCount ->
+            searchResultOrderByViewCount?.let {
+                it.forEach { item ->
+                    Log.d("MyPageFragment", "searchResultOrderByViewCount: ${item.snippet?.title}")
+                }
+            }
+        }
+        favoriteVideoViewModel.videoDetail.observe(viewLifecycleOwner) { videoDetail ->
+            videoDetail?.let {
+                Log.d("MyPageFragment", "videoDetail: ${videoDetail.title}")
+            }
+        }
     }
 
     override fun onDestroyView() {
