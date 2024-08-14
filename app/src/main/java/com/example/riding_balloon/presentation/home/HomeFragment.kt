@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.riding_balloon.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-
+//    private val binding: FragmentHomeBinding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
