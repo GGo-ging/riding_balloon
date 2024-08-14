@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 val localPropertiesFile = rootProject.file("local.properties")
@@ -70,10 +72,18 @@ dependencies {
     // Paging 3
     implementation(libs.androidx.paging)
 
+    // Dagger Hilt
+    implementation ("com.google.dagger:hilt-android:2.52")
+    kapt ("com.google.dagger:hilt-compiler:2.52")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.google.android.exoplayer:exoplayer:2.19.1")
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
+}
+
+kapt {
+    correctErrorTypes = true
 }
