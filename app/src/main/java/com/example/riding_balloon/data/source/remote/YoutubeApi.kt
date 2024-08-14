@@ -1,6 +1,6 @@
 package com.example.riding_balloon.data.source.remote
 
-import com.example.riding_balloon.data.model.ChannelDetailsResponse
+import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
 import com.example.riding_balloon.data.model.SearchVideoResponse
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.VideoDetailsResponse
