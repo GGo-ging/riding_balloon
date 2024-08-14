@@ -23,3 +23,12 @@ data class Thumbnail(
     @SerializedName("height")
     val height: Int?
 )
+
+data class ChannelThumbnails(
+    @SerializedName("default")
+    val default: Thumbnail?,
+    @SerializedName("medium")
+    val medium: Thumbnail?,
+    @SerializedName("high")
+    val high: Thumbnail?
+)

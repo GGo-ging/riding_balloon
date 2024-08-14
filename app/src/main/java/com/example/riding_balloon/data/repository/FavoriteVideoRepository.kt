@@ -1,8 +1,9 @@
 package com.example.riding_balloon.data.repository
 
+import com.example.riding_balloon.data.model.ChannelDetailsResponse
 import com.example.riding_balloon.data.model.SearchVideoResponse
 import com.example.riding_balloon.data.model.TrendingVideoResponse
-import com.example.riding_balloon.data.model.VideoDetailResponse
+import com.example.riding_balloon.data.model.VideoDetailsResponse
 
 interface FavoriteVideoRepository {
 
@@ -12,5 +13,7 @@ interface FavoriteVideoRepository {
 
     suspend fun searchVideosOrderByViewCount(query: String): SearchVideoResponse
 
-    suspend fun getVideoDetail(id: String): VideoDetailResponse
+    suspend fun getVideoDetails(id: String): VideoDetailsResponse
+
+    suspend fun getChannelDetails(id: String): ChannelDetailsResponse
 }

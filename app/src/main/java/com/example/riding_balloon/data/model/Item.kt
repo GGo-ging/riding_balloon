@@ -38,3 +38,16 @@ data class VideoItem(
     @SerializedName("statistics")
     val statistics: Statistics?
 )
+
+data class ChannelItem(
+    @SerializedName("kind")
+    val kind: String?,
+    @SerializedName("etag")
+    val etag: String?,
+    @SerializedName("id")
+    val id: String?,
+    @SerializedName("snippet")
+    val snippet: ChannelSnippet?,
+    @SerializedName("statistics")
+    val statistics: ChannelStatistics?
+)

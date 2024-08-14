@@ -1,8 +1,9 @@
 package com.example.riding_balloon.data.source.remote
 
+import com.example.riding_balloon.data.model.ChannelDetailsResponse
 import com.example.riding_balloon.data.model.SearchVideoResponse
 import com.example.riding_balloon.data.model.TrendingVideoResponse
-import com.example.riding_balloon.data.model.VideoDetailResponse
+import com.example.riding_balloon.data.model.VideoDetailsResponse
 import com.example.riding_balloon.util.Constants.API_KEY
 import com.example.riding_balloon.util.Constants.API_MAX_RESULT_20
 import com.example.riding_balloon.util.Constants.API_MAX_RESULT_50
@@ -22,7 +23,7 @@ interface YoutubeApi {
         @Query("key") key: String = API_KEY
     ): TrendingVideoResponse
 
-    // 동영상 검색
+    // 동영상 검색 -> q 값에 검색어를 넣어서 호출
     @GET("search")
     suspend fun searchVideos(
         @Query("part") part: String = "snippet",
@@ -33,7 +34,7 @@ interface YoutubeApi {
         @Query("videoCategoryId") videoCategoryId: String = "19",
     ): SearchVideoResponse
 
-    // 동영상 검색, 조회수 순으로 정렬
+    // 동영상 검색, 조회수 순으로 정렬 -> order 값에 viewCount 추가한 것
     @GET("search")
     suspend fun searchVideosOrderByViewCount(
         @Query("part") part: String = "snippet",
@@ -45,12 +46,19 @@ interface YoutubeApi {
         @Query("order") order: String = "viewCount",
     ): SearchVideoResponse
 
-    // 동영상 상세 정보 가져오기
+    // 동영상 상세 정보 가져오기 -> id 값에 동영상 id를 넣어서 호출
     @GET("videos")
-    suspend fun getVideoDetail(
+    suspend fun getVideoDetails(
         @Query("part") part: String = "snippet,statistics",
         @Query("id") id: String,
         @Query("key") key: String = API_KEY
-    ): VideoDetailResponse
+    ): VideoDetailsResponse
 
+    // 채널 상세 정보 가져오기 -> id 값에 채널 id를 넣어서 호출
+    @GET("channels")
+    suspend fun getChannelDetails(
+        @Query("part") part: String = "snippet,statistics",
+        @Query("id") id: String,
+        @Query("key") key: String = API_KEY
+    ): ChannelDetailsResponse
 }

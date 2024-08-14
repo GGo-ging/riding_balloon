@@ -53,3 +53,20 @@ data class VideoSnippet(
     @SerializedName("defaultAudioLanguage")
     val defaultAudioLanguage: String?
 )
+
+data class ChannelSnippet(
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("description")
+    val description: String?,
+    @SerializedName("customUrl")
+    val customUrl: String?,
+    @SerializedName("publishedAt")
+    val publishedAt: String?,
+    @SerializedName("thumbnails")
+    val thumbnails: ChannelThumbnails?,
+    @SerializedName("localized")
+    val localized: Localized?,
+    @SerializedName("country")
+    val country: String?
+)

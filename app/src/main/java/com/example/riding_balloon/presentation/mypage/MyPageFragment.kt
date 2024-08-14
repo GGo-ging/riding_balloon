@@ -76,6 +76,11 @@ class MyPageFragment : Fragment() {
                 Log.d("MyPageFragment", "videoDetail: ${videoDetail.title}")
             }
         }
+        favoriteVideoViewModel.channelDetail.observe(viewLifecycleOwner) { channelDetail ->
+            channelDetail?.let {
+                Log.d("MyPageFragment", "channelDetail: ${channelDetail.title}")
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -12,3 +12,14 @@ data class Statistics(
     @SerializedName("commentCount")
     val commentCount: String?
 )
+
+data class ChannelStatistics(
+    @SerializedName("viewCount")
+    val viewCount: String?,
+    @SerializedName("subscriberCount")
+    val subscriberCount: String?,
+    @SerializedName("hiddenSubscriberCount")
+    val hiddenSubscriberCount: Boolean?,
+    @SerializedName("videoCount")
+    val videoCount: String?
+)
