@@ -34,8 +34,8 @@ class FavoriteVideoViewModel (
     fun fetchSearchResult(query: String, page: Int = 1) {
         viewModelScope.launch {
             runCatching {
-                val searchResult = repository.searchVideos(query)
-                _searchResult.value = searchResult.items
+//                val searchResult = repository.searchVideos(query)
+//                _searchResult.value = searchResult.items
 
                 val trendingResult = repository.getTrendingVideos()
                 _trendingResult.value = trendingResult.items?.filter { it.snippet?.categoryId == "19" }
@@ -46,8 +46,8 @@ class FavoriteVideoViewModel (
 //                val combinedResults = (categoryFiltered.orEmpty() + tagFiltered.orEmpty()).distinctBy { it.id }
 //                _trendingResult.value = combinedResults
 
-                val searchResultOrderByViewCount = repository.searchVideosOrderByViewCount(query)
-                _searchResultOrderByViewCount.value = searchResultOrderByViewCount.items
+//                val searchResultOrderByViewCount = repository.searchVideosOrderByViewCount(query)
+//                _searchResultOrderByViewCount.value = searchResultOrderByViewCount.items
 
                 val videoDetail = repository.getVideoDetails("lvjvjhcpES4")
                 _videoDetail.value = videoDetail.items?.first()?.snippet
