@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="2dp"
+    android:paddingVertical="4dp">
+
+    <ImageView
+        android:id="@+id/iv_grid_video_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/description_youtube_video_thumbnail"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="h, 1920:1080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/grey_shade_40" />
+
+    <TextView
+        android:id="@+id/tv_grid_video_title"
+        style="@style/TextLabel.S18"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="7dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_grid_video_thumbnail"
+        tools:text="한국식 오징어 낚싯배를 탄 우즈벡 형님들" />
+
+    <TextView
+        android:id="@+id/tv_grid_video_channel"
+        style="@style/TextCaption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_grid_video_title"
+        app:layout_constraintStart_toStartOf="@id/tv_grid_video_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_grid_video_title"
+        tools:text="곽튜브" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
