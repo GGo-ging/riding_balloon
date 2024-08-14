@@ -23,6 +23,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/yp_youtube_player"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_back_bar"
+        tools:ignore="MissingConstraints" />
+
     <ScrollView
         android:id="@+id/sl_detail_page"
         android:layout_width="0dp"
@@ -32,18 +41,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_back_bar">
+        app:layout_constraintTop_toBottomOf="@id/yp_youtube_player">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/yp_youtube_player"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/tv_detail_page_main_title"
@@ -54,7 +57,7 @@
                 android:text="@string/detail_page_main_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/yp_youtube_player"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
             <TextView
