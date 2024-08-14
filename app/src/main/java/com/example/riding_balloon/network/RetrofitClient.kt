@@ -1,4 +1,4 @@
-package com.jeongu.imagesearchapp.network
+package com.example.riding_balloon.network
 
 import com.example.riding_balloon.data.source.remote.YoutubeApi
 import okhttp3.OkHttpClient

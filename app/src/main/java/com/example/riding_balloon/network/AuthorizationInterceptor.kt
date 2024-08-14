@@ -1,4 +1,4 @@
-package com.jeongu.imagesearchapp.network
+package com.example.riding_balloon.network
 
 import okhttp3.Interceptor
 
