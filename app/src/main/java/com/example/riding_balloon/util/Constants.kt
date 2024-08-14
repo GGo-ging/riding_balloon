@@ -8,4 +8,6 @@ object Constants {
     const val API_MAX_RESULT_20 = 20
     const val API_REGION = "KR"
     const val API_KEY = BuildConfig.YOUTUBE_API_KEY
+
+    const val PREF_FAVORITE = "pref_favorite"
 }
