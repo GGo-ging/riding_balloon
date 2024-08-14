@@ -57,8 +57,8 @@ interface YoutubeApi {
     // 채널 상세 정보 가져오기 -> id 값에 채널 id를 넣어서 호출
     @GET("channels")
     suspend fun getChannelDetails(
-        @Query("part") part: String = "snippet,statistics",
-        @Query("id") id: String,
+        @Query("part") part: String = "snippet, statistics",
+        @Query("forHandle") id: String, //id로 넣으면 안 돼서 forHandle로 교체
         @Query("key") key: String = API_KEY
     ): ChannelDetailsResponse
 }
