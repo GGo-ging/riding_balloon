@@ -20,8 +20,36 @@
     <string name="description_youtube_video_thumbnail">유튜브 비디오 썸네일 이미지</string>
 
     <!-- Travel Spot Detail -->
+    <string name="description_back_image">뒤로 가기 이미지</string>
 
     <!-- Video Detail -->
+    <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>
+    <string name="detail_page_sub_title">곽튜브 · 조회수 137만회</string>
+    <string name="detail_page_text">*이번 영상은 LG전자 스탠바이미 Go의 유료광고를 포함하고 있습니다\n
+        \n안녕하세요\n제주도의 마지막 여행 영상입니다
+        \n마침 이렇게 LG에서 감사하게도 형님들에게 빠야렉에서 TV대신 쓰면 좋을 것 같다고 제품을 보내주셔서 광고를 하게 되었습니다.
+        \n이번에 글램핑을 하면서 스탠바이미 GO를 사용했는데 참 유용했습니다\n두 형님들도 맘에 들어 하셔서 기분이 좋습니다\n
+        \n그럼 다음편은 마지막 어몽&amp;오리뽀편으로 찾아 뵙겠습니다\n
+        \n#LG전자 #스탠바이미 #스탠바이미러버
+        \n-------------------------------------------------------------------------------
+        \ninsta : @jbkwak
+        \nmail : wnsqls3@gmail.com
+        \n촬영장비 : 고프로 히어로 12 블랙
+        \n편집 : 맥북프로 16인치, 파이널컷 X
+        \n음원 : Epidemic sound&amp;Artlist\n\n\n
+        \n *이번 영상은 LG전자 스탠바이미 Go의 유료광고를 포함하고 있습니다\n
+        \n안녕하세요\n제주도의 마지막 여행 영상입니다
+        \n마침 이렇게 LG에서 감사하게도 형님들에게 빠야렉에서 TV대신 쓰면 좋을 것 같다고 제품을 보내주셔서 광고를 하게 되었습니다.
+        \n이번에 글램핑을 하면서 스탠바이미 GO를 사용했는데 참 유용했습니다\n두 형님들도 맘에 들어 하셔서 기분이 좋습니다\n
+        \n그럼 다음편은 마지막 어몽&amp;오리뽀편으로 찾아 뵙겠습니다\n
+        \n#LG전자 #스탠바이미 #스탠바이미러버
+        \n-------------------------------------------------------------------------------
+        \ninsta : @jbkwak
+        \nmail : wnsqls3@gmail.com
+        \n촬영장비 : 고프로 히어로 12 블랙
+        \n편집 : 맥북프로 16인치, 파이널컷 X
+        \n음원 : Epidemic sound&amp;Artlist</string>
+    <string name="share_button">공유하기</string>
 
 
 </resources>
