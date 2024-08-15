@@ -1,15 +1,15 @@
 package com.example.riding_balloon.presentation.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.riding_balloon.databinding.ItemGridChannelListBinding
-import com.example.riding_balloon.databinding.ItemGridVideoBinding
 import com.example.riding_balloon.presentation.model.ChannelListModel
-import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
-import com.example.riding_balloon.presentation.mypage.FavoriteVideoListAdapter.FavoriteVideoHolder
+import java.text.DecimalFormat
 
 class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.ChannelListHolder>(ChannelDiffCallback()) {
     interface ItemClick {
@@ -25,11 +25,14 @@ class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.Cha
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelListHolder {
         val binding = ItemGridChannelListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ChannelListHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChannelListHolder, position: Int) {
         val item = getItem(position)
+
+        Log.d("working?? >>", getItem(position).toString())
 
         with(holder){
             itemView.setOnClickListener {
@@ -37,21 +40,19 @@ class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.Cha
                 notifyItemChanged(position)
             }
 
+            Glide.with(itemView).load(item.profileImgUrl).into(image)
             channelName.text = item.name
-            subscribers.text = item.subscribers
+            subscribers.text = formatNumber(item.subscribers.toLong())
         }
     }
 
-    companion object {
-        fun from(parent: ViewGroup, onClick: (FavoriteVideoInfo) -> Unit): ChannelListHolder {
-            return ChannelListHolder(
-                ItemGridChannelListBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            )
-        }
+    private fun formatNumber(number: Long): String {
+        val formatter = DecimalFormat("#,##0.0")
+        if(number < 1000L){
+            return formatter.format(number / 10000.0) + "백명"
+        } else if(number < 10000L){
+            return formatter.format(number / 10000.0) + "천명"
+        } else return formatter.format(number / 10000.0) + "만명"
     }
 }
 

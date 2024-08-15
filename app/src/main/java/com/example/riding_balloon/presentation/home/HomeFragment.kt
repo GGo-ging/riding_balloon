@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.riding_balloon.databinding.FragmentHomeBinding
 import com.example.riding_balloon.presentation.mypage.FavoriteVideoListAdapter
 
@@ -34,9 +35,10 @@ class HomeFragment : Fragment() {
 
     private fun initView() = with(binding){
         rvChannelList.adapter = channelListAdapter
+        rvChannelList.layoutManager = GridLayoutManager(context, 3)
 
         homeViewModel.channelList.observe(viewLifecycleOwner){ itemList ->
-            channelListAdapter.submitList(itemList)
+            channelListAdapter.submitList(itemList.toMutableList())
         }
     }
 
