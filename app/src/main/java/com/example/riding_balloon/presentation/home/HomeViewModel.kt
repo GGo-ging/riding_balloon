@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
 import com.example.riding_balloon.data.repository.channel.ChannelRepository
 import com.example.riding_balloon.data.repository.channel.ChannelRepositoryImpl
+import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.presentation.model.ChannelListModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -33,6 +35,9 @@ class HomeViewModel(
     private val _channelList = MutableLiveData<List<ChannelListModel>>()
     val channelList: LiveData<List<ChannelListModel>> = _channelList
 
+    private val _best10List = MutableLiveData<List<TravelSpotInfo>>()
+    val best10List: LiveData<List<TravelSpotInfo>> = _best10List
+
     fun fetchChannel(){
         val newIdList = idList.shuffled().slice(0..5)
         val currentList = _channelList.value?.toMutableList() ?: mutableListOf()
@@ -53,4 +58,9 @@ class HomeViewModel(
     }
 
     fun fetchChannelList(){ }
+
+    fun getBest10List(){
+        val rankingList = TravelSpotManager.getListByRanking()
+        _best10List.value = rankingList
+    }
 }

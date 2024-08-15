@@ -1,4 +1,4 @@
-package com.example.riding_balloon.presentation.home
+package com.example.riding_balloon.presentation.home.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +11,9 @@ import com.example.riding_balloon.databinding.ItemGridChannelListBinding
 import com.example.riding_balloon.presentation.model.ChannelListModel
 import java.text.DecimalFormat
 
-class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.ChannelListHolder>(ChannelDiffCallback()) {
+class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.ChannelListHolder>(
+    ChannelDiffCallback()
+) {
     interface ItemClick {
         fun onClickItem(position: Int, item : ChannelListModel)
     }
@@ -31,8 +33,6 @@ class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.Cha
 
     override fun onBindViewHolder(holder: ChannelListHolder, position: Int) {
         val item = getItem(position)
-
-        Log.d("working?? >>", getItem(position).toString())
 
         with(holder){
             itemView.setOnClickListener {

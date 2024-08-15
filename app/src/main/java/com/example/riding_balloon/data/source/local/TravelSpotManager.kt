@@ -19,7 +19,7 @@ object TravelSpotManager {
                     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTN2TThACkDTMoOIl8Zvb5IdfGOY8laJ5Y6jSZj9AkoYsAnt4aVbuS8wYh-8rfN",
                     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSMXRkSoKvn34V2gCtolpWuJRoi-0wZkQ_4AuOZFFM9bt8BzsZy42Idd_LhnFOF"
                 ),
-                ranking = 0
+                ranking = 1
             ),
             TravelSpotInfo(
                 id = 2,
@@ -32,7 +32,7 @@ object TravelSpotManager {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMbxVOk__Qh1gSAgtp1XB9rPOg3J7s82lZhOKtY4BF9VK4mFYrMnIrdYiR6t-T",
                     "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSSiRr64gDONbJO42EbAHBDWHGl7s5hLufVFD2csxMVa1x4v2ZnUrqSReGn2-hy"
                 ),
-                ranking = 0
+                ranking = 2
             ),
             TravelSpotInfo(
                 id = 3,
@@ -84,7 +84,7 @@ object TravelSpotManager {
                     "https://i.namu.wiki/i/EPpd6a_Ww0TnDmzUGnfwQj2kNBvcb2n4jNpdR-oeE670fgHPwWvKtuPBPCtw1i5mm9YKETfHDiCYpDfUjzxGAS6TnS4-oJtHWjn6hATbpYUMegiE1z1yPVgVOnmoQ5YqfRRa_fplqsQnSz6Ks7HmJQ.webp",
                     "https://i.namu.wiki/i/JK953CLxojz_xXCrhMbYXWsCZBTmyG2SGmI0BIGnIYt95YGhNVaA1fsGPi2rosMp0bDh7_0TOdqdyZ216NoCn0k90M8UzktcRvFPaanPhKfFgOYfCMm_hH7Y_TT_ylNC_2Roe0e5sOBiqYMPckd-xA.webp"
                 ),
-                ranking = 0
+                ranking = 3
             ),
             TravelSpotInfo(
                 id = 7,
@@ -97,7 +97,7 @@ object TravelSpotManager {
                     "https://search.pstatic.net/common?src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5885_000_3%2F20200818104649989_VEGDN6FTL.jpg%2Ffb112_3_i2.jpg%3Ftype%3Dw540_fst&type=m1500_travelsearch",
                     "https://search.pstatic.net/common?src=https://dbscthumb-phinf.pstatic.net/5885_000_3/20200818105943270_I9WYBCB76.jpg/fb112_45_i2.jpg?type=w540_fst&type=w800_travelsearch"
                 ),
-                ranking = 0
+                ranking = 6
             ),
             TravelSpotInfo(
                 id = 8,
@@ -110,7 +110,7 @@ object TravelSpotManager {
                     "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/532000/532651-kota-kinabalu.jpg",
                     "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/44000/44008-Melaka-Historical-City.jpg"
                 ),
-                ranking = 0
+                ranking = 10
             ),
             TravelSpotInfo(
                 id = 9,
@@ -123,7 +123,7 @@ object TravelSpotManager {
                     "https://ak-d.tripcdn.com/images/0350m12000bxp23v82270_C_1136_640_Q10.jpg",
                     "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/13f9/image/xGgWcacouds-uEcAtggX0XyLuXs.jpg"
                 ),
-                ranking = 0
+                ranking = 7
             ),
             TravelSpotInfo(
                 id = 10,
@@ -136,7 +136,7 @@ object TravelSpotManager {
                     "https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/06def5bd-1d92-40f2-a9c2-1965f02797ed.jpeg",
                     "https://mblogthumb-phinf.pstatic.net/20161021_45/suni2park_1476994150025NCJxK_JPEG/%B4%EB%B8%B81.01.jpg?type=w800"
                 ),
-                ranking = 0
+                ranking = 5
             ),
             TravelSpotInfo(
                 id = 11,
@@ -149,7 +149,7 @@ object TravelSpotManager {
                     "https://tourimage.interpark.com/BBS/Tour/FckUpload/201702/6362174230293976690.jpg",
                     "https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/6b9c2427-b62f-457c-9155-5ca9c117ca03.jpeg"
                 ),
-                ranking = 0
+                ranking = 9
             ),
             TravelSpotInfo(
                 id = 12,
@@ -175,7 +175,7 @@ object TravelSpotManager {
                     "https://i.namu.wiki/i/BFRx2IpfxZLMWh1Cw51vTSNUthJ3uM-QosQ-oFNBsZpZQHjIsy6MyOplsEpjpWJlVicgkPeL9Ou1JOhsPGcQeA.webp",
                     "https://i.namu.wiki/i/4-WC3SEQ6E1msNvD81GVw_o35d3mz1SgQndYpPSmLsis8xdYvl_Tx2MGmWUixy6bsIzDm1rPOcIscIdme_20yg.webp"
                 ),
-                ranking = 0
+                ranking = 8
             ),
             TravelSpotInfo(
                 id = 14,
@@ -333,7 +333,7 @@ object TravelSpotManager {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDQ96V9Ak0dXzTojOHPsBxqZSEhj8SzX6082YaHytXbclDvQ2p03eqPEAibf-",
                     "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQPO382MuVZcJUF3F18ILAegSp5b3_Iha4Ta5tVVSA5QtBaUdC1hb6XAGP5zlBk"
                 ),
-                ranking = 0
+                ranking = 4
             ),
             TravelSpotInfo(
                 id = 26,

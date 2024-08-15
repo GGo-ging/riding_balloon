@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/wrapper_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -14,11 +15,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_home"
+            android:id="@+id/tv_home_subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_title1_channel"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,11 +40,57 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/wrapper_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_grid">
+
+        <TextView
+            android:id="@+id/tv_home_subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_title2_best10_1"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_home_subtitle2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="@string/home_title2_best10_2"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_best10_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wrapper_title2" />
+
+    <TextView
+        android:id="@+id/tv_home_subtitle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/home_title1_channel"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_best10_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
