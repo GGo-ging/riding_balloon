@@ -17,7 +17,7 @@ class Best10ListAdapter(): ListAdapter<TravelSpotInfo, Best10ListAdapter.Best10L
     }
     var itemClick: ItemClick? = null
 
-    class Best10ListHolder(private val binding: ItemBest10ListBinding) : RecyclerView.ViewHolder(binding.root){
+    class Best10ListHolder(binding: ItemBest10ListBinding) : RecyclerView.ViewHolder(binding.root){
         val backgroundImage = binding.ivBackgroundImg
         val ranking = binding.tvRanking
         val country = binding.tvCountry

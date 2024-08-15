@@ -1,6 +1,5 @@
 package com.example.riding_balloon.presentation.home.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -19,7 +18,7 @@ class ChannelListAdapter(): ListAdapter<ChannelListModel, ChannelListAdapter.Cha
     }
     var itemClick: ItemClick? = null
 
-    class ChannelListHolder(private val binding: ItemGridChannelListBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ChannelListHolder(binding: ItemGridChannelListBinding) : RecyclerView.ViewHolder(binding.root) {
         val image = binding.ivChannelImage
         val channelName = binding.tvChannelName
         val subscribers = binding.tvChannelSubscribers
