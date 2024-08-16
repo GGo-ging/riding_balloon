@@ -17,6 +17,8 @@ import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoV
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -30,6 +32,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     TravelDiffUtilCallback()
 ) {
     var drawImage: DrawImage? = null
+    var addChips: AddChips? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
         Log.d("ViewHolder 체크", "리스트 : $currentList")
@@ -65,6 +68,9 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             is ViewPagerViewHolderImpl -> {
                 holder.bind(getItem(position), drawImage)
             }
+            is VideoListViewHolderImpl -> {
+                holder.bind(getItem(position), addChips)
+            }
             else -> {
                 holder.bind(getItem(position))
             }
@@ -87,5 +93,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     fun interface DrawImage {
         fun onDraw(url: String): RequestBuilder<Drawable>
     }
+
+    fun interface AddChips {
+        fun onAdd(chipGroup: ChipGroup)
+    }
+
 }
 

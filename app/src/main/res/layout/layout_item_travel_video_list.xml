@@ -8,7 +8,7 @@
         android:id="@+id/tv_travel_video_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="@string/travel_video_list_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,12 +18,14 @@
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/cg_travel"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_title"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="-8dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView

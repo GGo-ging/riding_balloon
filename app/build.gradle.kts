@@ -73,10 +73,10 @@ dependencies {
     // Dot indicator
     implementation(libs.dotindicator)
 
+    // ExoPlayer, YoutubePlayer
+    implementation(libs.bundles.videoplayers)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
-    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
 }
