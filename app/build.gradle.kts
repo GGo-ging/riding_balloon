@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 val localPropertiesFile = rootProject.file("local.properties")
@@ -69,6 +71,10 @@ dependencies {
     // Paging 3
     implementation(libs.androidx.paging)
 
+    // Dagger Hilt
+    implementation ("com.google.dagger:hilt-android:2.52")
+    kapt ("com.google.dagger:hilt-compiler:2.52")
+
     // Dot indicator
     implementation(libs.dotindicator)
 
@@ -82,5 +88,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
+}
 
+kapt {
+    correctErrorTypes = true
 }

@@ -4,9 +4,10 @@ import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
 import com.example.riding_balloon.data.model.SearchVideoResponse
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.VideoDetailsResponse
-import com.example.riding_balloon.network.RetrofitClient.youtubeApi
+import com.example.riding_balloon.data.source.remote.YoutubeApi
+import javax.inject.Inject
 
-class FavoriteVideoRepositoryImpl : FavoriteVideoRepository {
+class FavoriteVideoRepositoryImpl @Inject constructor(private val youtubeApi: YoutubeApi) : FavoriteVideoRepository {
 
     override suspend fun getTrendingVideos(): TrendingVideoResponse {
         return youtubeApi.getTrendingVideos()
