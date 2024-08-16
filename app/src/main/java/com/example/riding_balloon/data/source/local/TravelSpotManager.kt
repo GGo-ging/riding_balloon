@@ -430,9 +430,63 @@ object TravelSpotManager {
                     "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
                 ),
                 ranking = 0
-            )
+            ),
 
+            TravelSpotInfo(
+                id = 33,
+                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                country = "괌",
+                region = "괌",
+                description = "괌 여행, 정말 좋은 선택이시네요! 에메랄드빛 투명한 바다, 하얀 모래사장, 울창한 열대 우림까지! 그 곳에서 다양한 액티비티까지 즐길 수 있는 매력적인 곳이죠.",
+                images = listOf(
+                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
+                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                ),
+                ranking = 0
+            ),
 
+            TravelSpotInfo(
+                id = 34,
+                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                country = "필리핀",
+                region = "마닐라",
+                description = "7,000개가 넘는 섬으로 이루어진 천혜의 자연, 저렴한 물가와 친절한 사람들, 다채로운 문화와 맛있는 음식! 이 모든 것들이 선사하는 잊지 못할 추억을 경험 해보세요.",
+                images = listOf(
+                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
+                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                ),
+                ranking = 0
+            ),
+
+            TravelSpotInfo(
+                id = 35,
+                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                country = "싱가포르",
+                region = "싱가포르",
+                description = "첨단 건축물과 아름다운 정원이 조화를 이루는 싱가포르! 쇼핑몰, 시장, 테마파크 등 다양한 곳에서 즐거운 시간을 보낼 수 있어요.",
+                images = listOf(
+                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
+                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                ),
+                ranking = 0
+            ),
+
+            TravelSpotInfo(
+                id = 35,
+                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                country = "싱가포르",
+                region = "싱가포르",
+                description = "첨단 건축물과 아름다운 정원이 조화를 이루는 싱가포르! 쇼핑몰, 시장, 테마파크 등 다양한 곳에서 즐거운 시간을 보낼 수 있어요.",
+                images = listOf(
+                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
+                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                ),
+                ranking = 0
+            ),
         )
 
     }

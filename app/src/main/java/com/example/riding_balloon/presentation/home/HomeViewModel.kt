@@ -58,6 +58,10 @@ class HomeViewModel(
         }
     }
 
+    fun clearList() {
+        _channelList.value = listOf()
+    }
+
     fun fetchChannelList(){ }
 
     fun getBest10List(){

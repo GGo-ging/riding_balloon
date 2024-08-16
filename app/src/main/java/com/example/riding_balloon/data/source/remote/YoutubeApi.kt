@@ -14,6 +14,7 @@ import retrofit2.http.Query
 interface YoutubeApi {
 
     // 인기 급상승 동영상 리스트 가져오기
+    // home 화면 리스트에서는 19번
     @GET("videos")
     suspend fun getTrendingVideos(
         @Query("part") part: String = "snippet,statistics",
