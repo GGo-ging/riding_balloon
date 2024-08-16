@@ -19,7 +19,7 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
         get() = _favoriteVideos.toList()
 
     override fun addFavoriteVideo(video: FavoriteVideoInfo) {
-        if (!_favoriteVideos.contains(video)) {
+        if (_favoriteVideos.find { it.videoId == video.videoId } == null) {
             _favoriteVideos.add(0, video)
             saveFavoriteVideos()
         }
