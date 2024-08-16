@@ -24,7 +24,11 @@
         android:id="@+id/navigation_travel_spot_detail"
         android:name="com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailFragment"
         android:label="TravelSpotDetailFragment"
-        tools:layout="@layout/fragment_travel_spot_detail" />
+        tools:layout="@layout/fragment_travel_spot_detail" >
+        <argument
+            android:name="travelSpot"
+            app:argType="com.example.riding_balloon.data.model.TravelSpotInfo" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_video_detail"
         android:name="com.example.riding_balloon.presentation.videodetail.VideoDetailFragment"

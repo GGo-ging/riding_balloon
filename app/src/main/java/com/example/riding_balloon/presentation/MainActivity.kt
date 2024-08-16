@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.riding_balloon.R
+import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.databinding.ActivityMainBinding
 import com.example.riding_balloon.presentation.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val travelSpotItem by lazy { TravelSpotManager.getFirstItem() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,12 +57,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initButton() = with(binding) {
         layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
-            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail()
+            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
             findNavController(R.id.container_main).navigate(action)
         }
         layoutToolbarMain.btnToolbarVideo.setOnClickListener {
             val action = HomeFragmentDirections.actionGlobalVideoDetail()
             findNavController(R.id.container_main).navigate(action)
         }
+    }
+
+    private fun sendTravelSpotItem() {
+        val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
+        findNavController(R.id.container_main).navigate(action)
     }
 }

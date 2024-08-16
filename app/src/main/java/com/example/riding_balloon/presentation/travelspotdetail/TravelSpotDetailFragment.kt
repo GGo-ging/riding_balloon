@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -26,6 +27,8 @@ class TravelSpotDetailFragment : Fragment() {
 
     private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
 
+    private val args: TravelSpotDetailFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +40,9 @@ class TravelSpotDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // args.travelSpot으로 가져오면 됨.
+        Log.d("TravelSpotDetailFragment", "args: ${args.travelSpot}")
 
         recyclerViewAdapter.submitList(
             listOf(

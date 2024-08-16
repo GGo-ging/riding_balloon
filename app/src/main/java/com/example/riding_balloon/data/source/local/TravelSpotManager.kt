@@ -500,4 +500,8 @@ object TravelSpotManager {
         // ranking 10위까지만 가져와서 정렬
         return travelSpotList.filter { it.ranking > 0 }.sortedBy { it.ranking }
     }
+
+    fun getFirstItem(): TravelSpotInfo {
+        return travelSpotList.first()
+    }
 }
