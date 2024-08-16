@@ -7,6 +7,7 @@ import com.example.riding_balloon.data.model.VideoDetailsResponse
 import com.jeongu.imagesearchapp.network.RetrofitClient.youtubeApi
 
 class FavoriteVideoRepositoryImpl : FavoriteVideoRepository {
+
     override suspend fun getTrendingVideos(): TrendingVideoResponse {
         return youtubeApi.getTrendingVideos()
     }
