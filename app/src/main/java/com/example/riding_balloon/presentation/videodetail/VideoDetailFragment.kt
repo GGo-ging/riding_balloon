@@ -11,6 +11,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.riding_balloon.databinding.FragmentVideoDetailBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class VideoDetailFragment : Fragment() {
 
@@ -57,9 +59,13 @@ class VideoDetailFragment : Fragment() {
         viewModel.videoDetail.observe(viewLifecycleOwner) { videoItem ->
             val video = videoItem.items?.firstOrNull()
 
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val dateTime = OffsetDateTime.parse(video?.snippet?.publishedAt)
+            val dataTimeFormat = dateTime?.format(formatter)
+
             with(binding) {
                 tvDetailPageMainTitle.text = video?.snippet?.title
-                tvDetailPageSubTitle.text = "${video?.snippet?.channelTitle} · 조회수 ${video?.statistics?.viewCount}회"
+                tvDetailPageSubTitle.text = "${video?.snippet?.channelTitle} · 조회수 ${video?.statistics?.viewCount}회   $dataTimeFormat"
                 tvDetailText.text = video?.snippet?.description
             }
         }
