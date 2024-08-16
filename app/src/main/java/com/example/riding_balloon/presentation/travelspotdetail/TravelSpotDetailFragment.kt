@@ -64,6 +64,7 @@ class TravelSpotDetailFragment : Fragment() {
                 val chip = Chip(context)
                 chip.text = "#$str"
 //                chip.setBackgroundResource(R.drawable.travel_sel_chip_click)
+                // d
                 chip.setOnClickListener {
                     Log.d("Chip", "chip clicked $chip")
                 }
