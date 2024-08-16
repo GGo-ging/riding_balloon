@@ -26,7 +26,57 @@
         android:layout_marginTop="16dp"
         app:chipSpacingHorizontal="8dp"
         app:chipSpacingVertical="-8dp"
-        />
+        >
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_travel_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_chip_all"
+            android:backgroundTint="@color/sel_travel_chip_color"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_travel_train"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_chip_train"
+            android:backgroundTint="@color/sel_travel_chip_color"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_travel_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_chip_restaurant"
+            android:backgroundTint="@color/sel_travel_chip_color"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_travel_backpacking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_chip_backpacking"
+            android:backgroundTint="@color/sel_travel_chip_color"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_travel_honeymoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_chip_honeymoon"
+            android:backgroundTint="@color/sel_travel_chip_color"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_travel_healing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/travel_chip_healing"
+            android:backgroundTint="@color/sel_travel_chip_color"
+            />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_travel_video_list"

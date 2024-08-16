@@ -32,6 +32,13 @@
     <string name="travel_description">이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다.</string>
     <string name="travel_video_list_title">여행지 간접 여행하기</string>
 
+    <string name="travel_chip_all">#전체</string>
+    <string name="travel_chip_train">#기차여행</string>
+    <string name="travel_chip_restaurant">#맛집여행</string>
+    <string name="travel_chip_backpacking">#배낭여행</string>
+    <string name="travel_chip_honeymoon">#신혼여행</string>
+    <string name="travel_chip_healing">#힐링여행</string>
+
     <string-array name="travel_chips">
         <item>전체</item>
         <item>기차여행</item>
