@@ -2,6 +2,7 @@ package com.example.riding_balloon.data.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import com.example.riding_balloon.util.Constants.PREF_FAVORITE
 import com.google.gson.GsonBuilder
@@ -42,7 +43,13 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
     }
 
     override fun isFavorite(videoId: String): Boolean {
-        val video = _favoriteVideos.find { it.videoId == videoId } ?: return false
-        return video.isFavorite
+        val video = _favoriteVideos.find { it.videoId == videoId }
+        if (video == null) {
+            Log.d("FavoriteRepositoryImpl", "isFavorite: $videoId, false")
+            return false
+        } else {
+            Log.d("FavoriteRepositoryImpl", "isFavorite: $videoId, true")
+        }
+        return true
     }
 }

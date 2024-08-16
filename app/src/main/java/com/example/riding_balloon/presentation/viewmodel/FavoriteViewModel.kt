@@ -27,6 +27,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
     fun removeFavoriteItem(item: FavoriteVideoInfo) {
+        Log.d("FavoriteViewModel", "removeFavoriteItem() item: $item")
         repository.removeFavoriteVideo(item)
         _favoriteVideos.value = repository.favoriteVideos
     }
