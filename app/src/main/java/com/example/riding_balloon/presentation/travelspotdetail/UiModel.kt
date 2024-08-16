@@ -1,29 +1,34 @@
 package com.example.riding_balloon.presentation.travelspotdetail
 
+import com.example.riding_balloon.presentation.travelspotdetail.UiModel.TravelVideoListModel
+import java.util.UUID
+
 sealed class UiModel {
-    data class ImageModel(
+    abstract val id: String
+    data class ViewPagerModel(
+        override val id: String = UUID.randomUUID().toString(),
         val imageUrlList: List<String>,
     ): UiModel()
-    data class NationModel(
+    data class InfoModel(
+        override val id: String = UUID.randomUUID().toString(),
         val nation: String,
         val city: String,
         val desc: String,
     ): UiModel()
-//    data class NationTitleModel(
-//        val nation: String,
-//        val city: String,
-//    ): UiModel()
-//    data class NationDescModel(
-//        val desc: String,
-//    ): UiModel()
-    data class TravelChipsModel(
-        val title: String,
-        val chipList: List<String>,
+    data class TravelVideoListModel(
+        override val id: String = UUID.randomUUID().toString()
     ): UiModel()
-    class TravelVideoListModel: UiModel()
+}
+
+sealed class VideoListUiModel {
+    abstract val id: String
     data class TravelVideoModel(
+        override val id: String = UUID.randomUUID().toString(),
         val videoUrl: String?,
         val videoTitle: String?,
-
-    ): TravelVideoListModel()
+    ) : VideoListUiModel()
 }
+
+data class ViewPagerItemModel(
+    val imageUrl: String,
+)

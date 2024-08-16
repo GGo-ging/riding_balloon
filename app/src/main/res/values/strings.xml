@@ -34,6 +34,9 @@
         <item>신혼여행</item>
         <item>힐링여행</item>
     </string-array>
+
+    <string name="travel_empty">오류 발생!</string>
+
     <!-- Video Detail -->
     <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>
     <string name="detail_page_sub_title">곽튜브 · 조회수 137만회</string>
