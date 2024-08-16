@@ -4,7 +4,7 @@ import com.example.riding_balloon.data.model.ChannelDetailsResponse
 import com.example.riding_balloon.data.model.SearchVideoResponse
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.VideoDetailsResponse
-import com.jeongu.imagesearchapp.network.RetrofitClient.youtubeApi
+import com.example.riding_balloon.network.RetrofitClient.youtubeApi
 
 class FavoriteVideoRepositoryImpl : FavoriteVideoRepository {
 
