@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "riding_balloon"
 include(":app")
- 
