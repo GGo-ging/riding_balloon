@@ -1,7 +1,7 @@
 package com.example.riding_balloon.di
 
 import com.example.riding_balloon.data.source.remote.YoutubeApi
-import com.jeongu.imagesearchapp.network.AuthorizationInterceptor
+import com.example.riding_balloon.network.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
