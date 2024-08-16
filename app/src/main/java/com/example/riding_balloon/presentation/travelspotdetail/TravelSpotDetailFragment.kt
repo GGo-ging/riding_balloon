@@ -27,7 +27,7 @@ class TravelSpotDetailFragment : Fragment() {
 
     private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
 
-    private val args: TravelSpotDetailFragmentArgs by navArgs()
+    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
     override fun onCreateView(
         inflater: LayoutInflater,

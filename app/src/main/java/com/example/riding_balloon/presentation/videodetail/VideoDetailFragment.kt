@@ -2,12 +2,14 @@ package com.example.riding_balloon.presentation.videodetail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.example.riding_balloon.databinding.FragmentVideoDetailBinding
 import com.example.riding_balloon.presentation.MainActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -23,6 +25,8 @@ class VideoDetailFragment : Fragment() {
     private val viewModel : VideoDetailViewModel by activityViewModels()
     private lateinit var url : String
 
+    private val args: VideoDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +38,9 @@ class VideoDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // args.videoId로 영상 정보를 가져옴
+        Log.d("VideoDetailFragment", "args.videoId: ${args.videoId}")
 
         url = "https://youtu.be/_UyQLveYyzI?si=4Uh2TVQ1MNwvR7ik"
 

@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             findNavController(R.id.container_main).navigate(action)
         }
         layoutToolbarMain.btnToolbarVideo.setOnClickListener {
-            val action = HomeFragmentDirections.actionGlobalVideoDetail()
+            val action = HomeFragmentDirections.actionGlobalVideoDetail("RSv0K4hQyV8")
             findNavController(R.id.container_main).navigate(action)
         }
     }

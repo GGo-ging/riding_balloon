@@ -33,7 +33,11 @@
         android:id="@+id/navigation_video_detail"
         android:name="com.example.riding_balloon.presentation.videodetail.VideoDetailFragment"
         android:label="VideoDetailFragment"
-        tools:layout="@layout/fragment_video_detail" />
+        tools:layout="@layout/fragment_video_detail" >
+        <argument
+            android:name="videoId"
+            app:argType="string" />
+    </fragment>
     <action
         android:id="@+id/action_global_travel_spot_detail"
         app:destination="@id/navigation_travel_spot_detail" />
