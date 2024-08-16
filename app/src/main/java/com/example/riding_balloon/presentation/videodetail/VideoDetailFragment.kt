@@ -54,13 +54,6 @@ class VideoDetailFragment : Fragment() {
             }
         })
 
-//        val videoDetail = YoutubeVideoSubTitle (
-//            statistics =
-//        )
-
-//        val channelName = YoutubeVideoSubTitle.snippet?.channelTitle ?: ""
-//        val viewCount = YoutubeVideoSubTitle.statistics?.viewCount ?: ""
-
         viewModel.videoDetail.observe(viewLifecycleOwner) { videoItem ->
             val video = videoItem.items?.firstOrNull()
 
@@ -81,6 +74,10 @@ class VideoDetailFragment : Fragment() {
 
             val chooseTitle = "친구에게 공유하기"
             startActivity(Intent.createChooser(intent, chooseTitle))
+        }
+
+        binding.ivBackBarImage.setOnClickListener {
+            // 메인 화면으로 돌아감
         }
     }
 
