@@ -27,6 +27,21 @@
 
     <!-- Travel Spot Detail -->
     <string name="description_back_image">뒤로 가기 이미지</string>
+    <string name="travel_nation">국가</string>
+    <string name="travel_city">도시</string>
+    <string name="travel_description">이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다.</string>
+    <string name="travel_video_list_title">여행지 간접 여행하기</string>
+
+    <string-array name="travel_chips">
+        <item>전체</item>
+        <item>기차여행</item>
+        <item>맛집여행</item>
+        <item>배낭여행</item>
+        <item>신혼여행</item>
+        <item>힐링여행</item>
+    </string-array>
+
+    <string name="travel_empty">오류 발생!</string>
 
     <!-- Video Detail -->
     <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>

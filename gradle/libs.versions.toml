@@ -14,6 +14,9 @@ paging = "3.3.2"
 navigation = "2.7.7"
 glide = "4.16.0"
 retrofit = "2.9.0"
+dotindicator = "5.0"
+exoplayer = "2.19.1"
+youtube-player="11.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +41,12 @@ okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref 
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
+dotindicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotindicator" }
+
+exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
+youtubeplayer= {group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "youtube-player"}
+
+
 [bundles]
 retrofit = [
     "retrofit",
@@ -48,6 +57,10 @@ retrofit = [
 navigation = [
     "navigation-fragment",
     "navigation-ui"
+]
+videoplayers = [
+    "exoplayer",
+    "youtubeplayer"
 ]
 
 [plugins]
