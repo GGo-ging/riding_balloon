@@ -58,20 +58,6 @@ class TravelSpotDetailFragment : Fragment() {
             Glide.with(this).load(url)
         }
 
-        recyclerViewAdapter.addChips = TravelSpotDetailRecyclerViewAdapter.AddChips { group ->
-            val stringArray: Array<String> = resources.getStringArray(R.array.travel_chips)
-//            for(str in stringArray) {
-//                val chip = Chip(context)
-//                chip.text = "#$str"
-//                chip.setBackgroundResource(R.drawable.travel_sel_chip_click)
-//                // d
-//                chip.setOnClickListener {
-//                    Log.d("Chip", "chip clicked $chip")
-//                }
-//                group.addView(chip)
-//            }
-        }
-
     }
 
     override fun onDestroyView() {

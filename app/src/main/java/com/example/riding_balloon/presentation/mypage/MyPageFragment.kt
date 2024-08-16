@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
+import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
@@ -19,6 +22,7 @@ class MyPageFragment : Fragment() {
         }
     }
     private val favoriteVideoViewModel by activityViewModels<FavoriteVideoViewModel>()
+    private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,15 +41,15 @@ class MyPageFragment : Fragment() {
 
     private fun initView() = with(binding) {
         rvFavoriteVideos.adapter = favoriteVideoListAdapter
-        val list = listOf(
-            FavoriteVideoInfo(1, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
-            FavoriteVideoInfo(2, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
-            FavoriteVideoInfo(3, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
-            FavoriteVideoInfo(4, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
-            FavoriteVideoInfo(5, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
-            FavoriteVideoInfo(6, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
-        )
-        favoriteVideoListAdapter.submitList(list)
+//        val list = listOf(
+//            FavoriteVideoInfo(1, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
+//            FavoriteVideoInfo(2, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
+//            FavoriteVideoInfo(3, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
+//            FavoriteVideoInfo(4, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
+//            FavoriteVideoInfo(5, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
+//            FavoriteVideoInfo(6, "https://i.ytimg.com/vi/OmeskI1MOVw/sddefault.jpg", "섬이 처음인 우즈벡 형님들의 제주도 적응기 - 어몽&오리뽀(5)", "곽튜브"),
+//        )
+//        favoriteVideoListAdapter.submitList(list)
     }
 
     private fun initViewModel() {

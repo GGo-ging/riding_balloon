@@ -35,7 +35,7 @@ class FavoriteVideoListAdapter(private val onClick: (FavoriteVideoInfo) -> Unit)
                     .load(video.thumbnailUrl)
                     .into(ivGridVideoThumbnail)
                 tvGridVideoTitle.text = video.title
-                tvGridVideoChannel.text = video.creator
+                tvGridVideoChannel.text = video.channelTitle
             }
         }
 
@@ -55,7 +55,7 @@ class FavoriteVideoListAdapter(private val onClick: (FavoriteVideoInfo) -> Unit)
 
 private class FavoriteVideoDiffCallback : DiffUtil.ItemCallback<FavoriteVideoInfo>() {
     override fun areItemsTheSame(oldItem: FavoriteVideoInfo, newItem: FavoriteVideoInfo): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.videoId == newItem.videoId
     }
 
     override fun areContentsTheSame(oldItem: FavoriteVideoInfo, newItem: FavoriteVideoInfo): Boolean {

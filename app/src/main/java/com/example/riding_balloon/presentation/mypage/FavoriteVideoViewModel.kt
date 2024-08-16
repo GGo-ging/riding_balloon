@@ -11,10 +11,13 @@ import com.example.riding_balloon.data.model.ItemSnippetStatistics
 import com.example.riding_balloon.data.model.VideoSnippet
 import com.example.riding_balloon.data.repository.FavoriteVideoRepository
 import com.example.riding_balloon.data.repository.FavoriteVideoRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavoriteVideoViewModel (
-    private val repository: FavoriteVideoRepository = FavoriteVideoRepositoryImpl()
+@HiltViewModel
+class FavoriteVideoViewModel @Inject constructor (
+    private val repository: FavoriteVideoRepository
 ) : ViewModel() {
     private val _trendingResult = MutableLiveData<List<ItemSnippetStatistics>?>()
     val trendingResult: LiveData<List<ItemSnippetStatistics>?> = _trendingResult

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.4.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -17,6 +17,8 @@ retrofit = "2.9.0"
 dotindicator = "5.0"
 exoplayer = "2.19.1"
 youtube-player="11.1.0"
+viewmodel = "2.6.1"
+hilt = "2.52"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +48,11 @@ dotindicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 youtubeplayer= {group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "youtube-player"}
 
+viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewmodel" }
+livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "viewmodel"}
+
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
 [bundles]
 retrofit = [
@@ -61,6 +68,10 @@ navigation = [
 videoplayers = [
     "exoplayer",
     "youtubeplayer"
+]
+viewmodel = [
+    "viewmodel",
+    "livedata"
 ]
 
 [plugins]

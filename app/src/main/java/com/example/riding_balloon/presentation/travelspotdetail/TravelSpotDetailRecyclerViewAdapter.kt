@@ -32,7 +32,6 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     TravelDiffUtilCallback()
 ) {
     var drawImage: DrawImage? = null
-    var addChips: AddChips? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
         Log.d("ViewHolder 체크", "리스트 : $currentList")
@@ -68,9 +67,6 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             is ViewPagerViewHolderImpl -> {
                 holder.bind(getItem(position), drawImage)
             }
-            is VideoListViewHolderImpl -> {
-                holder.bind(getItem(position), addChips)
-            }
             else -> {
                 holder.bind(getItem(position))
             }
@@ -93,10 +89,5 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     fun interface DrawImage {
         fun onDraw(url: String): RequestBuilder<Drawable>
     }
-
-    fun interface AddChips {
-        fun onAdd(chipGroup: ChipGroup)
-    }
-
 }
 

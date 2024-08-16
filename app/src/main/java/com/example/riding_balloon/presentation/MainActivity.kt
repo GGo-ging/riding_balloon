@@ -12,7 +12,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.ActivityMainBinding
 import com.example.riding_balloon.presentation.home.HomeFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
