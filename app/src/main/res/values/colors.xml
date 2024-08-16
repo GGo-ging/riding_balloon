@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="grey_shade_90">#202020</color>
+    <color name="black">#202020</color>
     <color name="grey_shade_60">#606060</color>
     <color name="grey_shade_40">#A5A5A5</color>
     <color name="stroke">#D4D4D4</color>

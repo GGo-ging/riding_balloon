@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.riding_balloon.R
 import com.example.riding_balloon.data.model.VideoItem
+import androidx.navigation.fragment.navArgs
 import com.example.riding_balloon.databinding.FragmentVideoDetailBinding
 import com.example.riding_balloon.presentation.extensions.toFavoriteVideoInfo
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
+import com.example.riding_balloon.presentation.MainActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import java.time.OffsetDateTime
@@ -27,6 +29,8 @@ class VideoDetailFragment : Fragment() {
 
     private val viewModel : VideoDetailViewModel by activityViewModels()
     private lateinit var url : String
+
+    private val args: VideoDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
     private lateinit var video: VideoItem
     private lateinit var favoriteVideoItem: FavoriteVideoInfo
@@ -44,6 +48,9 @@ class VideoDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // args.videoId로 영상 정보를 가져옴
+        Log.d("VideoDetailFragment", "args.videoId: ${args.videoId}")
 
         url = "https://youtu.be/_UyQLveYyzI?si=4Uh2TVQ1MNwvR7ik"
 
@@ -95,6 +102,8 @@ class VideoDetailFragment : Fragment() {
 
         binding.ivBackBarImage.setOnClickListener {
             // 메인 화면으로 돌아감
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
         }
 
         if (videoId != null) {
