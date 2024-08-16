@@ -1,16 +1,26 @@
 package com.example.riding_balloon.presentation.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.riding_balloon.databinding.FragmentHomeBinding
+import com.example.riding_balloon.presentation.home.adapters.Best10ListAdapter
+import com.example.riding_balloon.presentation.home.adapters.ChannelListAdapter
+import com.example.riding_balloon.presentation.model.ChannelListModel
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val channelListAdapter by lazy { ChannelListAdapter() }
+    private val best10ListAdapter by lazy { Best10ListAdapter() }
+    private val homeViewModel by viewModels<HomeViewModel>() // fragment의 생명주기를 따르는 viewmodel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,11 +33,38 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
+        initView()
+    }
 
+    private fun initView() = with(binding){
+        rvChannelList.adapter = channelListAdapter
+        rvChannelList.layoutManager = GridLayoutManager(context, 3)
+
+        rvBest10List.adapter = best10ListAdapter
+        channelListAdapter.itemClick = object : ChannelListAdapter.ItemClick {
+            override fun onClickItem(position: Int, item: ChannelListModel) {
+                val intentYoutube = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/${item.customUrl}"))
+                startActivity(intentYoutube)
+            }
+        }
+
+        with(homeViewModel){
+            channelList.observe(viewLifecycleOwner){ itemList -> channelListAdapter.submitList(itemList) }
+            best10List.observe(viewLifecycleOwner){ itemList -> best10ListAdapter.submitList(itemList) }
+        }
+    }
+
+    private fun initViewModel() = with(homeViewModel){
+        fetchChannel()
+        getBest10List()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        homeViewModel.clearList()
+        homeViewModel.channelList.removeObservers(viewLifecycleOwner)
+        homeViewModel.best10List.removeObservers(viewLifecycleOwner)
     }
 }

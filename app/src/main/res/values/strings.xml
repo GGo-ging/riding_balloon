@@ -8,6 +8,12 @@
     <string name="description_main_logo_image">메인 로고 이미지</string>
 
     <!-- Home -->
+    <string name="home_title1_channel">여행 채널 추천</string>
+    <string name="home_title2_best10_1">해외 여행지 </string>
+    <string name="home_title2_best10_2">BEST 10</string>
+    <string name="home_title3_popular">지금 인기 많은 여행 유튜브</string>
+
+    <string name="home_channel_list_subscribers">구독자 %s명</string>
 
     <!-- Search -->
 
@@ -39,7 +45,7 @@
 
     <!-- Video Detail -->
     <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>
-    <string name="detail_page_sub_title">곽튜브 · 조회수 137만회</string>
+    <string name="detail_page_sub_title">곽튜브 · 조회수 137만회   2024.08.16</string>
     <string name="detail_page_text">*이번 영상은 LG전자 스탠바이미 Go의 유료광고를 포함하고 있습니다\n
         \n안녕하세요\n제주도의 마지막 여행 영상입니다
         \n마침 이렇게 LG에서 감사하게도 형님들에게 빠야렉에서 TV대신 쓰면 좋을 것 같다고 제품을 보내주셔서 광고를 하게 되었습니다.

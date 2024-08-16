@@ -1,6 +1,6 @@
 package com.example.riding_balloon.data.source.remote
 
-import com.example.riding_balloon.data.model.ChannelDetailsResponse
+import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
 import com.example.riding_balloon.data.model.SearchVideoResponse
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.VideoDetailsResponse
@@ -14,6 +14,7 @@ import retrofit2.http.Query
 interface YoutubeApi {
 
     // 인기 급상승 동영상 리스트 가져오기
+    // home 화면 리스트에서는 19번
     @GET("videos")
     suspend fun getTrendingVideos(
         @Query("part") part: String = "snippet,statistics",
@@ -57,8 +58,8 @@ interface YoutubeApi {
     // 채널 상세 정보 가져오기 -> id 값에 채널 id를 넣어서 호출
     @GET("channels")
     suspend fun getChannelDetails(
-        @Query("part") part: String = "snippet,statistics",
-        @Query("id") id: String,
+        @Query("part") part: String = "snippet, statistics",
+        @Query("forHandle") id: String, //id로 넣으면 안 돼서 forHandle로 교체
         @Query("key") key: String = API_KEY
     ): ChannelDetailsResponse
 }
