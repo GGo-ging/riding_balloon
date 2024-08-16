@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
         android:id="@+id/vpdi_travel_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +23,7 @@
         app:dotsColor="@color/white"
         app:selectedDotColor="@color/black"
         android:layout_marginBottom="16dp"
+        app:dotsSize="10dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

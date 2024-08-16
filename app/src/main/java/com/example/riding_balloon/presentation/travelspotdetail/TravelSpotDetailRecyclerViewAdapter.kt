@@ -1,14 +1,17 @@
 package com.example.riding_balloon.presentation.travelspotdetail
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
+import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelEmptyBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
+import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailViewPagerAdapter.DrawImage
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
@@ -26,6 +29,8 @@ enum class TSDEnum(val type: Int) {
 class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolder>(
     TravelDiffUtilCallback()
 ) {
+    var drawImage: DrawImage? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
         Log.d("ViewHolder 체크", "리스트 : $currentList")
         val holderType = TSDEnum.entries.find {
@@ -56,7 +61,14 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
 
     override fun onBindViewHolder(holder: TravelViewHolder, position: Int) {
         Log.d("ViewHolder 체크", "Bind")
-        holder.bind()
+        when(holder) {
+            is ViewPagerViewHolderImpl -> {
+                holder.bind(getItem(position), drawImage)
+            }
+            else -> {
+                holder.bind(getItem(position))
+            }
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -70,6 +82,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     override fun getItemCount(): Int {
         Log.d("ViewHolder 체크", currentList.size.toString())
         return currentList.size
+    }
+
+    fun interface DrawImage {
+        fun onDraw(url: String): RequestBuilder<Drawable>
     }
 }
 

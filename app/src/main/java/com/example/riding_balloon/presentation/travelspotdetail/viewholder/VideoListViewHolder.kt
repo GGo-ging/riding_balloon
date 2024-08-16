@@ -4,9 +4,10 @@ import android.util.Log
 import androidx.viewbinding.ViewBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
+import com.example.riding_balloon.presentation.travelspotdetail.UiModel
 
 class VideoListViewHolderImpl(binding: LayoutItemTravelVideoListBinding) : TravelViewHolder(binding) {
-    override fun bind() {
+    override fun bind(item: UiModel) {
         Log.d("ViewHolder 체크", "VideoList")
     }
 }
