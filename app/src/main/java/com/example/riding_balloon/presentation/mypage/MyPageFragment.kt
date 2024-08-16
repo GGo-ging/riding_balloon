@@ -85,6 +85,12 @@ class MyPageFragment : Fragment() {
                 Log.d("MyPageFragment", "channelDetail: ${channelDetail.title}")
             }
         }
+
+        favoriteViewModel.favoriteVideos.observe(viewLifecycleOwner) { favoriteVideos ->
+            favoriteVideos?.let {
+                favoriteVideoListAdapter.submitList(favoriteVideos)
+            }
+        }
     }
 
     override fun onDestroyView() {

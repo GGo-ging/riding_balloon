@@ -13,4 +13,6 @@ interface FavoriteRepository {
     fun saveFavoriteVideos()
 
     fun loadFavoriteVideos(): MutableList<FavoriteVideoInfo>
+
+    fun isFavorite(videoId: String): Boolean
 }

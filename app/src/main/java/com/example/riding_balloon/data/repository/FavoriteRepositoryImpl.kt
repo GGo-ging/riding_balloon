@@ -40,4 +40,9 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
         val type = object : TypeToken<MutableList<FavoriteVideoInfo>>() {}.type
         return gson.fromJson(json, type)
     }
+
+    override fun isFavorite(videoId: String): Boolean {
+        val video = _favoriteVideos.find { it.videoId == videoId } ?: return false
+        return video.isFavorite
+    }
 }

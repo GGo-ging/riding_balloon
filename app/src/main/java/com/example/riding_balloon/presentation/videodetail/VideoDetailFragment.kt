@@ -2,13 +2,19 @@ package com.example.riding_balloon.presentation.videodetail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.riding_balloon.R
+import com.example.riding_balloon.data.model.VideoItem
 import com.example.riding_balloon.databinding.FragmentVideoDetailBinding
+import com.example.riding_balloon.presentation.extensions.toFavoriteVideoInfo
+import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
+import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import java.time.OffsetDateTime
@@ -21,6 +27,11 @@ class VideoDetailFragment : Fragment() {
 
     private val viewModel : VideoDetailViewModel by activityViewModels()
     private lateinit var url : String
+
+    private lateinit var video: VideoItem
+    private lateinit var favoriteVideoItem: FavoriteVideoInfo
+    private val videoId: String = ""
+    private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +68,7 @@ class VideoDetailFragment : Fragment() {
         })
 
         viewModel.videoDetail.observe(viewLifecycleOwner) { videoItem ->
-            val video = videoItem.items?.firstOrNull()
+            video = videoItem.items?.firstOrNull() ?: VideoItem(null, null, null, null, null)
 
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val dateTime = OffsetDateTime.parse(video?.snippet?.publishedAt)
@@ -85,6 +96,10 @@ class VideoDetailFragment : Fragment() {
         binding.ivBackBarImage.setOnClickListener {
             // 메인 화면으로 돌아감
         }
+
+        if (videoId != null) {
+            initFavoriteButton(videoId)
+        }
     }
 
     private fun videoIdSlice(videoUrl: String?): String? {
@@ -107,5 +122,27 @@ class VideoDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initFavoriteButton(videoId: String) = with(binding) {
+        val isFavorite = favoriteViewModel.isFavorite(videoId)
+        Log.d("VideoDetailFragment", "isFavorite: $isFavorite")
+        if (isFavorite) {
+            ivBackBarHeart.setImageResource(R.drawable.ic_heart)
+        } else {
+            ivBackBarHeart.setImageResource(R.drawable.ic_heart_border)
+        }
+        ivBackBarHeart.setOnClickListener {
+            favoriteVideoItem = video.toFavoriteVideoInfo(isFavorite)
+            if (favoriteViewModel.isFavorite(favoriteVideoItem.videoId)) {
+                Log.d("VideoDetailFragment", "removeFavoriteItem: ${favoriteVideoItem}")
+                favoriteViewModel.removeFavoriteItem(favoriteVideoItem)
+                ivBackBarHeart.setImageResource(R.drawable.ic_heart_border)
+            } else {
+                val favoriteItem = favoriteVideoItem.copy(isFavorite = true)
+                favoriteViewModel.addFavoriteItem(favoriteItem)
+                ivBackBarHeart.setImageResource(R.drawable.ic_heart)
+            }
+        }
     }
 }
