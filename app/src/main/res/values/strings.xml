@@ -8,6 +8,12 @@
     <string name="description_main_logo_image">메인 로고 이미지</string>
 
     <!-- Home -->
+    <string name="home_title1_channel">여행 채널 추천</string>
+    <string name="home_title2_best10_1">해외 여행지 </string>
+    <string name="home_title2_best10_2">BEST 10</string>
+    <string name="home_title3_popular">지금 인기 많은 여행 유튜브</string>
+
+    <string name="home_channel_list_subscribers">구독자 %s명</string>
 
     <!-- Search -->
 
