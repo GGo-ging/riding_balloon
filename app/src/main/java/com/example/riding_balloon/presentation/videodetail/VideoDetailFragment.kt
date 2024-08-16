@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.riding_balloon.databinding.FragmentVideoDetailBinding
+import com.example.riding_balloon.presentation.MainActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import java.time.OffsetDateTime
@@ -84,6 +85,8 @@ class VideoDetailFragment : Fragment() {
 
         binding.ivBackBarImage.setOnClickListener {
             // 메인 화면으로 돌아감
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
