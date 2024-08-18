@@ -56,12 +56,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButton() = with(binding) {
+        val videosMap = mapOf(
+            0 to "RSv0K4hQyV8",
+            1 to "YJmu2JuDdZw",
+            2 to "XSU0CsElmVA",
+            3 to "WMjYjWufHwg",
+            4 to "h-XCpon8B5k",
+            5 to "hzjgHEF1-i0",
+            6 to "ZsgG9EOV4eE",
+        )
+
         layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
             val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
             findNavController(R.id.container_main).navigate(action)
         }
         layoutToolbarMain.btnToolbarVideo.setOnClickListener {
-            val action = HomeFragmentDirections.actionGlobalVideoDetail("RSv0K4hQyV8")
+            val randomIndex = (0..6).random()
+            val randomVideoId = videosMap[randomIndex] ?: "RSv0K4hQyV8"
+
+            val action = HomeFragmentDirections.actionGlobalVideoDetail(randomVideoId)
             findNavController(R.id.container_main).navigate(action)
         }
     }

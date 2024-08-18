@@ -87,8 +87,11 @@ class MyPageFragment : Fragment() {
 //        }
 
         favoriteViewModel.favoriteVideos.observe(viewLifecycleOwner) { favoriteVideos ->
-            favoriteVideos?.let {
+            if (favoriteVideos.isNotEmpty()) {
                 favoriteVideoListAdapter.submitList(favoriteVideos)
+                binding.tvEmptyFavoriteVideos.visibility = View.GONE
+            } else {
+                binding.tvEmptyFavoriteVideos.visibility = View.VISIBLE
             }
         }
     }
