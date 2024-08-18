@@ -32,6 +32,11 @@ class FavoriteViewModel @Inject constructor(
         _favoriteVideos.value = repository.favoriteVideos
     }
 
+    fun removeMultipleFavoriteItems(items: List<FavoriteVideoInfo>) {
+        repository.removeMultipleFavoriteVideos(items)
+        _favoriteVideos.value = repository.favoriteVideos
+    }
+
     fun saveFavoriteVideos() {
         repository.saveFavoriteVideos()
     }

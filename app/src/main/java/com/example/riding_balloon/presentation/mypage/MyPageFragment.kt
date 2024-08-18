@@ -59,6 +59,7 @@ class MyPageFragment : Fragment() {
         tvLabelMyFavoriteVideos.setOnClickListener {
             val selectedItems = favoriteVideoListAdapter.getSelectedItems()
             if (selectedItems.isNotEmpty()) {
+                favoriteViewModel.removeMultipleFavoriteItems(selectedItems)
                 Toast.makeText(requireContext(), "선택된 아이템 개수: ${selectedItems.size}", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show()
@@ -72,6 +73,7 @@ class MyPageFragment : Fragment() {
                 favoriteVideoListAdapter.submitList(favoriteVideos)
                 binding.tvEmptyFavoriteVideos.visibility = View.GONE
             } else {
+                favoriteVideoListAdapter.submitList(mutableListOf())
                 binding.tvEmptyFavoriteVideos.visibility = View.VISIBLE
             }
         }

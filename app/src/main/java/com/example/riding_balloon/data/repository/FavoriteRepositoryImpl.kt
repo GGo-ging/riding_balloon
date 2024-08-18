@@ -31,6 +31,11 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
         saveFavoriteVideos()
     }
 
+    override fun removeMultipleFavoriteVideos(videos: List<FavoriteVideoInfo>) {
+        _favoriteVideos.removeAll(videos)
+        saveFavoriteVideos()
+    }
+
     override fun saveFavoriteVideos() {
         val json = gson.toJson(_favoriteVideos)
         sharedPreferences.edit().putString(PREF_FAVORITE, json).apply()
