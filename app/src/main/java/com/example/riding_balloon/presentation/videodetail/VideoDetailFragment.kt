@@ -53,6 +53,7 @@ class VideoDetailFragment : Fragment() {
         Log.d("VideoDetailFragment", "args.videoId: ${args.videoId}")
 
         url = "https://www.youtube.com/watch?v=${args.videoId}"
+        //url = "https://youtu.be/_UyQLveYyzI?si=4Uh2TVQ1MNwvR7ik"
 
         val videoId = videoIdSlice(url)
         if (videoId != null) {

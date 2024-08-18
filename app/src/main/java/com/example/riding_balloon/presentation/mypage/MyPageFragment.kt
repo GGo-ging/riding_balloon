@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
@@ -19,6 +21,8 @@ class MyPageFragment : Fragment() {
     private val binding get() = _binding!!
     private val favoriteVideoListAdapter by lazy {
         FavoriteVideoListAdapter { favoriteVideoInfo ->
+            val action = MyPageFragmentDirections.actionGlobalVideoDetail(favoriteVideoInfo.videoId)
+            requireActivity().findNavController(R.id.container_main).navigate(action)
         }
     }
     private val favoriteVideoViewModel by activityViewModels<FavoriteVideoViewModel>()
