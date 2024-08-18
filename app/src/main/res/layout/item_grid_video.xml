@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/tv_grid_video_title"
-        style="@style/TextLabel.S18"
+        style="@style/TextBody.S18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/tv_grid_video_channel"
-        style="@style/TextCaption"
+        style="@style/TextLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
