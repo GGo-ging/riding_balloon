@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.riding_balloon.databinding.ItemGridVideoBinding
+import com.example.riding_balloon.presentation.extensions.load
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 
 class FavoriteVideoListAdapter(
@@ -57,9 +58,7 @@ class FavoriteVideoListAdapter(
                 ivGridVideoThumbnail.setOnClickListener {
                     onClick(video)
                 }
-                Glide.with(ivGridVideoThumbnail)
-                    .load(video.thumbnailUrl)
-                    .into(ivGridVideoThumbnail)
+                ivGridVideoThumbnail.load(video.thumbnailUrl)
                 tvGridVideoTitle.text = video.title
                 tvGridVideoChannel.text = video.channelTitle
 
