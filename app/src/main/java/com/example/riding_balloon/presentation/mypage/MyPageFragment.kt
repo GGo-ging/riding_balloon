@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -43,6 +44,26 @@ class MyPageFragment : Fragment() {
 
     private fun initView() = with(binding) {
         rvFavoriteVideos.adapter = favoriteVideoListAdapter
+
+        tvLabelFavoriteVideosEdit.setOnClickListener {
+            // isEditMode를 직접 토글
+            favoriteVideoListAdapter.isEditMode = !favoriteVideoListAdapter.isEditMode
+
+            if (favoriteVideoListAdapter.isEditMode) {
+                tvLabelFavoriteVideosEdit.text = getString(R.string.label_edit_complete)
+            } else {
+                tvLabelFavoriteVideosEdit.text = getString(R.string.label_edit)
+            }
+        }
+
+        tvLabelMyFavoriteVideos.setOnClickListener {
+            val selectedItems = favoriteVideoListAdapter.getSelectedItems()
+            if (selectedItems.isNotEmpty()) {
+                Toast.makeText(requireContext(), "선택된 아이템 개수: ${selectedItems.size}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun initViewModel() {
