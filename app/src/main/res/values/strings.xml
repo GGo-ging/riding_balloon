@@ -25,6 +25,7 @@
     <string name="label_my_favorite_videos">내가 좋아하는 영상</string>
     <string name="description_youtube_video_thumbnail">유튜브 비디오 썸네일 이미지</string>
     <string name="guide_message_empty_favorite_videos">좋아요 누른 영상이 없습니다.</string>
+    <string name="label_edit">편집</string>
 
     <!-- Travel Spot Detail -->
     <string name="description_back_image">뒤로 가기 이미지</string>

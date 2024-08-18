@@ -2,6 +2,7 @@ package com.example.riding_balloon.presentation.mypage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,7 @@ class FavoriteVideoListAdapter(private val onClick: (FavoriteVideoInfo) -> Unit)
     FavoriteVideoDiffCallback()
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteVideoHolder {
-        val binding = ItemGridVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoriteVideoHolder(binding, onClick)
+        return FavoriteVideoHolder.from(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: FavoriteVideoHolder, position: Int) {
@@ -27,15 +27,18 @@ class FavoriteVideoListAdapter(private val onClick: (FavoriteVideoInfo) -> Unit)
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(video: FavoriteVideoInfo) {
-            itemView.setOnClickListener {
-                onClick(video)
-            }
             with(binding) {
+                ivGridVideoThumbnail.setOnClickListener {
+                    onClick(video)
+                }
                 Glide.with(ivGridVideoThumbnail)
                     .load(video.thumbnailUrl)
                     .into(ivGridVideoThumbnail)
                 tvGridVideoTitle.text = video.title
                 tvGridVideoChannel.text = video.channelTitle
+                viewGridVideoAlpha.setOnClickListener {
+                    Toast.makeText(it.context, "체크", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
