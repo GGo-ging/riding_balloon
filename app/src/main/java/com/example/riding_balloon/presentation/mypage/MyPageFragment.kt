@@ -53,38 +53,38 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        favoriteVideoViewModel.fetchSearchResult("일본여행")
-        favoriteVideoViewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
-            searchResult?.let {
-                it.forEach { item ->
-                    Log.d("MyPageFragment", "searchResult: ${item.snippet?.title}")
-                }
-            }
-        }
-        favoriteVideoViewModel.trendingResult.observe(viewLifecycleOwner) { trendingResult ->
-            trendingResult?.let {
-                it.forEach { item ->
-                    Log.d("MyPageFragment", "trendingResult: ${item.snippet?.title}")
-                }
-            }
-        }
-        favoriteVideoViewModel.searchResultOrderByViewCount.observe(viewLifecycleOwner) { searchResultOrderByViewCount ->
-            searchResultOrderByViewCount?.let {
-                it.forEach { item ->
-                    Log.d("MyPageFragment", "searchResultOrderByViewCount: ${item.snippet?.title}")
-                }
-            }
-        }
-        favoriteVideoViewModel.videoDetail.observe(viewLifecycleOwner) { videoDetail ->
-            videoDetail?.let {
-                Log.d("MyPageFragment", "videoDetail: ${videoDetail.title}")
-            }
-        }
-        favoriteVideoViewModel.channelDetail.observe(viewLifecycleOwner) { channelDetail ->
-            channelDetail?.let {
-                Log.d("MyPageFragment", "channelDetail: ${channelDetail.title}")
-            }
-        }
+//        favoriteVideoViewModel.fetchSearchResult("일본여행")
+//        favoriteVideoViewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
+//            searchResult?.let {
+//                it.forEach { item ->
+//                    Log.d("MyPageFragment", "searchResult: ${item.snippet?.title}")
+//                }
+//            }
+//        }
+//        favoriteVideoViewModel.trendingResult.observe(viewLifecycleOwner) { trendingResult ->
+//            trendingResult?.let {
+//                it.forEach { item ->
+//                    Log.d("MyPageFragment", "trendingResult: ${item.snippet?.title}")
+//                }
+//            }
+//        }
+//        favoriteVideoViewModel.searchResultOrderByViewCount.observe(viewLifecycleOwner) { searchResultOrderByViewCount ->
+//            searchResultOrderByViewCount?.let {
+//                it.forEach { item ->
+//                    Log.d("MyPageFragment", "searchResultOrderByViewCount: ${item.snippet?.title}")
+//                }
+//            }
+//        }
+//        favoriteVideoViewModel.videoDetail.observe(viewLifecycleOwner) { videoDetail ->
+//            videoDetail?.let {
+//                Log.d("MyPageFragment", "videoDetail: ${videoDetail.title}")
+//            }
+//        }
+//        favoriteVideoViewModel.channelDetail.observe(viewLifecycleOwner) { channelDetail ->
+//            channelDetail?.let {
+//                Log.d("MyPageFragment", "channelDetail: ${channelDetail.title}")
+//            }
+//        }
 
         favoriteViewModel.favoriteVideos.observe(viewLifecycleOwner) { favoriteVideos ->
             favoriteVideos?.let {
