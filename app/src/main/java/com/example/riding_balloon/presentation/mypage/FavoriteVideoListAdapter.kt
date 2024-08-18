@@ -10,7 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.riding_balloon.databinding.ItemGridVideoBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 
-class FavoriteVideoListAdapter(private val onClick: (FavoriteVideoInfo) -> Unit) : ListAdapter<FavoriteVideoInfo, FavoriteVideoListAdapter.FavoriteVideoHolder>(
+class FavoriteVideoListAdapter(
+    private val onClick: (FavoriteVideoInfo) -> Unit
+) : ListAdapter<FavoriteVideoInfo, FavoriteVideoListAdapter.FavoriteVideoHolder>(
     FavoriteVideoDiffCallback()
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteVideoHolder {
