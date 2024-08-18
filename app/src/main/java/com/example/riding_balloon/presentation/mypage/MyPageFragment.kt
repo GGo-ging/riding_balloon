@@ -20,9 +20,8 @@ class MyPageFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
     private val favoriteVideoListAdapter by lazy {
-        FavoriteVideoListAdapter { favoriteVideoInfo ->
-            val action = MyPageFragmentDirections.actionGlobalVideoDetail(favoriteVideoInfo.videoId)
-            requireActivity().findNavController(R.id.container_main).navigate(action)
+        FavoriteVideoListAdapter { favoriteVideo ->
+            navigateToVideoDetail(favoriteVideo)
         }
     }
     private val favoriteVideoViewModel by activityViewModels<FavoriteVideoViewModel>()
@@ -98,6 +97,11 @@ class MyPageFragment : Fragment() {
                 binding.tvEmptyFavoriteVideos.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun navigateToVideoDetail(favoriteVideo: FavoriteVideoInfo) {
+        val action = MyPageFragmentDirections.actionGlobalVideoDetail(favoriteVideo.videoId)
+        requireActivity().findNavController(R.id.container_main).navigate(action)
     }
 
     override fun onDestroyView() {
