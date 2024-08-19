@@ -6,11 +6,15 @@ object TravelSpotManager {
 
     private val travelSpotList: List<TravelSpotInfo> = getDummyData()
 
+    fun getTravelSpots(): List<TravelSpotInfo> {
+        return travelSpotList
+    }
+
     private fun getDummyData(): List<TravelSpotInfo> {
         return listOf(
             TravelSpotInfo(
                 id = 1,
-                thumbnailUrl = "https://cdn.pixabay.com/photo/2016/11/29/05/45/astronomy-1867616_960_720.jpg",
+                thumbnailUrl = "https://d28dpoj42hxr8c.cloudfront.net/files/topics/9586_ext_14_ko_0.jpg?v=1449751963",
                 country = "일본",
                 region = "오사카",
                 description = "오사카 여행은 먹거리, 볼거리, 즐길 거리가 가득한 매력적인 도시.\n" + "오사카성, 도톤보리, 우메다 등 역사와 현대가 공존하는 다양한 관광 명소가 있습니다. 오사카 사람들은 친절하고 활기차서 여행객들에게 편안한 분위기를 제공합니다.",
@@ -32,7 +36,7 @@ object TravelSpotManager {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMbxVOk__Qh1gSAgtp1XB9rPOg3J7s82lZhOKtY4BF9VK4mFYrMnIrdYiR6t-T",
                     "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSSiRr64gDONbJO42EbAHBDWHGl7s5hLufVFD2csxMVa1x4v2ZnUrqSReGn2-hy"
                 ),
-                ranking = 2
+                ranking = 0
             ),
             TravelSpotInfo(
                 id = 3,
@@ -75,7 +79,7 @@ object TravelSpotManager {
             ),
             TravelSpotInfo(
                 id = 6,
-                thumbnailUrl = "https://i.namu.wiki/i/7f-OowTH4eRHCA_BwSLFSnoe28XHpbp5M2Nxg45WLeuDa8UX_B9Smm9vjjKSSG4rujcDCBVvInb2NprTDAkcacDepk_DS40sYIPpGrp7kPuQosVcmX7hNILv_9RbhODBiCguUTqzeus9vtnTde39-A.webp",
+                thumbnailUrl = "https://d1rcr366f28p93.cloudfront.net/wp-content/uploads/2018/04/%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg",
                 country = "베트남",
                 region = "하노이",
                 description = "베트남의 심장, 하노이를 소개합니다!\n"+"베트남의 수도, 하노이는 천년의 역사를 가진 도시로서 오랜 시간 동안 베트남의 정치, 경제, 문화의 중심지 역할을 해왔습니다. 프랑스 식민지 시대의 건축물과 전통적인 베트남 건축물이 조화롭게 어우러져 독특한 매력을 자랑합니다.",
@@ -84,7 +88,7 @@ object TravelSpotManager {
                     "https://i.namu.wiki/i/EPpd6a_Ww0TnDmzUGnfwQj2kNBvcb2n4jNpdR-oeE670fgHPwWvKtuPBPCtw1i5mm9YKETfHDiCYpDfUjzxGAS6TnS4-oJtHWjn6hATbpYUMegiE1z1yPVgVOnmoQ5YqfRRa_fplqsQnSz6Ks7HmJQ.webp",
                     "https://i.namu.wiki/i/JK953CLxojz_xXCrhMbYXWsCZBTmyG2SGmI0BIGnIYt95YGhNVaA1fsGPi2rosMp0bDh7_0TOdqdyZ216NoCn0k90M8UzktcRvFPaanPhKfFgOYfCMm_hH7Y_TT_ylNC_2Roe0e5sOBiqYMPckd-xA.webp"
                 ),
-                ranking = 3
+                ranking = 2
             ),
             TravelSpotInfo(
                 id = 7,
@@ -97,7 +101,7 @@ object TravelSpotManager {
                     "https://search.pstatic.net/common?src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5885_000_3%2F20200818104649989_VEGDN6FTL.jpg%2Ffb112_3_i2.jpg%3Ftype%3Dw540_fst&type=m1500_travelsearch",
                     "https://search.pstatic.net/common?src=https://dbscthumb-phinf.pstatic.net/5885_000_3/20200818105943270_I9WYBCB76.jpg/fb112_45_i2.jpg?type=w540_fst&type=w800_travelsearch"
                 ),
-                ranking = 6
+                ranking = 0
             ),
             TravelSpotInfo(
                 id = 8,
@@ -110,7 +114,7 @@ object TravelSpotManager {
                     "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/532000/532651-kota-kinabalu.jpg",
                     "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/44000/44008-Melaka-Historical-City.jpg"
                 ),
-                ranking = 10
+                ranking = 0
             ),
             TravelSpotInfo(
                 id = 9,
@@ -123,20 +127,20 @@ object TravelSpotManager {
                     "https://ak-d.tripcdn.com/images/0350m12000bxp23v82270_C_1136_640_Q10.jpg",
                     "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/13f9/image/xGgWcacouds-uEcAtggX0XyLuXs.jpg"
                 ),
-                ranking = 7
+                ranking = 8
             ),
             TravelSpotInfo(
                 id = 10,
                 thumbnailUrl = "https://www.befreetour.com/img/produk/yehliu-geological-park-admission-ticket/yehliu-geological-park-admission-ticket_3e9bdd8ffe2f7a8587e1e6df7c6e1d3f7e774b98.jpg",
                 country = "대만",
-                region = "다양한 지역",
+                region = "타이베이",
                 description = "대만은 아름다운 자연과 독특한 문화가 어우러진 매력적인 섬나라입니다. 예류 지질공원과 타이루거 협곡 같은 아름다운 자연을 비롯해 밤시장과 온천 등 다양한 즐길 거리가 있어 잊지 못할 여행을 선사합니다.",
                 images = listOf(
                     "https://www.befreetour.com/img/produk/yehliu-geological-park-admission-ticket/yehliu-geological-park-admission-ticket_3e9bdd8ffe2f7a8587e1e6df7c6e1d3f7e774b98.jpg",
                     "https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/06def5bd-1d92-40f2-a9c2-1965f02797ed.jpeg",
                     "https://mblogthumb-phinf.pstatic.net/20161021_45/suni2park_1476994150025NCJxK_JPEG/%B4%EB%B8%B81.01.jpg?type=w800"
                 ),
-                ranking = 5
+                ranking = 6
             ),
             TravelSpotInfo(
                 id = 11,
@@ -149,7 +153,7 @@ object TravelSpotManager {
                     "https://tourimage.interpark.com/BBS/Tour/FckUpload/201702/6362174230293976690.jpg",
                     "https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/6b9c2427-b62f-457c-9155-5ca9c117ca03.jpeg"
                 ),
-                ranking = 9
+                ranking = 10
             ),
             TravelSpotInfo(
                 id = 12,
@@ -175,7 +179,7 @@ object TravelSpotManager {
                     "https://i.namu.wiki/i/BFRx2IpfxZLMWh1Cw51vTSNUthJ3uM-QosQ-oFNBsZpZQHjIsy6MyOplsEpjpWJlVicgkPeL9Ou1JOhsPGcQeA.webp",
                     "https://i.namu.wiki/i/4-WC3SEQ6E1msNvD81GVw_o35d3mz1SgQndYpPSmLsis8xdYvl_Tx2MGmWUixy6bsIzDm1rPOcIscIdme_20yg.webp"
                 ),
-                ranking = 8
+                ranking = 9
             ),
             TravelSpotInfo(
                 id = 14,
@@ -333,7 +337,7 @@ object TravelSpotManager {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDQ96V9Ak0dXzTojOHPsBxqZSEhj8SzX6082YaHytXbclDvQ2p03eqPEAibf-",
                     "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQPO382MuVZcJUF3F18ILAegSp5b3_Iha4Ta5tVVSA5QtBaUdC1hb6XAGP5zlBk"
                 ),
-                ranking = 4
+                ranking = 3
             ),
             TravelSpotInfo(
                 id = 26,
@@ -434,44 +438,44 @@ object TravelSpotManager {
 
             TravelSpotInfo(
                 id = 33,
-                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                thumbnailUrl = "https://dimg.donga.com/wps/NEWS/IMAGE/2020/08/19/102532636.5.jpg",
                 country = "괌",
                 region = "괌",
                 description = "괌 여행, 정말 좋은 선택이시네요! 에메랄드빛 투명한 바다, 하얀 모래사장, 울창한 열대 우림까지! 그 곳에서 다양한 액티비티까지 즐길 수 있는 매력적인 곳이죠.",
                 images = listOf(
-                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
-                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
-                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                    "https://www.kayak.co.kr/c/wp-content/uploads/sites/308/2022/04/danny-mc-z5j2dwpb3p0-unsplash.jpg",
+                    "https://tourimage.interpark.com/BBS/Tour/FckUpload/201606/6360097958533349240.jpg",
+                    "https://www.cts.tv/plugin/editor/summernote/upload/dc1c2ed9a15f7c359a35bb6e833c4319_thumb.jpeg"
                 ),
-                ranking = 0
+                ranking = 7
             ),
 
             TravelSpotInfo(
                 id = 34,
-                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                thumbnailUrl = "https://www.agoda.com/wp-content/uploads/2024/02/Downtown-Manila-hotels-things-to-do-in-Manila-Rizal-Park-Philippines-1.jpg",
                 country = "필리핀",
                 region = "마닐라",
                 description = "7,000개가 넘는 섬으로 이루어진 천혜의 자연, 저렴한 물가와 친절한 사람들, 다채로운 문화와 맛있는 음식! 이 모든 것들이 선사하는 잊지 못할 추억을 경험 해보세요.",
                 images = listOf(
-                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
-                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
-                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                    "https://i.namu.wiki/i/bTqsNAZYwzLO_4zCqRATtJ8dg55YgZ8zYMDp0QKiJxPEURR3hKKfyOWdQhIs6ABf31bDtX9n5BE7fBZWie8mlw.webp",
+                    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/e6/90/9e/caption.jpg?w=1200&h=-1&s=1&cx=1920&cy=1080&chk=v1_98d290c726259c64b704",
+                    "https://media.istockphoto.com/id/1092423872/ko/%EC%82%AC%EC%A7%84/%EB%A7%88%EB%8B%90%EB%9D%BC-%EB%B2%A0%EC%9D%B4-%ED%95%84%EB%A6%AC%ED%95%80-%EB%A7%88%EB%8B%90%EB%9D%BC-%EC%8B%9C%EC%9D%98-%EC%8A%A4%EC%B9%B4%EC%9D%B4-%EB%9D%BC%EC%9D%B8.jpg?s=612x612&w=0&k=20&c=joiJzyt8h_DI57YQEZceAaS4rhJBxlgGaJU5QlztLmg="
                 ),
-                ranking = 0
+                ranking = 4
             ),
 
             TravelSpotInfo(
                 id = 35,
-                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+                thumbnailUrl = "https://story.s-oil.com/wp-content/uploads/2021/06/%EB%B6%80%EB%A3%A8%EB%A7%88%EB%B8%94_01.jpg",
                 country = "싱가포르",
                 region = "싱가포르",
                 description = "첨단 건축물과 아름다운 정원이 조화를 이루는 싱가포르! 쇼핑몰, 시장, 테마파크 등 다양한 곳에서 즐거운 시간을 보낼 수 있어요.",
                 images = listOf(
-                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
-                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
-                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+                    "https://img.khan.co.kr/news/2022/06/09/news-p.v1.20220609.4b67056841a94763a34f8845694316d6_P1.jpg",
+                    "https://tourimage.interpark.com/BBS/Tour/FckUpload/202001/6371470205165735740.png",
+                    "https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/wlQ/image/k41IemYFNns52pFaSJuJGaPlbfU.jpeg"
                 ),
-                ranking = 0
+                ranking = 5
             ),
 
             TravelSpotInfo(

@@ -8,7 +8,8 @@
     <Spinner
         android:id="@+id/spinnerContinent"
         android:layout_width="161dp"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.064"
@@ -20,6 +21,7 @@
         android:id="@+id/spinnerCountry"
         android:layout_width="161dp"
         android:layout_height="48dp"
+        android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.76"
