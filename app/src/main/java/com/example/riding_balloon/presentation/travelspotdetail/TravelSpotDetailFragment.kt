@@ -30,6 +30,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
+var isScrollCoroutineRunning = false
+
 @AndroidEntryPoint
 class TravelSpotDetailFragment : Fragment() {
 
@@ -98,6 +100,15 @@ class TravelSpotDetailFragment : Fragment() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     Log.d("TSD 리사이클러뷰", "$dy 로 변경 중...")
+                    if(
+                        !binding.rvTravel.canScrollVertically(1) &&
+                        tsdViewModel.videosData.value?.isEmpty() == false &&
+                        !isScrollCoroutineRunning
+                        ) {
+                        isScrollCoroutineRunning = true
+                        Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
+                        tsdViewModel.addData()
+                    }
                 }
             })
         }
@@ -111,7 +122,7 @@ class TravelSpotDetailFragment : Fragment() {
         }
 
         recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
-            tsdViewModel.changeData(it)
+            tsdViewModel.changeData(it, false)
         }
 
     }

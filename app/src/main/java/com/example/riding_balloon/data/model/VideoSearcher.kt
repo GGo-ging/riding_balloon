@@ -12,9 +12,24 @@ data class VideoData(
 )
 
 class VideoSearcher(private val youtubeApi: YoutubeApi) {
+    private var nextPageToken : String = ""
 
-    suspend fun getSearchDataFromYoutubeApi(keyword: String) : List<VideoData> {
-        return youtubeApi.searchVideos(query = keyword).items?.map {
+    private suspend fun getSearchData(keyword: String) : SearchVideoResponse {
+        return youtubeApi.searchVideos(query = keyword)
+    }
+
+    private suspend fun getSearchData(keyword: String, nextPageToken: String) : SearchVideoResponse {
+        return youtubeApi.searchNextVideos(query = keyword, pageToken = nextPageToken)
+    }
+
+    private suspend fun SearchVideoResponse.getNextPageToken() {
+        this@VideoSearcher.nextPageToken = this.nextPageToken ?: ""
+    }
+
+    suspend fun getSearchDataFromYoutubeApi(keyword: String, isNext: Boolean) : List<VideoData> {
+        val searchData = if(!isNext) getSearchData(keyword) else getSearchData(keyword, nextPageToken = nextPageToken)
+        searchData.getNextPageToken()
+        return searchData.items?.map {
             VideoData(
                 videoId = it.id?.videoId,
                 videoUrl = it.snippet?.thumbnails?.medium?.url,

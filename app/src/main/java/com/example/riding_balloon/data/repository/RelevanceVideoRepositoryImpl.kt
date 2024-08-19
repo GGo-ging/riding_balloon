@@ -13,8 +13,8 @@ import javax.inject.Inject
 class RelevanceVideoRepositoryImpl @Inject constructor(private val youtubeApi: YoutubeApi) : RelevanceVideoRepository {
     private val videoSearcher: VideoSearcher = VideoSearcher(youtubeApi)
 
-    override suspend fun videoDataToUiModel(keyword: String) : List<VideoListUiModel> {
-        return videoSearcher.getSearchDataFromYoutubeApi(keyword).toUiModel()
+    override suspend fun videoDataToUiModel(keyword: String, isNext: Boolean) : List<VideoListUiModel> {
+        return videoSearcher.getSearchDataFromYoutubeApi(keyword = keyword, isNext = isNext).toUiModel()
     }
 
     override suspend fun getTrendingVideos(): TrendingVideoResponse = youtubeApi.getTrendingVideos()

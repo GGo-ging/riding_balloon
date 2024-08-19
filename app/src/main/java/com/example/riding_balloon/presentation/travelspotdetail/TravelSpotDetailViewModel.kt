@@ -19,15 +19,37 @@ class TravelSpotDetailViewModel @Inject constructor (
     private val _videosData = MutableLiveData<List<VideoListUiModel>>()
     val videosData get() = _videosData
 
-    fun initData() = changeData("")
+    private var videoKeyword : String = ""
 
-    fun changeData(keyword: String) = runBlocking {
+    fun initData() {
+        changeData("", false)
+    }
+
+    fun addData() {
+        changeData(videoKeyword, true)
+    }
+
+    fun changeData(keyword: String, isNext: Boolean) = runBlocking {
         viewModelScope.launch {
-            var list : List<VideoListUiModel> = listOf()
-            list = relevantVideoRepository.videoDataToUiModel("괌" + keyword + "여행")
+            changeKeyword(keyword)
+            var list : MutableList<VideoListUiModel> = videosData.value?.map { it }?.toMutableList() ?: mutableListOf()
+            val uiModelList = relevantVideoRepository.videoDataToUiModel(
+                keyword = "괌" + videoKeyword + "여행",
+                isNext = isNext
+            )
+            if(!isNext) {
+                list = uiModelList.toMutableList()
+            } else {
+                list.addAll(uiModelList)
+            }
             _videosData.value = list
-            Log.d("ViewModel 데이터", "${videosData.value}")
+            Log.d("ViewModel 데이터", "사이즈: ${videosData.value?.size} 리스트: ${videosData.value}")
+            isScrollCoroutineRunning = false
         }
+    }
+
+    private fun changeKeyword(keyword: String) {
+        videoKeyword = keyword
     }
 
 }

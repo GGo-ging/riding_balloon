@@ -31,11 +31,5 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
 
-        binding.rvTravelVideoList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                Log.d("VideoList 뷰홀더", "$dy 로 변경 중...")
-            }
-        })
     }
 }
