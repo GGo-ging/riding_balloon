@@ -5,5 +5,6 @@ data class PopularVideoListModel(
     val thumbnailUrl: String,
     val title: String,
     val channelTitle: String,
-//    val views: Int,
+    val viewCount: String,
+    val createdAt: String
 )

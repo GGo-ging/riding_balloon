@@ -29,10 +29,12 @@ fun ChannelDetailsResponse.toListData(): ChannelListModel {
 
 fun TrendingVideoResponse.toListData(): PopularVideoListModel {
     return PopularVideoListModel(
-        UUID.randomUUID().toString(),
-        items?.map { it.snippet?.thumbnails?.default?.url }?.get(0) ?: "",
+        items?.map { it.id }.toString(),
+        items?.map { it.snippet?.thumbnails?.standard?.url }?.get(0) ?: "",
         items?.map { it.snippet?.title }?.get(0) ?: "",
-        items?.map { it.snippet?.channelTitle }?.get(0) ?: ""
+        items?.map { it.snippet?.channelTitle }?.get(0) ?: "",
+        items?.map{ it.statistics?.viewCount }.toString(),
+        items?.map{ it.snippet?.publishedAt }.toString(),
     )
 }
 
@@ -87,6 +89,11 @@ class HomeViewModel(
 //        }
 //    }
 
+    fun getBest10List(){
+        val rankingList = TravelSpotManager.getListByRanking()
+        _best10List.value = rankingList
+    }
+
     fun fetchPopularVideoList(){
         viewModelScope.launch {
             runCatching {
@@ -100,16 +107,9 @@ class HomeViewModel(
         }
     }
 
-    fun fetchChannelList(){ }
-
     fun clearList() {
         _channelList.value = listOf()
         _best10List.value = listOf()
         _popularVideoList.value = listOf()
-    }
-
-    fun getBest10List(){
-        val rankingList = TravelSpotManager.getListByRanking()
-        _best10List.value = rankingList
     }
 }

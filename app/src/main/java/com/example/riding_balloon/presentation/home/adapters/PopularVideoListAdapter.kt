@@ -6,20 +6,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.riding_balloon.databinding.ItemGridVideoBinding
+import com.example.riding_balloon.databinding.ItemHomeVideoListBinding
 import com.example.riding_balloon.presentation.model.PopularVideoListModel
 
 class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideoListAdapter.PopularYoutubeHolder>(
     PopularYoutubeDiffCallback()
 ) {
-    class PopularYoutubeHolder(binding: ItemGridVideoBinding) : RecyclerView.ViewHolder(binding.root){
+    class PopularYoutubeHolder(binding: ItemHomeVideoListBinding) : RecyclerView.ViewHolder(binding.root){
         val image =  binding.ivGridVideoThumbnail
         val title = binding.tvGridVideoTitle
         val channelTitle = binding.tvGridVideoChannel
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularYoutubeHolder {
-        val binding = ItemGridVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemHomeVideoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return PopularYoutubeHolder(binding)
     }
