@@ -24,12 +24,20 @@
         android:id="@+id/navigation_travel_spot_detail"
         android:name="com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailFragment"
         android:label="TravelSpotDetailFragment"
-        tools:layout="@layout/fragment_travel_spot_detail" />
+        tools:layout="@layout/fragment_travel_spot_detail" >
+        <argument
+            android:name="travelSpot"
+            app:argType="com.example.riding_balloon.data.model.TravelSpotInfo" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_video_detail"
         android:name="com.example.riding_balloon.presentation.videodetail.VideoDetailFragment"
         android:label="VideoDetailFragment"
-        tools:layout="@layout/fragment_video_detail" />
+        tools:layout="@layout/fragment_video_detail" >
+        <argument
+            android:name="videoId"
+            app:argType="string" />
+    </fragment>
     <action
         android:id="@+id/action_global_travel_spot_detail"
         app:destination="@id/navigation_travel_spot_detail" />

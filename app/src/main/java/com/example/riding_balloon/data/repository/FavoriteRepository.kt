@@ -10,7 +10,11 @@ interface FavoriteRepository {
 
     fun removeFavoriteVideo(video: FavoriteVideoInfo)
 
+    fun removeMultipleFavoriteVideos(videos: List<FavoriteVideoInfo>)
+
     fun saveFavoriteVideos()
 
     fun loadFavoriteVideos(): MutableList<FavoriteVideoInfo>
+
+    fun isFavorite(videoId: String): Boolean
 }

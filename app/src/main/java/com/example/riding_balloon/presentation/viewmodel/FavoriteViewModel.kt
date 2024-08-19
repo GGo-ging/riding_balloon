@@ -1,10 +1,10 @@
 package com.example.riding_balloon.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.riding_balloon.data.repository.FavoriteRepository
-import com.example.riding_balloon.data.repository.FavoriteRepositoryImpl
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,17 +21,28 @@ class FavoriteViewModel @Inject constructor(
         _favoriteVideos.value = repository.loadFavoriteVideos()
     }
 
-    fun addBookmarkItem(item: FavoriteVideoInfo) {
+    fun addFavoriteItem(item: FavoriteVideoInfo) {
         repository.addFavoriteVideo(item)
         _favoriteVideos.value = repository.favoriteVideos
     }
 
-    fun removeBookmarkItem(item: FavoriteVideoInfo) {
+    fun removeFavoriteItem(item: FavoriteVideoInfo) {
+        Log.d("FavoriteViewModel", "removeFavoriteItem() item: $item")
         repository.removeFavoriteVideo(item)
         _favoriteVideos.value = repository.favoriteVideos
     }
 
-    fun saveBookmarks() {
+    fun removeMultipleFavoriteItems(items: List<FavoriteVideoInfo>) {
+        repository.removeMultipleFavoriteVideos(items)
+        _favoriteVideos.value = repository.favoriteVideos
+    }
+
+    fun saveFavoriteVideos() {
         repository.saveFavoriteVideos()
+    }
+
+    fun isFavorite(videoId: String): Boolean {
+        Log.d("FavoriteViewModel", "isFavorite() videoId: $videoId")
+        return repository.isFavorite(videoId)
     }
 }

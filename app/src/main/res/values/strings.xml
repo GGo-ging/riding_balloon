@@ -24,6 +24,15 @@
     <string name="text_my_description">지나가버린 (지나가버린) 어린 시절엔 (시절엔)\n풍선을 타고 날아가는 예쁜 꿈도 꾸었지\n빨간 풍선이 하늘을 날면 내 마음에도 아름다운 기억들이 생각나</string>
     <string name="label_my_favorite_videos">내가 좋아하는 영상</string>
     <string name="description_youtube_video_thumbnail">유튜브 비디오 썸네일 이미지</string>
+    <string name="guide_message_empty_favorite_videos">좋아요 누른 영상이 없습니다.</string>
+    <string name="label_edit">편집</string>
+    <string name="label_edit_complete">편집완료</string>
+    <string name="format_diff_year">%d년 전</string>
+    <string name="format_diff_month">%d개월 전</string>
+    <string name="format_diff_day">%d일 전</string>
+    <string name="format_diff_hour">%d시간 전</string>
+    <string name="format_diff_minute">%d분 전</string>
+    <string name="format_diff_second">%d초 전</string>
 
     <!-- Travel Spot Detail -->
     <string name="description_back_image">뒤로 가기 이미지</string>
