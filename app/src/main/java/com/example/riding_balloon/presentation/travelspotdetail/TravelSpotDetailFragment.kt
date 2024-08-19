@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -33,12 +34,12 @@ import kotlin.math.roundToInt
 var isScrollCoroutineRunning = false
 
 @AndroidEntryPoint
-class TravelSpotDetailFragment : Fragment() {
+class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> {
 
     private var _binding: FragmentTravelSpotDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
+    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter(this)
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
 
@@ -136,6 +137,27 @@ class TravelSpotDetailFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             val videoDb = VideoRoomDB.getDatabase((requireActivity().applicationContext as PungsunTagoApplication))
             videoDb.videoDao().insert(video)
+        }
+    }
+
+    override fun onTravelSpotClick(item: UiModel) {
+        when (item) {
+            is UiModel.InfoModel -> {
+                // InfoModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "${item.city} clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.ViewPagerModel -> {
+                // ViewPagerModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "ViewPager clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.TravelVideoListModel -> {
+                // TravelVideoListModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "Video List clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.ChipGroupModel -> {
+                // ChipGroupModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "${item.city} clicked!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
