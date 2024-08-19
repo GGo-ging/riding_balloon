@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.riding_balloon.data.model.ItemSnippetStatistics
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
@@ -25,6 +26,17 @@ fun ChannelDetailsResponse.toListData(): ChannelListModel {
             items?.first()?.snippet?.thumbnails?.default?.url ?:"",
             items?.first()?.statistics?.subscriberCount ?: "",
         )
+}
+
+fun ItemSnippetStatistics.toListData(): PopularVideoListModel {
+    return PopularVideoListModel(
+        id.toString(),
+        snippet?.thumbnails?.standard?.url ?: "",
+        snippet?.title ?: "",
+        snippet?.channelTitle ?: "",
+        statistics?.viewCount.toString(),
+        snippet?.publishedAt.toString(),
+    )
 }
 
 fun TrendingVideoResponse.toListData(): PopularVideoListModel {
@@ -74,21 +86,6 @@ class HomeViewModel(
         }
     }
 
-//    fun fetchPopularVideoList(){
-//        viewModelScope.launch {
-//            runCatching {
-//                val fetchResult = async { return@async channelRepository.getVideos() }
-//                val result = fetchResult.await()
-//                Log.d("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() result: $result")
-//                val filteredResult = result.items?.filter { it.snippet?.categoryId == "19" }
-//                Log.d("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() filteredResult: $filteredResult")
-//                _popularVideoList.value = listOf(result.toListData())
-//            }.onFailure {
-//                Log.e("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() onFailure: ${it.message}")
-//            }
-//        }
-//    }
-
     fun getBest10List(){
         val rankingList = TravelSpotManager.getListByRanking()
         _best10List.value = rankingList
@@ -99,8 +96,8 @@ class HomeViewModel(
             runCatching {
                 val fetchResult = async { return@async channelRepository.getVideos() }
                 val result = fetchResult.await()
-                result.items?.filter { it.snippet?.categoryId == "19" }
-                _popularVideoList.value = listOf(result.toListData())
+                val filteredResult = result.items?.filter { it.snippet?.categoryId == "19" }
+                _popularVideoList.value = filteredResult?.map{ it.toListData() }
             }.onFailure {
                 Log.e("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() onFailure: ${it.message}")
             }
