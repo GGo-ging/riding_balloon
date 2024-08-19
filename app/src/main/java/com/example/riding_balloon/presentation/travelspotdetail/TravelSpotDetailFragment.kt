@@ -90,9 +90,17 @@ class TravelSpotDetailFragment : Fragment() {
         // args.travelSpot으로 가져오면 됨.
         Log.d("TravelSpotDetailFragment", "args: ${args.travelSpot}")
 
-        binding.rvTravel.adapter = recyclerViewAdapter
-        binding.rvTravel.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTravel.addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
+        binding.rvTravel.apply {
+            adapter = recyclerViewAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    Log.d("TSD 리사이클러뷰", "$dy 로 변경 중...")
+                }
+            })
+        }
 
         recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
             Glide.with(this).load(url)
@@ -104,10 +112,6 @@ class TravelSpotDetailFragment : Fragment() {
 
         recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
             tsdViewModel.changeData(it)
-        }
-
-        recyclerViewAdapter.addDecoration = TravelSpotDetailRecyclerViewAdapter.AddDecoration {
-            TsdRecyclerViewVideoListSpaceDecoration(resources.displayMetrics.density.roundToInt())
         }
 
     }
@@ -140,20 +144,5 @@ class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDec
             else -> 0
         }
         outRect.bottom = marginBottom
-    }
-}
-
-class TsdRecyclerViewVideoListSpaceDecoration(private val px: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State
-    ) {
-        val marginBottom = px * 8
-        val marginHorizontal = px * 4
-        outRect.bottom = marginBottom
-        outRect.left = marginHorizontal
-        outRect.right = marginHorizontal
     }
 }

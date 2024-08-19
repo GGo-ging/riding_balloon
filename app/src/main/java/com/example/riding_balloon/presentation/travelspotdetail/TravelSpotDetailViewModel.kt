@@ -24,7 +24,7 @@ class TravelSpotDetailViewModel @Inject constructor (
     fun changeData(keyword: String) = runBlocking {
         viewModelScope.launch {
             var list : List<VideoListUiModel> = listOf()
-            list = relevantVideoRepository.videoDataToUiModel("일본" + keyword + "여행")
+            list = relevantVideoRepository.videoDataToUiModel("괌" + keyword + "여행")
             _videosData.value = list
             Log.d("ViewModel 데이터", "${videosData.value}")
         }

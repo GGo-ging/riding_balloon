@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
@@ -20,7 +21,6 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         item: UiModel,
         drawImage: TravelSpotDetailRecyclerViewAdapter.DrawImage?,
         drawLayoutManager: TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager?,
-        addDecoration: TravelSpotDetailRecyclerViewAdapter.AddDecoration?
     ) {
         Log.d("ViewHolder 체크", "VideoList $item")
         val travelSpotDetailVideoListAdapter = TravelSpotDetailVideoListAdapter()
@@ -29,7 +29,13 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         }
         binding.rvTravelVideoList.adapter = travelSpotDetailVideoListAdapter
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
-        addDecoration?.onAdd()?.let { binding.rvTravelVideoList.addItemDecoration(it) }
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
+
+        binding.rvTravelVideoList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d("VideoList 뷰홀더", "$dy 로 변경 중...")
+            }
+        })
     }
 }

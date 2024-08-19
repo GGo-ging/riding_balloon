@@ -32,7 +32,6 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     var drawImage: DrawImage? = null
     var drawLayoutManager : DrawLayoutManager? = null
     var selectChip : SelectChip? = null
-    var addDecoration: AddDecoration? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
         Log.d("ViewHolder 체크", "리스트 : $currentList")
@@ -73,7 +72,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
                 holder.bind(getItem(position), drawImage)
             }
             is VideoListViewHolderImpl -> {
-                holder.bind(getItem(position), drawImage, drawLayoutManager, addDecoration)
+                holder.bind(getItem(position), drawImage, drawLayoutManager)
             }
             is ChipGroupViewHolderImpl -> {
                 holder.bind(getItem(position), selectChip)
@@ -108,10 +107,6 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
 
     fun interface SelectChip {
         fun onSelect(chipText: String)
-    }
-
-    fun interface AddDecoration {
-        fun onAdd() : RecyclerView.ItemDecoration
     }
 
 }
