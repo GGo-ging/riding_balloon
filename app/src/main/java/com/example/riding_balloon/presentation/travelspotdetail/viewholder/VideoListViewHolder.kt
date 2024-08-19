@@ -11,7 +11,6 @@ import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailRecyclerViewAdapter
 import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailVideoListAdapter
-import com.example.riding_balloon.presentation.travelspotdetail.TsdRecyclerViewSpaceDecoration
 import com.example.riding_balloon.presentation.travelspotdetail.UiModel
 import com.google.android.material.chip.Chip
 
@@ -30,7 +29,6 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         binding.rvTravelVideoList.adapter = travelSpotDetailVideoListAdapter
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
         binding.rvTravelVideoList.isNestedScrollingEnabled = true
-        binding.rvTravelVideoList.setHasFixedSize(true)
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
     }
 }

@@ -39,7 +39,8 @@ class TravelSpotDetailFragment : Fragment() {
     private var _binding: FragmentTravelSpotDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
+//    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
+    private val rvAdapter = TravelSpotDetailVideoListAdapter()
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
 
@@ -50,22 +51,12 @@ class TravelSpotDetailFragment : Fragment() {
         city = TravelSpotManager.getListByCountry()[0].region,
         desc = TravelSpotManager.getListByCountry()[0].description
     )
-    private val chipGroupModel = UiModel.ChipGroupModel(
-        city = TravelSpotManager.getListByCountry()[0].region
-    )
-    private val videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
-    private val loadingModel = UiModel.VideoListLoadingUiModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tsdViewModel.initData()
-        recyclerViewAdapter.submitList(
-            listOf(
-                viewPagerModel,
-                infoModel,
-                chipGroupModel,
-                loadingModel
-            )
+        rvAdapter.submitList(
+            listOf()
         )
     }
 
@@ -83,27 +74,34 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val chipList = listOf(
+            binding.chipTravelAll,
+            binding.chipTravelTrain,
+            binding.chipTravelRestaurant,
+            binding.chipTravelBackpacking,
+            binding.chipTravelHoneymoon,
+            binding.chipTravelHealing,
+        )
+
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
-            recyclerViewAdapter.submitList(
-                listOf(
-                    viewPagerModel,
-                    infoModel,
-                    chipGroupModel,
-                    videoListModel.copy(
-                        id = videoListModel.id,
-                        videoList = tsdViewModel.videosData.value ?: listOf()
-                    )
-                )
+            rvAdapter.submitList(
+                tsdViewModel.videosData.value ?: listOf()
             )
+            chipList.forEach {
+                it.isEnabled = true
+            }
         }
 
         // args.travelSpot으로 가져오면 됨.
         Log.d("TravelSpotDetailFragment", "args: ${args.travelSpot}")
 
+        setViewPager()
+        setInfo()
+        setChip()
+
         binding.rvTravel.apply {
-            adapter = recyclerViewAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
+            adapter = rvAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
@@ -115,35 +113,14 @@ class TravelSpotDetailFragment : Fragment() {
                     ) {
                         isScrollCoroutineRunning = true
                         Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
-                        recyclerViewAdapter.submitList(
-                            listOf(
-                                viewPagerModel,
-                                infoModel,
-                                chipGroupModel,
-                                videoListModel.copy(
-                                    id = videoListModel.id,
-                                    videoList = tsdViewModel.videosData.value ?: listOf()
-                                ),
-                                UiModel.VideoListLoadingUiModel()
-                            )
-                        )
                         tsdViewModel.addData()
                     }
                 }
             })
         }
 
-        recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
+        rvAdapter.drawImage = TravelSpotDetailVideoListAdapter.DrawImage { url ->
             Glide.with(this).load(url)
-        }
-
-        recyclerViewAdapter.drawLayoutManager =
-            TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager {
-                GridLayoutManager(requireContext(), 2)
-            }
-
-        recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
-            tsdViewModel.changeData(it, false)
         }
 
     }
@@ -153,29 +130,134 @@ class TravelSpotDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun insertVideo(video: List<VideoEntity>) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val videoDb =
-                VideoRoomDB.getDatabase((requireActivity().applicationContext as PungsunTagoApplication))
-            videoDb.videoDao().insert(video)
+    private fun setChip() {
+        binding.tvTravelChipgroupTitle.text = "영상으로 ${infoModel.city} 여행하기"
+        val chipTag = listOf(
+            "", "기차", "맛집", "배낭", "신혼", "힐링"
+        )
+        val chipList = listOf(
+            binding.chipTravelAll,
+            binding.chipTravelTrain,
+            binding.chipTravelRestaurant,
+            binding.chipTravelBackpacking,
+            binding.chipTravelHoneymoon,
+            binding.chipTravelHealing,
+        )
+        binding.cgTravel.setOnCheckedStateChangeListener { _, ids ->
+            val chip = chipList.first { chip -> chip.id == ids.first() }
+            tsdViewModel.changeData(chipTag[chipList.indexOf(chip)], false)
+            for (chip1 in chipList) {
+                chip1.isEnabled = false
+            }
+        }
+    }
+
+    private fun setViewPager() {
+        val vpAdapter = TravelSpotDetailViewPagerAdapter()
+        vpAdapter.drawImage = TravelSpotDetailViewPagerAdapter.DrawImage { url ->
+            Glide.with(this).load(url)
+        }
+        binding.vpTravelInfo.adapter = vpAdapter
+        val list = viewPagerModel.imageUrlList.map {
+            ViewPagerItemModel(
+                it
+            )
+        }
+        vpAdapter.submitList(list)
+        binding.vpdiTravelInfo.attachTo(binding.vpTravelInfo)
+    }
+
+    private fun setInfo() {
+        binding.apply {
+            tvTravelCity.text = infoModel.city
+            tvTravelNation.text = infoModel.nation
+            tvTravelDescription.text = infoModel.desc
         }
     }
 }
 
-class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State
-    ) {
-        val position = parent.getChildAdapterPosition(view)
-        val marginBottom = when (position) {
-            0 -> px * 16
-            1 -> px * 32
-            2 -> px * 16
-            else -> 0
-        }
-        outRect.bottom = marginBottom
-    }
-}
+//    private val chipGroupModel = UiModel.ChipGroupModel(
+//        city = TravelSpotManager.getListByCountry()[0].region
+//    )
+//    private val videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
+//    private val loadingModel = UiModel.VideoListLoadingUiModel()
+
+//        recyclerViewAdapter.submitList(
+//            listOf(
+//                viewPagerModel,
+//                infoModel,
+//                chipGroupModel,
+//                loadingModel
+//            )
+//        )
+
+//            recyclerViewAdapter.submitList(
+//                listOf(
+//                    viewPagerModel,
+//                    infoModel,
+//                    chipGroupModel,
+//                    videoListModel.copy(
+//                        id = videoListModel.id,
+//                        videoList = tsdViewModel.videosData.value ?: listOf()
+//                    )
+//                )
+//            )
+
+//            adapter = recyclerViewAdapter
+//            layoutManager = LinearLayoutManager(requireContext())
+
+//            addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
+//            isNestedScrollingEnabled = false
+
+//                        recyclerViewAdapter.submitList(
+//                            listOf(
+//                                viewPagerModel,
+//                                infoModel,
+//                                chipGroupModel,
+//                                videoListModel.copy(
+//                                    id = videoListModel.id,
+//                                    videoList = tsdViewModel.videosData.value ?: listOf()
+//                                ),
+//                                UiModel.VideoListLoadingUiModel()
+//                            )
+//                        )
+
+//        recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
+//            Glide.with(this).load(url)
+//        }
+
+//
+//        recyclerViewAdapter.drawLayoutManager =
+//            TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager {
+//                GridLayoutManager(requireContext(), 2)
+//            }
+//
+//        recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
+//            tsdViewModel.changeData(it, false)
+//        }
+
+//    private fun insertVideo(video: List<VideoEntity>) {
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            val videoDb =
+//                VideoRoomDB.getDatabase((requireActivity().applicationContext as PungsunTagoApplication))
+//            videoDb.videoDao().insert(video)
+//        }
+//    }
+
+//class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDecoration() {
+//    override fun getItemOffsets(
+//        outRect: Rect,
+//        view: View,
+//        parent: RecyclerView,
+//        state: RecyclerView.State
+//    ) {
+//        val position = parent.getChildAdapterPosition(view)
+//        val marginBottom = when (position) {
+//            0 -> px * 16
+//            1 -> px * 32
+//            2 -> px * 16
+//            else -> 0
+//        }
+//        outRect.bottom = marginBottom
+//    }
+//}

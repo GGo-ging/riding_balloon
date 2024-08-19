@@ -36,7 +36,8 @@ sealed class VideoListUiModel {
         val videoUrl: String?,
         val videoTitle: String?,
         val videoUploader: String?,
-        val videoViewCount: String?,
+        val videoUploadAt: String?,
+//        val videoViewCount: String?,
     ) : VideoListUiModel()
 }
 
