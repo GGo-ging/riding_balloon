@@ -13,17 +13,19 @@ import com.example.riding_balloon.databinding.LayoutItemTravelChipgroupBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelEmptyBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
+import com.example.riding_balloon.databinding.LayoutItemTravelVideoListLoadingBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
 import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelDiffUtilCallback
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ChipGroupViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.viewholder.LoadingViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
 
 enum class TSDEnum(val type: Int) {
-    VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), EMPTY(-1)
+    VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), LOADING(4), EMPTY(-1)
 }
 
 class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolder>(
@@ -61,6 +63,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
                 binding = LayoutItemTravelEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 viewHolder = EmptyViewHolder(binding)
             }
+            TSDEnum.LOADING -> {
+                binding = LayoutItemTravelVideoListLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                viewHolder = LoadingViewHolderImpl(binding)
+            }
         }
         return viewHolder
     }
@@ -89,6 +95,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             is UiModel.InfoModel -> TSDEnum.INFO.type
             is UiModel.TravelVideoListModel -> TSDEnum.VIDEO_LIST.type
             is UiModel.ChipGroupModel -> TSDEnum.CHIP_GROUP.type
+            is UiModel.VideoListLoadingUiModel -> TSDEnum.LOADING.type
         }
     }
 

@@ -23,6 +23,9 @@ sealed class UiModel {
         override val id: String = UUID.randomUUID().toString(),
         val videoList : List<VideoListUiModel>
     ): UiModel()
+    data class VideoListLoadingUiModel (
+        override val id: String = "loading",
+    ): UiModel()
 }
 
 sealed class VideoListUiModel {

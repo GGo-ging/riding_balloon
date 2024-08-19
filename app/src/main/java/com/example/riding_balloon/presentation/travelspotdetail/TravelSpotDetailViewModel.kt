@@ -22,6 +22,7 @@ class TravelSpotDetailViewModel @Inject constructor (
     private var videoKeyword : String = ""
 
     fun initData() {
+        isScrollCoroutineRunning = true
         changeData("", false)
     }
 
@@ -44,6 +45,7 @@ class TravelSpotDetailViewModel @Inject constructor (
             }
             _videosData.value = list
             Log.d("ViewModel 데이터", "사이즈: ${videosData.value?.size} 리스트: ${videosData.value}")
+            Log.d("ViewModel 데이터", "${videosData.value?.filterIsInstance<VideoListUiModel.TravelVideoModel>()?.map { it.id }}")
             isScrollCoroutineRunning = false
         }
     }

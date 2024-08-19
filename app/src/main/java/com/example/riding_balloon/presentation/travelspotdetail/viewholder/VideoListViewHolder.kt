@@ -16,6 +16,7 @@ import com.example.riding_balloon.presentation.travelspotdetail.UiModel
 import com.google.android.material.chip.Chip
 
 class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : TravelViewHolder(binding) {
+    private val travelSpotDetailVideoListAdapter = TravelSpotDetailVideoListAdapter()
     override fun bind(item: UiModel) {}
     fun bind(
         item: UiModel,
@@ -23,13 +24,14 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         drawLayoutManager: TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager?,
     ) {
         Log.d("ViewHolder 체크", "VideoList $item")
-        val travelSpotDetailVideoListAdapter = TravelSpotDetailVideoListAdapter()
         travelSpotDetailVideoListAdapter.drawImage = TravelSpotDetailVideoListAdapter.DrawImage { url ->
             drawImage?.onDraw(url)!!
         }
         binding.rvTravelVideoList.adapter = travelSpotDetailVideoListAdapter
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
+        binding.rvTravelVideoList.isNestedScrollingEnabled = true
+        binding.rvTravelVideoList.setHasFixedSize(true)
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
-
     }
 }
+
