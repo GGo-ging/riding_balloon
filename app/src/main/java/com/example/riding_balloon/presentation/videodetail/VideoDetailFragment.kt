@@ -19,6 +19,7 @@ import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
 import com.example.riding_balloon.presentation.MainActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import java.text.DecimalFormat
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -27,14 +28,15 @@ class VideoDetailFragment : Fragment() {
     private var _binding: FragmentVideoDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : VideoDetailViewModel by activityViewModels()
-    private lateinit var url : String
+    private val viewModel: VideoDetailViewModel by activityViewModels()
+    private lateinit var url: String
 
     private val args: VideoDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
     private lateinit var video: VideoItem
     private lateinit var favoriteVideoItem: FavoriteVideoInfo
-    private val videoId: String = ""
+
+    //    private val videoId: String = ""
     private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
 
     override fun onCreateView(
@@ -55,10 +57,10 @@ class VideoDetailFragment : Fragment() {
         url = "https://www.youtube.com/watch?v=${args.videoId}"
         //url = "https://youtu.be/_UyQLveYyzI?si=4Uh2TVQ1MNwvR7ik"
 
-        val videoId = videoIdSlice(url)
-        if (videoId != null) {
-            viewModel.videoDetailsGet(videoId)
-        }
+        val videoId = args.videoId
+//        if (videoId != null) {
+        viewModel.videoDetailsGet(videoId)
+//        }
 
         val player = binding.ypYoutubePlayer
         lifecycle.addObserver(player)
@@ -67,11 +69,11 @@ class VideoDetailFragment : Fragment() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 super.onReady(youTubePlayer)
 
-                if (videoId != null) {
-                    youTubePlayer.loadVideo(videoId, 0F)
-                } else {
-                    Toast.makeText(requireContext(), "영상을 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
-                }
+//                if (videoId != null) {
+                youTubePlayer.loadVideo(videoId, 0F)
+//                } else {
+//                    Toast.makeText(requireContext(), "영상을 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
+//                }
             }
         })
 
@@ -79,13 +81,17 @@ class VideoDetailFragment : Fragment() {
             video = videoItem.items?.firstOrNull() ?: VideoItem(null, null, null, null, null)
 
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val dateTime = OffsetDateTime.parse(video?.snippet?.publishedAt)
+            val dateTime = OffsetDateTime.parse(video.snippet?.publishedAt)
             val dataTimeFormat = dateTime?.format(formatter)
 
+            val viewCount = video.statistics?.viewCount?.toLong() ?: 0L
+            val formatPattern = DecimalFormat("#,###")
+            val formatViewCount = formatPattern.format(viewCount)
+
             with(binding) {
-                tvDetailPageMainTitle.text = video?.snippet?.title
-                tvDetailPageSubTitle.text = "${video?.snippet?.channelTitle} · 조회수 ${video?.statistics?.viewCount}회   $dataTimeFormat"
-                tvDetailText.text = video?.snippet?.description
+                tvDetailPageMainTitle.text = video.snippet?.title
+                tvDetailPageSubTitle.text = getString(R.string.video_detail_subtitle, video.snippet?.channelTitle, formatViewCount, dataTimeFormat)
+                tvDetailText.text = video.snippet?.description
             }
         }
 
@@ -93,9 +99,8 @@ class VideoDetailFragment : Fragment() {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
 
-            val shareUrl = url
             val content = "링크 공유를 할 수 있습니다. 어디에 공유 할까요?"
-            intent.putExtra(Intent.EXTRA_TEXT,"$content\n\n$shareUrl")
+            intent.putExtra(Intent.EXTRA_TEXT, "$content\n\n$url")
 
             val chooseTitle = "친구에게 공유하기"
             startActivity(Intent.createChooser(intent, chooseTitle))
@@ -107,27 +112,27 @@ class VideoDetailFragment : Fragment() {
             startActivity(intent)
         }
 
-        if (videoId != null) {
-            initFavoriteButton(videoId)
-        }
+//        if (videoId != null) {
+        initFavoriteButton(videoId)
+//        }
     }
 
-    private fun videoIdSlice(videoUrl: String?): String? {
-        if (videoUrl == null) return null
-
-        val videoIdPattern = listOf(
-            Regex("v=([a-zA-Z0-9_-]{11})"),
-            Regex("youtu.be/([a-zA-Z0-9_-]{11})")
-        )
-        for (videoIdSlice in videoIdPattern) {
-            val sliceId = videoIdSlice.find(videoUrl)
-            if (sliceId != null) {
-                return sliceId.groupValues[1]
-            }
-        }
-
-        return null
-    }
+//    private fun videoIdSlice(videoUrl: String?): String? {
+//        if (videoUrl == null) return null
+//
+//        val videoIdPattern = listOf(
+//            Regex("v=([a-zA-Z0-9_-]{11})"),
+//            Regex("youtu.be/([a-zA-Z0-9_-]{11})")
+//        )
+//        for (videoIdSlice in videoIdPattern) {
+//            val sliceId = videoIdSlice.find(videoUrl)
+//            if (sliceId != null) {
+//                return sliceId.groupValues[1]
+//            }
+//        }
+//
+//        return null
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -146,7 +151,7 @@ class VideoDetailFragment : Fragment() {
             isFavorite = favoriteViewModel.isFavorite(videoId)
             favoriteVideoItem = video.toFavoriteVideoInfo(isFavorite)
             if (isFavorite) {
-                Log.d("VideoDetailFragment", "removeFavoriteItem: ${favoriteVideoItem}")
+                Log.d("VideoDetailFragment", "removeFavoriteItem: $favoriteVideoItem")
                 favoriteViewModel.removeFavoriteItem(favoriteVideoItem)
                 ivBackBarHeart.setImageResource(R.drawable.ic_heart_border)
                 Toast.makeText(requireContext(), "좋아요 취소하였습니다.", Toast.LENGTH_SHORT).show()

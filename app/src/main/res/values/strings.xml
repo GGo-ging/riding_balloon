@@ -53,6 +53,8 @@
     <string name="travel_empty">오류 발생!</string>
 
     <!-- Video Detail -->
+    <!-- &amp; 쓰면 "&" 이 글자를 쓸 수 있네요.-->
+    <!-- \u00A0 이건 공백 관련 입니다.-->
     <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>
     <string name="detail_page_sub_title">곽튜브 · 조회수 137만회   2024.08.16</string>
     <string name="detail_page_text">*이번 영상은 LG전자 스탠바이미 Go의 유료광고를 포함하고 있습니다\n
@@ -79,7 +81,7 @@
         \n촬영장비 : 고프로 히어로 12 블랙
         \n편집 : 맥북프로 16인치, 파이널컷 X
         \n음원 : Epidemic sound&amp;Artlist</string>
-    <string name="share_button">공유하기</string>
-
+<!--    <string name="share_button">공유하기</string>-->
+    <string name="video_detail_subtitle">%1$s · 조회수 %2$s회\u00A0\u00A0\u00A0%3$s</string>
 
 </resources>
