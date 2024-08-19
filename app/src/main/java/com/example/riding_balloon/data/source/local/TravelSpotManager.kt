@@ -6,6 +6,10 @@ object TravelSpotManager {
 
     private val travelSpotList: List<TravelSpotInfo> = getDummyData()
 
+    fun getTravelSpots(): List<TravelSpotInfo> {
+        return travelSpotList
+    }
+
     private fun getDummyData(): List<TravelSpotInfo> {
         return listOf(
             TravelSpotInfo(
