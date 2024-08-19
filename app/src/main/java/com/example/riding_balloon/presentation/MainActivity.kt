@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.riding_balloon.R
+import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.databinding.ActivityMainBinding
 import com.example.riding_balloon.presentation.home.HomeFragmentDirections
 import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailViewModel
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val travelSpotItem by lazy { TravelSpotManager.getFirstItem() }
 
     val tsdViewModel by viewModels<TravelSpotDetailViewModel>()
 
@@ -59,13 +61,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButton() = with(binding) {
+        val videosMap = mapOf(
+            0 to "RSv0K4hQyV8",
+            1 to "YJmu2JuDdZw",
+            2 to "XSU0CsElmVA",
+            3 to "WMjYjWufHwg",
+            4 to "h-XCpon8B5k",
+            5 to "hzjgHEF1-i0",
+            6 to "ZsgG9EOV4eE",
+        )
+
         layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
-            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail()
+            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
             findNavController(R.id.container_main).navigate(action)
         }
         layoutToolbarMain.btnToolbarVideo.setOnClickListener {
-            val action = HomeFragmentDirections.actionGlobalVideoDetail()
+            val randomIndex = (0..6).random()
+            val randomVideoId = videosMap[randomIndex] ?: "RSv0K4hQyV8"
+
+            val action = HomeFragmentDirections.actionGlobalVideoDetail(randomVideoId)
             findNavController(R.id.container_main).navigate(action)
         }
+    }
+
+    private fun sendTravelSpotItem() {
+        val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
+        findNavController(R.id.container_main).navigate(action)
     }
 }

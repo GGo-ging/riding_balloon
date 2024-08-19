@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
+import com.example.riding_balloon.databinding.LayoutItemTravelChipgroupBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelEmptyBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
 import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelDiffUtilCallback
+import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ChipGroupViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
@@ -20,7 +23,7 @@ import com.example.riding_balloon.presentation.travelspotdetail.viewholder.Video
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
 
 enum class TSDEnum(val type: Int) {
-    VIEW_PAGER(0), INFO(1), VIDEO_LIST(2), EMPTY(-1)
+    VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), EMPTY(-1)
 }
 
 class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolder>(
@@ -29,6 +32,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     var drawImage: DrawImage? = null
     var drawLayoutManager : DrawLayoutManager? = null
     var selectChip : SelectChip? = null
+    var addDecoration: AddDecoration? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
         Log.d("ViewHolder 체크", "리스트 : $currentList")
@@ -45,6 +49,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             TSDEnum.INFO -> {
                 binding = LayoutItemTravelInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 viewHolder = InfoViewHolderImpl(binding)
+            }
+            TSDEnum.CHIP_GROUP -> {
+                binding = LayoutItemTravelChipgroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                viewHolder = ChipGroupViewHolderImpl(binding)
             }
             TSDEnum.VIDEO_LIST -> {
                 binding = LayoutItemTravelVideoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -65,7 +73,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
                 holder.bind(getItem(position), drawImage)
             }
             is VideoListViewHolderImpl -> {
-                holder.bind(getItem(position), drawImage, drawLayoutManager, selectChip)
+                holder.bind(getItem(position), drawImage, drawLayoutManager, addDecoration)
+            }
+            is ChipGroupViewHolderImpl -> {
+                holder.bind(getItem(position), selectChip)
             }
             else -> {
                 holder.bind(getItem(position))
@@ -78,6 +89,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             is UiModel.ViewPagerModel -> TSDEnum.VIEW_PAGER.type
             is UiModel.InfoModel -> TSDEnum.INFO.type
             is UiModel.TravelVideoListModel -> TSDEnum.VIDEO_LIST.type
+            is UiModel.ChipGroupModel -> TSDEnum.CHIP_GROUP.type
         }
     }
 
@@ -97,5 +109,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     fun interface SelectChip {
         fun onSelect(chipText: String)
     }
+
+    fun interface AddDecoration {
+        fun onAdd() : RecyclerView.ItemDecoration
+    }
+
 }
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -45,6 +46,9 @@ class TravelSpotDetailFragment : Fragment() {
         city = TravelSpotManager.getListByCountry()[0].region,
         desc = TravelSpotManager.getListByCountry()[0].description
     )
+    private val chipGroupModel = UiModel.ChipGroupModel(
+        city = TravelSpotManager.getListByCountry()[0].region
+    )
     private val videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +57,12 @@ class TravelSpotDetailFragment : Fragment() {
             listOf(
                 viewPagerModel,
                 infoModel,
+                chipGroupModel,
                 videoListModel.copy(videoList = listOf())
             )
         )
     }
+    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,14 +81,18 @@ class TravelSpotDetailFragment : Fragment() {
                 listOf(
                     viewPagerModel,
                     infoModel,
+                    chipGroupModel,
                     videoListModel.copy(videoList = tsdViewModel.videosData.value ?: listOf())
                 )
             )
         }
 
+        // args.travelSpot으로 가져오면 됨.
+        Log.d("TravelSpotDetailFragment", "args: ${args.travelSpot}")
+
         binding.rvTravel.adapter = recyclerViewAdapter
         binding.rvTravel.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTravel.addItemDecoration(TsdRecyclerViewSpaceDecoration((resources.displayMetrics.density).roundToInt()))
+        binding.rvTravel.addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
 
         recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
             Glide.with(this).load(url)
@@ -94,6 +104,10 @@ class TravelSpotDetailFragment : Fragment() {
 
         recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
             tsdViewModel.changeData(it)
+        }
+
+        recyclerViewAdapter.addDecoration = TravelSpotDetailRecyclerViewAdapter.AddDecoration {
+            TsdRecyclerViewVideoListSpaceDecoration(resources.displayMetrics.density.roundToInt())
         }
 
     }
@@ -122,8 +136,24 @@ class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDec
         val marginBottom = when(position) {
             0 -> px * 16
             1 -> px * 32
+            2 -> px * 16
             else -> 0
         }
         outRect.bottom = marginBottom
+    }
+}
+
+class TsdRecyclerViewVideoListSpaceDecoration(private val px: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        val marginBottom = px * 8
+        val marginHorizontal = px * 4
+        outRect.bottom = marginBottom
+        outRect.left = marginHorizontal
+        outRect.right = marginHorizontal
     }
 }

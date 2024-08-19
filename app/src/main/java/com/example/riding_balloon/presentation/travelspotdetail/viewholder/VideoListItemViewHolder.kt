@@ -11,7 +11,7 @@ class VideoListItemViewHolder(private val binding : LayoutItemTravelVideoListIte
             is VideoListUiModel.TravelVideoModel -> {
                 binding.tvTravelVideoListItemTitle.text = uiModel.videoTitle
                 binding.tvTravelVideoListItemChannel.text = uiModel.videoUploader
-                binding.tvTravelVideoListItemViewCount.text = uiModel.videoViewCount
+                binding.tvTravelVideoListItemViewCount.text = "조회수 3333만회" //uiModel.videoViewCount
                 uiModel.videoUrl?.let { drawImage?.onDraw(it)?.into(binding.ivTravelVideoListItem) }
             }
         }

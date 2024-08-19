@@ -21,6 +21,15 @@
             android:layout_height="30dp"
             android:src="@drawable/arrow" />
 
+        <ImageView
+            android:id="@+id/iv_back_bar_heart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_heart_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -54,11 +63,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="10dp"
-                tools:text="@string/detail_page_main_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                tools:text="@string/detail_page_main_title" />
 
             <TextView
                 android:id="@+id/tv_detail_page_sub_title"
@@ -67,10 +76,10 @@
                 android:paddingStart="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                tools:text="@string/detail_page_sub_title"
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_page_main_title"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:text="@string/detail_page_sub_title" />
 
             <TextView
                 android:id="@+id/tv_detail_text"
@@ -78,9 +87,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:paddingHorizontal="10dp"
-                tools:text="@string/detail_page_text"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/tv_detail_page_sub_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_page_sub_title"
+                tools:text="@string/detail_page_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

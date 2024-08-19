@@ -20,7 +20,7 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         item: UiModel,
         drawImage: TravelSpotDetailRecyclerViewAdapter.DrawImage?,
         drawLayoutManager: TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager?,
-        selectChip: TravelSpotDetailRecyclerViewAdapter.SelectChip?
+        addDecoration: TravelSpotDetailRecyclerViewAdapter.AddDecoration?
     ) {
         Log.d("ViewHolder 체크", "VideoList $item")
         val travelSpotDetailVideoListAdapter = TravelSpotDetailVideoListAdapter()
@@ -29,19 +29,7 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         }
         binding.rvTravelVideoList.adapter = travelSpotDetailVideoListAdapter
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
-//        binding.rvTravelVideoList.addItemDecoration(TsdRecyclerViewSpaceDecoration())
+        addDecoration?.onAdd()?.let { binding.rvTravelVideoList.addItemDecoration(it) }
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
-        val chipIdList = listOf(
-            binding.chipTravelAll,
-            binding.chipTravelHealing,
-            binding.chipTravelTrain,
-            binding.chipTravelRestaurant,
-            binding.chipTravelBackpacking,
-            binding.chipTravelHoneymoon
-        )
-        binding.cgTravel.setOnCheckedStateChangeListener { _, ids ->
-            val chip = chipIdList.filter { chip -> chip.id == ids.first() }
-            selectChip?.onSelect(chip.first().text.toString())
-        }
     }
 }

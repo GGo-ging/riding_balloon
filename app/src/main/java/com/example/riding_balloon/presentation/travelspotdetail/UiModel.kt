@@ -15,6 +15,10 @@ sealed class UiModel {
         val city: String,
         val desc: String,
     ): UiModel()
+    data class ChipGroupModel(
+        override val id: String = UUID.randomUUID().toString(),
+        val city: String,
+    ) : UiModel()
     data class TravelVideoListModel(
         override val id: String = UUID.randomUUID().toString(),
         val videoList : List<VideoListUiModel>

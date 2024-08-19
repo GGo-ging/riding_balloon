@@ -4,101 +4,100 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tv_travel_video_list_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="@string/travel_video_list_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_travel_video_list_title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="18sp"-->
+<!--        android:text="@string/travel_video_list_title"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        />-->
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/cg_travel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        app:checkedChip="@id/chip_travel_all"
-        app:chipSpacingHorizontal="8dp"
-        app:chipSpacingVertical="-8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_title"
-        app:selectionRequired="true"
-        app:singleSelection="true">
+<!--    <com.google.android.material.chip.ChipGroup-->
+<!--        android:id="@+id/cg_travel"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        app:checkedChip="@id/chip_travel_all"-->
+<!--        app:chipSpacingHorizontal="8dp"-->
+<!--        app:chipSpacingVertical="-8dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_title"-->
+<!--        app:selectionRequired="true"-->
+<!--        app:singleSelection="true">-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_travel_all"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/travel_chip_all"
-            app:checkedIconEnabled="false"
-            app:chipBackgroundColor="@color/sel_travel_chip_color" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip_travel_all"-->
+<!--            style="@style/Widget.Material3.Chip.Filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checkable="true"-->
+<!--            android:text="@string/travel_chip_all"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            app:chipBackgroundColor="@color/sel_travel_chip_color" />-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_travel_train"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/travel_chip_train"
-            app:checkedIconEnabled="false"
-            app:chipBackgroundColor="@color/sel_travel_chip_color" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip_travel_train"-->
+<!--            style="@style/Widget.Material3.Chip.Filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checkable="true"-->
+<!--            android:text="@string/travel_chip_train"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            app:chipBackgroundColor="@color/sel_travel_chip_color" />-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_travel_restaurant"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/travel_chip_restaurant"
-            app:checkedIconEnabled="false"
-            app:chipBackgroundColor="@color/sel_travel_chip_color" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip_travel_restaurant"-->
+<!--            style="@style/Widget.Material3.Chip.Filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checkable="true"-->
+<!--            android:text="@string/travel_chip_restaurant"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            app:chipBackgroundColor="@color/sel_travel_chip_color" />-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_travel_backpacking"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/travel_chip_backpacking"
-            app:checkedIconEnabled="false"
-            app:chipBackgroundColor="@color/sel_travel_chip_color" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip_travel_backpacking"-->
+<!--            style="@style/Widget.Material3.Chip.Filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checkable="true"-->
+<!--            android:text="@string/travel_chip_backpacking"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            app:chipBackgroundColor="@color/sel_travel_chip_color" />-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_travel_honeymoon"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/travel_chip_honeymoon"
-            app:checkedIconEnabled="false"
-            app:chipBackgroundColor="@color/sel_travel_chip_color" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip_travel_honeymoon"-->
+<!--            style="@style/Widget.Material3.Chip.Filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checkable="true"-->
+<!--            android:text="@string/travel_chip_honeymoon"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            app:chipBackgroundColor="@color/sel_travel_chip_color" />-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_travel_healing"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/travel_chip_healing"
-            app:checkedIconEnabled="false"
-            app:chipBackgroundColor="@color/sel_travel_chip_color" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip_travel_healing"-->
+<!--            style="@style/Widget.Material3.Chip.Filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checkable="true"-->
+<!--            android:text="@string/travel_chip_healing"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            app:chipBackgroundColor="@color/sel_travel_chip_color" />-->
 
-    </com.google.android.material.chip.ChipGroup>
+<!--    </com.google.android.material.chip.ChipGroup>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_travel_video_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cg_travel"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
