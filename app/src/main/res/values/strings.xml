@@ -31,6 +31,9 @@
     <string name="travel_city">도시</string>
     <string name="travel_description">이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다.</string>
     <string name="travel_video_list_title">여행지 간접 여행하기</string>
+    <string name="travel_video_list_item_title">영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목</string>
+    <string name="travel_video_list_item_uploader">영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 </string>
+    <string name="travel_video_list_item_view_count">조회수 1000만회</string>
 
     <string name="travel_chip_all">#전체</string>
     <string name="travel_chip_train">#기차여행</string>

@@ -9,22 +9,54 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.example.riding_balloon.PungsunTagoApplication
 import com.example.riding_balloon.R
 import com.example.riding_balloon.data.source.local.TravelSpotManager
+import com.example.riding_balloon.data.source.local.room.VideoEntity
+import com.example.riding_balloon.data.source.local.room.VideoRoomDB
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class TravelSpotDetailFragment : Fragment() {
 
     private var _binding: FragmentTravelSpotDetailBinding? = null
     private val binding get() = _binding!!
 
     private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
+
+    private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
+
+    private val viewPagerModel = UiModel.ViewPagerModel(imageUrlList = TravelSpotManager.getListByCountry()[0].images)
+    private val infoModel = UiModel.InfoModel(
+        nation = TravelSpotManager.getListByCountry()[0].country,
+        city = TravelSpotManager.getListByCountry()[0].region,
+        desc = TravelSpotManager.getListByCountry()[0].description
+    )
+    private val videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        recyclerViewAdapter.submitList(
+            listOf(
+                viewPagerModel,
+                infoModel,
+                videoListModel.copy(videoList = listOf())
+            )
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,17 +70,15 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerViewAdapter.submitList(
-            listOf(
-                UiModel.ViewPagerModel(imageUrlList = TravelSpotManager.getListByCountry()[0].images),
-                UiModel.InfoModel(
-                    nation = TravelSpotManager.getListByCountry()[0].country,
-                    city = TravelSpotManager.getListByCountry()[0].region,
-                    desc = TravelSpotManager.getListByCountry()[0].description
-                ),
-                UiModel.TravelVideoListModel()
+        tsdViewModel.videosData.observe(viewLifecycleOwner) {
+            recyclerViewAdapter.submitList(
+                listOf(
+                    viewPagerModel,
+                    infoModel,
+                    videoListModel.copy(videoList = tsdViewModel.videosData.value ?: listOf())
+                )
             )
-        )
+        }
 
         binding.rvTravel.adapter = recyclerViewAdapter
         binding.rvTravel.layoutManager = LinearLayoutManager(requireContext())
@@ -58,11 +88,26 @@ class TravelSpotDetailFragment : Fragment() {
             Glide.with(this).load(url)
         }
 
+        recyclerViewAdapter.drawLayoutManager = TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager {
+            GridLayoutManager(requireContext(),2)
+        }
+
+        recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
+            tsdViewModel.changeData(it)
+        }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun insertVideo(video: List<VideoEntity>) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val videoDb = VideoRoomDB.getDatabase((requireActivity().applicationContext as PungsunTagoApplication))
+            videoDb.videoDao().insert(video)
+        }
     }
 }
 

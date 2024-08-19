@@ -70,6 +70,7 @@ dependencies {
 
     // Paging 3
     implementation(libs.androidx.paging)
+    implementation(libs.room.paging)
 
     // Dagger Hilt
     implementation (libs.hilt)
@@ -83,6 +84,10 @@ dependencies {
 
     // ViewModel
     implementation (libs.viewmodel)
+
+    // Room
+    implementation(libs.room)
+    annotationProcessor(libs.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

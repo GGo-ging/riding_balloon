@@ -16,16 +16,20 @@ sealed class UiModel {
         val desc: String,
     ): UiModel()
     data class TravelVideoListModel(
-        override val id: String = UUID.randomUUID().toString()
+        override val id: String = UUID.randomUUID().toString(),
+        val videoList : List<VideoListUiModel>
     ): UiModel()
 }
 
 sealed class VideoListUiModel {
-    abstract val id: String
+    abstract val id: String?
     data class TravelVideoModel(
-        override val id: String = UUID.randomUUID().toString(),
+        override val id: String = "",
+//        val videoId: String?,
         val videoUrl: String?,
         val videoTitle: String?,
+        val videoUploader: String?,
+        val videoViewCount: String?,
     ) : VideoListUiModel()
 }
 

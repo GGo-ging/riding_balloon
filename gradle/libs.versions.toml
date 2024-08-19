@@ -19,6 +19,7 @@ exoplayer = "2.19.1"
 youtube-player="11.1.0"
 viewmodel = "2.6.1"
 hilt = "2.52"
+room = "2.4.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +54,10 @@ livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", vers
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 
 [bundles]
 retrofit = [

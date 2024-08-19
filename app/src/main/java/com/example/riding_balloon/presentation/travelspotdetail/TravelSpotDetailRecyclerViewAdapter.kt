@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
@@ -11,18 +12,12 @@ import com.example.riding_balloon.databinding.LayoutItemTravelEmptyBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
-import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailViewPagerAdapter.DrawImage
+import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelDiffUtilCallback
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 enum class TSDEnum(val type: Int) {
     VIEW_PAGER(0), INFO(1), VIDEO_LIST(2), EMPTY(-1)
@@ -32,6 +27,8 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     TravelDiffUtilCallback()
 ) {
     var drawImage: DrawImage? = null
+    var drawLayoutManager : DrawLayoutManager? = null
+    var selectChip : SelectChip? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
         Log.d("ViewHolder 체크", "리스트 : $currentList")
@@ -67,6 +64,9 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             is ViewPagerViewHolderImpl -> {
                 holder.bind(getItem(position), drawImage)
             }
+            is VideoListViewHolderImpl -> {
+                holder.bind(getItem(position), drawImage, drawLayoutManager, selectChip)
+            }
             else -> {
                 holder.bind(getItem(position))
             }
@@ -88,6 +88,14 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
 
     fun interface DrawImage {
         fun onDraw(url: String): RequestBuilder<Drawable>
+    }
+
+    fun interface DrawLayoutManager {
+        fun onDraw() : GridLayoutManager
+    }
+
+    fun interface SelectChip {
+        fun onSelect(chipText: String)
     }
 }
 
