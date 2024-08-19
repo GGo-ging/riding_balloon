@@ -36,23 +36,33 @@
     <TextView
         android:id="@+id/tv_grid_video_channel"
         style="@style/TextLabel"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@id/tv_grid_video_title"
         app:layout_constraintStart_toStartOf="@id/tv_grid_video_title"
         app:layout_constraintTop_toBottomOf="@id/tv_grid_video_title"
         tools:text="곽튜브" />
+
+    <TextView
+        android:id="@+id/tv_grid_video_publish_date"
+        style="@style/TextLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_grid_video_channel"
+        app:layout_constraintTop_toTopOf="@id/tv_grid_video_channel"
+        tools:text="1개월 전" />
 
     <View
         android:id="@+id/view_grid_video_alpha"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/iv_grid_video_thumbnail"
-        app:layout_constraintEnd_toEndOf="@id/iv_grid_video_thumbnail"
-        app:layout_constraintTop_toTopOf="@id/iv_grid_video_thumbnail"
+        android:background="@color/black_a50"
         app:layout_constraintBottom_toBottomOf="@id/iv_grid_video_thumbnail"
-        android:background="@color/black_a50" />
+        app:layout_constraintEnd_toEndOf="@id/iv_grid_video_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/iv_grid_video_thumbnail"
+        app:layout_constraintTop_toTopOf="@id/iv_grid_video_thumbnail" />
 
     <CheckBox
         android:id="@+id/checkbox_favorite_video"
@@ -61,7 +71,7 @@
         android:layout_margin="7dp"
         android:background="@drawable/sel_checkbox"
         android:button="@android:color/transparent"
-        android:checked="true"
+        android:checked="false"
         android:padding="0dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@id/iv_grid_video_thumbnail"

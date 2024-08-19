@@ -1,16 +1,14 @@
 package com.example.riding_balloon.presentation.mypage
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.riding_balloon.databinding.ItemGridVideoBinding
 import com.example.riding_balloon.presentation.extensions.load
+import com.example.riding_balloon.presentation.extensions.setPublishedDate
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 
 class FavoriteVideoListAdapter(
@@ -61,6 +59,7 @@ class FavoriteVideoListAdapter(
                 ivGridVideoThumbnail.load(video.thumbnailUrl)
                 tvGridVideoTitle.text = video.title
                 tvGridVideoChannel.text = video.channelTitle
+                tvGridVideoPublishDate.setPublishedDate(video.publishedAt)
 
                 // 편집 모드에 따라 뷰의 가시성 조정
                 viewGridVideoAlpha.isVisible = isEditMode
