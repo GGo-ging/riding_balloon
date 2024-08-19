@@ -3,6 +3,7 @@ package com.example.riding_balloon.presentation.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.riding_balloon.databinding.FragmentHomeBinding
 import com.example.riding_balloon.presentation.home.adapters.Best10ListAdapter
 import com.example.riding_balloon.presentation.home.adapters.ChannelListAdapter
+import com.example.riding_balloon.presentation.home.adapters.PopularVideoListAdapter
 import com.example.riding_balloon.presentation.model.ChannelListModel
 
 class HomeFragment : Fragment() {
@@ -20,6 +22,7 @@ class HomeFragment : Fragment() {
 
     private val channelListAdapter by lazy { ChannelListAdapter() }
     private val best10ListAdapter by lazy { Best10ListAdapter() }
+    private val popularVideoListAdapter by lazy { PopularVideoListAdapter() }
     private val homeViewModel by viewModels<HomeViewModel>() // fragment의 생명주기를 따르는 viewmodel
 
     override fun onCreateView(
@@ -49,15 +52,19 @@ class HomeFragment : Fragment() {
             }
         }
 
+        rvPopularVideoList.adapter = popularVideoListAdapter
+
         with(homeViewModel){
             channelList.observe(viewLifecycleOwner){ itemList -> channelListAdapter.submitList(itemList) }
             best10List.observe(viewLifecycleOwner){ itemList -> best10ListAdapter.submitList(itemList) }
+            popularVideoList.observe(viewLifecycleOwner){ itemList -> popularVideoListAdapter.submitList(itemList) }
         }
     }
 
     private fun initViewModel() = with(homeViewModel){
         fetchChannel()
         getBest10List()
+        fetchPopularVideoList()
     }
 
     override fun onDestroyView() {
