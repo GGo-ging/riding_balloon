@@ -2,6 +2,7 @@ package com.example.riding_balloon.data.repository.favoritetravelspot
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.repository.FavoriteTravelSpotDeserializer
 import com.example.riding_balloon.util.Constants.PREF_FAVORITE_TRAVEL_SPOTS
@@ -22,6 +23,7 @@ class FavoriteTravelSpotRepositoryImpl @Inject constructor(context: Context) : F
     override fun addFavoriteTravelSpot(travelSpot: TravelSpotInfo) {
         if (_favoriteTravelSpots.find { it.id == travelSpot.id } == null) {
             _favoriteTravelSpots.add(0, travelSpot)
+            Log.d("FavoriteTravelSpotRepositoryImpl", "addFavoriteTravelSpot: $travelSpot")
             saveFavoriteTravelSpots()
         }
     }
@@ -50,5 +52,6 @@ class FavoriteTravelSpotRepositoryImpl @Inject constructor(context: Context) : F
     override fun isFavorite(travelSpotId: Int): Boolean {
         val travelSpot = _favoriteTravelSpots.find { it.id == travelSpotId }
         return travelSpot != null
+        //return true
     }
 }

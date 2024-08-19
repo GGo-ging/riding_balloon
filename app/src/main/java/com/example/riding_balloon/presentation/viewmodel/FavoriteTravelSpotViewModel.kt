@@ -1,5 +1,6 @@
 package com.example.riding_balloon.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,7 @@ class FavoriteTravelSpotViewModel @Inject constructor(
     }
 
     fun addFavoriteItem(item: TravelSpotInfo) {
+        Log.d("FavoriteTravelSpotViewModel", "addFavoriteItem: $item")
         repository.addFavoriteTravelSpot(item)
         _favoriteTravelSpots.value = repository.favoriteTravelSpots
     }

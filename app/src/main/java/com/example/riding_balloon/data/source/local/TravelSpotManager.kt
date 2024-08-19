@@ -508,4 +508,8 @@ object TravelSpotManager {
     fun getFirstItem(): TravelSpotInfo {
         return travelSpotList.first()
     }
+
+    fun getRandomItem(id: Int): TravelSpotInfo {
+        return travelSpotList[id]
+    }
 }

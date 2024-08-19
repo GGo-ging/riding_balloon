@@ -25,6 +25,7 @@ import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.data.source.local.room.VideoEntity
 import com.example.riding_balloon.data.source.local.room.VideoRoomDB
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
+import com.example.riding_balloon.presentation.viewmodel.FavoriteTravelSpotViewModel
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -43,12 +44,19 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
 
+    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
+
+    private val favoriteTravelSpotViewModel by activityViewModels<FavoriteTravelSpotViewModel>()
+    //var isFavorite = favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)
+
     private val viewPagerModel = UiModel.ViewPagerModel(imageUrlList = TravelSpotManager.getListByCountry()[0].images)
-    private val infoModel = UiModel.InfoModel(
-        nation = TravelSpotManager.getListByCountry()[0].country,
-        city = TravelSpotManager.getListByCountry()[0].region,
-        desc = TravelSpotManager.getListByCountry()[0].description
-    )
+//    private val infoModel = UiModel.InfoModel(
+//        nation = TravelSpotManager.getListByCountry()[0].country,
+//        city = TravelSpotManager.getListByCountry()[0].region,
+//        desc = TravelSpotManager.getListByCountry()[0].description,
+//        isFavorite = favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)
+//    )
+    private lateinit var infoModel: UiModel.InfoModel
     private val chipGroupModel = UiModel.ChipGroupModel(
         city = TravelSpotManager.getListByCountry()[0].region
     )
@@ -56,6 +64,15 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        infoModel = UiModel.InfoModel(
+            nation = TravelSpotManager.getListByCountry()[0].country,
+            city = TravelSpotManager.getListByCountry()[0].region,
+            desc = TravelSpotManager.getListByCountry()[0].description,
+            isFavorite = favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)
+        )
+
+
         recyclerViewAdapter.submitList(
             listOf(
                 viewPagerModel,
@@ -65,7 +82,6 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
             )
         )
     }
-    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -144,7 +160,15 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
         when (item) {
             is UiModel.InfoModel -> {
                 // InfoModel에 대한 클릭 이벤트 처리
-                Toast.makeText(context, "${item.city} clicked!", Toast.LENGTH_SHORT).show()
+                if (favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)) {
+                    // 좋아요 해제
+                    favoriteTravelSpotViewModel.removeFavoriteItem(args.travelSpot)
+                    Toast.makeText(context, "좋아요 해제", Toast.LENGTH_SHORT).show()
+                } else {
+                    // 좋아요 추가
+                    favoriteTravelSpotViewModel.addFavoriteItem(args.travelSpot)
+                    Toast.makeText(context, "좋아요 추가", Toast.LENGTH_SHORT).show()
+                }
             }
             is UiModel.ViewPagerModel -> {
                 // ViewPagerModel에 대한 클릭 이벤트 처리

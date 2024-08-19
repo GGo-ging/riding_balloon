@@ -32,7 +32,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_heart_border"
+        android:src="@drawable/sel_favorite_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/tv_travel_city"
