@@ -72,6 +72,21 @@ class HomeViewModel(
         }
     }
 
+//    fun fetchPopularVideoList(){
+//        viewModelScope.launch {
+//            runCatching {
+//                val fetchResult = async { return@async channelRepository.getVideos() }
+//                val result = fetchResult.await()
+//                Log.d("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() result: $result")
+//                val filteredResult = result.items?.filter { it.snippet?.categoryId == "19" }
+//                Log.d("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() filteredResult: $filteredResult")
+//                _popularVideoList.value = listOf(result.toListData())
+//            }.onFailure {
+//                Log.e("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() onFailure: ${it.message}")
+//            }
+//        }
+//    }
+
     fun fetchPopularVideoList(){
         viewModelScope.launch {
             runCatching {

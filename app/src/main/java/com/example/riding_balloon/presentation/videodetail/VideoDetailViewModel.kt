@@ -3,6 +3,7 @@ package com.example.riding_balloon.presentation.videodetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.riding_balloon.data.model.VideoDetailsResponse
 import com.example.riding_balloon.network.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,7 @@ class VideoDetailViewModel : ViewModel() {
     val videoDetail: LiveData<VideoDetailsResponse> get() = _videoDetail
 
     fun videoDetailsGet(videoId: String) {
-        CoroutineScope (Dispatchers.IO).launch {
+        viewModelScope.launch {
             val response = RetrofitClient.youtubeApi.getVideoDetails(id = videoId)
             _videoDetail.postValue(response)
         }

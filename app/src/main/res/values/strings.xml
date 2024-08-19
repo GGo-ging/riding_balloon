@@ -63,8 +63,10 @@
     <string name="label_my_favorite_videos">내가 좋아하는 영상</string>
     <string name="description_youtube_video_thumbnail">유튜브 비디오 썸네일 이미지</string>
     <string name="guide_message_empty_favorite_videos">좋아요 누른 영상이 없습니다.</string>
-    <string name="label_edit">편집</string>
-    <string name="label_edit_complete">편집완료</string>
+    <string name="label_select_all">전체선택</string>
+    <string name="label_select_delete">선택삭제 |</string>
+    <string name="label_edit">&#160;편집</string>
+    <string name="label_edit_complete">&#160;편집완료</string>
     <string name="format_diff_year">%d년 전</string>
     <string name="format_diff_month">%d개월 전</string>
     <string name="format_diff_day">%d일 전</string>
