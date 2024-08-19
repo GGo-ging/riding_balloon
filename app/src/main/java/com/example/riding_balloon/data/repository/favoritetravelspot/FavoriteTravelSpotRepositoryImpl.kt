@@ -50,5 +50,6 @@ class FavoriteTravelSpotRepositoryImpl @Inject constructor(context: Context) : F
     override fun isFavorite(travelSpotId: Int): Boolean {
         val travelSpot = _favoriteTravelSpots.find { it.id == travelSpotId }
         return travelSpot != null
+        //return true
     }
 }

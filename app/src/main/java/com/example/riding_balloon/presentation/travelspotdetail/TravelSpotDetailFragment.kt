@@ -10,17 +10,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.R
+import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
+import com.example.riding_balloon.presentation.viewmodel.FavoriteTravelSpotViewModel
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> {
 
     private var _binding: FragmentTravelSpotDetailBinding? = null
@@ -29,6 +34,8 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
     private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter(this)
 
     private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
+
+    private val favoriteTravelSpotViewModel by activityViewModels<FavoriteTravelSpotViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +51,8 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
 
         // args.travelSpot으로 가져오면 됨.
         Log.d("TravelSpotDetailFragment", "args: ${args.travelSpot}")
+        var isFavorite = favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)
+        Log.d("TravelSpotDetailFragment", "isFavorite: $isFavorite")
 
         recyclerViewAdapter.submitList(
             listOf(
@@ -51,7 +60,8 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
                 UiModel.InfoModel(
                     nation = TravelSpotManager.getListByCountry()[0].country,
                     city = TravelSpotManager.getListByCountry()[0].region,
-                    desc = TravelSpotManager.getListByCountry()[0].description
+                    desc = TravelSpotManager.getListByCountry()[0].description,
+                    isFavorite = isFavorite
                 ),
                 UiModel.TravelVideoListModel()
             )
@@ -89,8 +99,26 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
     override fun onTravelSpotClick(item: UiModel) {
         when (item) {
             is UiModel.InfoModel -> {
+
+                val travelSpotItem = TravelSpotInfo(
+                    id = args.travelSpot.id,
+                    thumbnailUrl = args.travelSpot.images[0],
+                    country = args.travelSpot.country,
+                    region = args.travelSpot.region,
+                    description = args.travelSpot.description,
+                    images = args.travelSpot.images,
+                    ranking = args.travelSpot.ranking
+                )
+
                 // InfoModel에 대한 클릭 이벤트 처리
                 Toast.makeText(context, "${item.city} clicked!", Toast.LENGTH_SHORT).show()
+                if (item.isFavorite) {
+                    // 좋아요 해제
+                    favoriteTravelSpotViewModel.removeFavoriteItem(travelSpotItem)
+                } else {
+                    // 좋아요 추가
+                    favoriteTravelSpotViewModel.addFavoriteItem(travelSpotItem)
+                }
             }
             is UiModel.ViewPagerModel -> {
                 // ViewPagerModel에 대한 클릭 이벤트 처리
@@ -101,6 +129,11 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
                 Toast.makeText(context, "Video List clicked!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun initFavoriteImage() = with(binding) {
+        var isFavorite = favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)
+
     }
 }
 

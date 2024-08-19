@@ -14,6 +14,7 @@ sealed class UiModel {
         val nation: String,
         val city: String,
         val desc: String,
+        val isFavorite: Boolean,
     ): UiModel()
     data class TravelVideoListModel(
         override val id: String = UUID.randomUUID().toString()
