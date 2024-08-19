@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.riding_balloon.R
 import com.example.riding_balloon.data.model.TravelSpotInfo
 
-class SearchFragmentAdapter(private val data : List<TravelSpotInfo>
+class SearchFragmentAdapter(private var data : List<TravelSpotInfo>
 ) : RecyclerView.Adapter<SearchFragmentAdapter.ViewHolder>() {
         interface ItemClick {
             fun onClick(view: View, position: Int)
@@ -43,5 +43,10 @@ class SearchFragmentAdapter(private val data : List<TravelSpotInfo>
 
         holder.countryTextView.text = data.country
         holder.cityTextView.text = data.region
+    }
+
+    fun updateData(newData: List<TravelSpotInfo>) {
+        data = newData // 새로운 데이터로 교체
+        notifyDataSetChanged() // 데이터 변경을 알림
     }
 }

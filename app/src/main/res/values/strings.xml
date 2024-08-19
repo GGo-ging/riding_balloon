@@ -16,7 +16,45 @@
     <string name="home_channel_list_subscribers">구독자 %s명</string>
 
     <!-- Search -->
+    <string-array name="spinner_items_continent">
+        <item>아시아</item>
+        <item>유럽</item>
+        <item>아프리카</item>
+        <item>아메리카</item>
+    </string-array>
 
+    <string-array name="spinner_items_country">
+        <item>일본</item>
+        <item>중국</item>
+        <item>베트남</item>
+        <item>말레아시아</item>
+        <item>인도네시아</item>
+        <item>대만</item>
+        <item>홍콩</item>
+        <item>태국</item>
+        <item>튀르키예</item>
+        <item>프랑스</item>
+        <item>오스트리아</item>
+        <item>영국</item>
+        <item>이탈리아</item>
+        <item>독일</item>
+        <item>그리스</item>
+        <item>스위스</item>
+        <item>덴마크</item>
+        <item>노르웨이</item>
+        <item>벨기에</item>
+        <item>스페인</item>
+        <item>포르투갈</item>
+        <item>미국</item>
+        <item>캐나다</item>
+        <item>브라질</item>
+        <item>아르헨티나</item>
+        <item>이집트</item>
+        <item>호주</item>
+
+
+
+    </string-array>
     <!-- My Page -->
     <string name="description_my_background_image">내 배경 이미지</string>
     <string name="description_my_profile_image">내 프로필 이미지</string>
@@ -55,6 +93,8 @@
     <string name="travel_empty">오류 발생!</string>
 
     <!-- Video Detail -->
+    <!-- &amp; 쓰면 "&" 이 글자를 쓸 수 있네요.-->
+    <!-- \u00A0 이건 공백 관련 입니다.-->
     <string name="detail_page_main_title">한국식 오징어 낚싯배를 탄 우즈벡 형님들 - 어몽&amp;오리뽀(6)</string>
     <string name="detail_page_sub_title">곽튜브 · 조회수 137만회   2024.08.16</string>
     <string name="detail_page_text">*이번 영상은 LG전자 스탠바이미 Go의 유료광고를 포함하고 있습니다\n
@@ -81,7 +121,7 @@
         \n촬영장비 : 고프로 히어로 12 블랙
         \n편집 : 맥북프로 16인치, 파이널컷 X
         \n음원 : Epidemic sound&amp;Artlist</string>
-    <string name="share_button">공유하기</string>
-
+<!--    <string name="share_button">공유하기</string>-->
+    <string name="video_detail_subtitle">%1$s · 조회수 %2$s회\u00A0\u00A0\u00A0%3$s</string>
 
 </resources>
