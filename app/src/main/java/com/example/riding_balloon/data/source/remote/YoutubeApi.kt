@@ -35,6 +35,18 @@ interface YoutubeApi {
         @Query("videoCategoryId") videoCategoryId: String = "19",
     ): SearchVideoResponse
 
+    // 동영상 검색 -> q 값에 검색어를 넣어서 호출, nextPageToken에 값 넣어줘야 함
+    @GET("search")
+    suspend fun searchNextVideos(
+        @Query("part") part: String = "snippet",
+        @Query("q") query: String,
+        @Query("type") type: String = "video",
+        @Query("maxResults") maxResults: Int = API_MAX_RESULT_20,
+        @Query("key") key: String = API_KEY,
+        @Query("videoCategoryId") videoCategoryId: String = "19",
+        @Query("pageToken") pageToken: String,
+    ): SearchVideoResponse
+
     // 동영상 검색, 조회수 순으로 정렬 -> order 값에 viewCount 추가한 것
     @GET("search")
     suspend fun searchVideosOrderByViewCount(

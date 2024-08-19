@@ -71,10 +71,11 @@ dependencies {
 
     // Paging 3
     implementation(libs.androidx.paging)
+    implementation(libs.room.paging)
 
     // Dagger Hilt
-    implementation ("com.google.dagger:hilt-android:2.52")
-    kapt ("com.google.dagger:hilt-compiler:2.52")
+    implementation (libs.hilt)
+    kapt (libs.hilt.compiler)
 
     // Dot indicator
     implementation(libs.dotindicator)
@@ -82,12 +83,16 @@ dependencies {
     // ExoPlayer, YoutubePlayer
     implementation(libs.bundles.videoplayers)
 
+    // ViewModel
+    implementation (libs.viewmodel)
+
+    // Room
+    implementation(libs.room)
+    annotationProcessor(libs.room.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
 }
 

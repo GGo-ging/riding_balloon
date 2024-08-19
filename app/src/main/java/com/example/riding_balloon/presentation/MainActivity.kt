@@ -3,6 +3,7 @@ package com.example.riding_balloon.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,6 +14,7 @@ import com.example.riding_balloon.R
 import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.databinding.ActivityMainBinding
 import com.example.riding_balloon.presentation.home.HomeFragmentDirections
+import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val travelSpotItem by lazy { TravelSpotManager.getFirstItem() }
+
+    val tsdViewModel by viewModels<TravelSpotDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
         setBottomNavigation()
         initButton()
+        tsdViewModel.initData()
     }
 
     private fun setBottomNavigation() = with(binding) {
