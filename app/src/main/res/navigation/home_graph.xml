@@ -43,6 +43,7 @@
         app:destination="@id/navigation_travel_spot_detail" />
     <action
         android:id="@+id/action_global_video_detail"
-        app:destination="@id/navigation_video_detail" />
+        app:destination="@id/navigation_video_detail"
+        app:enterAnim="@anim/video_detail_animation" />
 
 </navigation>
