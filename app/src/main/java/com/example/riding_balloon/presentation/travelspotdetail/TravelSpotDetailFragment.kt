@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -20,12 +21,12 @@ import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
 import com.google.android.material.chip.Chip
 import kotlin.math.roundToInt
 
-class TravelSpotDetailFragment : Fragment() {
+class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> {
 
     private var _binding: FragmentTravelSpotDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
+    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter(this)
 
     private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
@@ -83,6 +84,23 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onTravelSpotClick(item: UiModel) {
+        when (item) {
+            is UiModel.InfoModel -> {
+                // InfoModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "${item.city} clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.ViewPagerModel -> {
+                // ViewPagerModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "ViewPager clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.TravelVideoListModel -> {
+                // TravelVideoListModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "Video List clicked!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
 

@@ -11,24 +11,20 @@ import com.example.riding_balloon.databinding.LayoutItemTravelEmptyBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
-import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailViewPagerAdapter.DrawImage
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
-import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 enum class TSDEnum(val type: Int) {
     VIEW_PAGER(0), INFO(1), VIDEO_LIST(2), EMPTY(-1)
 }
 
-class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolder>(
+class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
+    private val onTravelSpotClickListener: OnTravelSpotClickListener<T>
+) : ListAdapter<UiModel, TravelViewHolder>(
     TravelDiffUtilCallback()
 ) {
     var drawImage: DrawImage? = null
@@ -48,7 +44,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             }
             TSDEnum.INFO -> {
                 binding = LayoutItemTravelInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                viewHolder = InfoViewHolderImpl(binding)
+                viewHolder = InfoViewHolderImpl(binding, onTravelSpotClickListener as OnTravelSpotClickListener<UiModel.InfoModel>)
             }
             TSDEnum.VIDEO_LIST -> {
                 binding = LayoutItemTravelVideoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
