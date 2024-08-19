@@ -74,20 +74,33 @@
 
             <TextView
                 android:id="@+id/tv_label_my_favorite_videos"
-                style="@style/TextLabel.S18"
+                style="@style/TextBody.S18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="@string/label_my_favorite_videos"
-                app:layout_constraintEnd_toEndOf="@id/tv_my_description"
+                app:layout_constraintEnd_toStartOf="@id/tv_label_favorite_videos_edit"
                 app:layout_constraintStart_toStartOf="@id/tv_my_description"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_description" />
+
+            <TextView
+                android:id="@+id/tv_label_favorite_videos_edit"
+                style="@style/TextBody.S16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_edit"
+                android:textColor="@color/main"
+                app:layout_constraintBottom_toBottomOf="@id/tv_label_my_favorite_videos"
+                app:layout_constraintEnd_toEndOf="@id/tv_my_description"
+                app:layout_constraintStart_toEndOf="@id/tv_label_my_favorite_videos"
+                app:layout_constraintTop_toTopOf="@id/tv_label_my_favorite_videos" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_favorite_videos"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
                 android:paddingHorizontal="2dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +109,20 @@
                 app:spanCount="2"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_grid_video" />
+
+            <TextView
+                android:id="@+id/tv_empty_favorite_videos"
+                style="@style/TextCaption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center"
+                android:text="@string/guide_message_empty_favorite_videos"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_my_favorite_videos"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

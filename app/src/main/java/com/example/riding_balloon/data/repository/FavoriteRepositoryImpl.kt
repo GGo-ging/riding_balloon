@@ -2,6 +2,7 @@ package com.example.riding_balloon.data.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import com.example.riding_balloon.util.Constants.PREF_FAVORITE
 import com.google.gson.GsonBuilder
@@ -30,6 +31,11 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
         saveFavoriteVideos()
     }
 
+    override fun removeMultipleFavoriteVideos(videos: List<FavoriteVideoInfo>) {
+        _favoriteVideos.removeAll(videos)
+        saveFavoriteVideos()
+    }
+
     override fun saveFavoriteVideos() {
         val json = gson.toJson(_favoriteVideos)
         sharedPreferences.edit().putString(PREF_FAVORITE, json).apply()
@@ -39,5 +45,16 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
         val json = sharedPreferences.getString(PREF_FAVORITE, null) ?: return mutableListOf()
         val type = object : TypeToken<MutableList<FavoriteVideoInfo>>() {}.type
         return gson.fromJson(json, type)
+    }
+
+    override fun isFavorite(videoId: String): Boolean {
+        val video = _favoriteVideos.find { it.videoId == videoId }
+        if (video == null) {
+            Log.d("FavoriteRepositoryImpl", "isFavorite: $videoId, false")
+            return false
+        } else {
+            Log.d("FavoriteRepositoryImpl", "isFavorite: $videoId, true")
+        }
+        return true
     }
 }
