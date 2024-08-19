@@ -10,7 +10,6 @@ import com.example.riding_balloon.data.model.ItemSnippet
 import com.example.riding_balloon.data.model.ItemSnippetStatistics
 import com.example.riding_balloon.data.model.VideoSnippet
 import com.example.riding_balloon.data.repository.FavoriteVideoRepository
-import com.example.riding_balloon.data.repository.FavoriteVideoRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
