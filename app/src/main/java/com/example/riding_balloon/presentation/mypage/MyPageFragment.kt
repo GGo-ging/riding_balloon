@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
@@ -57,6 +59,39 @@ class MyPageFragment : Fragment() {
         rvFavoriteTravelSpots.adapter = favoriteTravelSpotListAdapter
         rvFavoriteVideos.adapter = favoriteVideoListAdapter
 
+        tvLabelFavoriteTravelSpotsEdit.setOnClickListener {
+            // isEditMode를 직접 토글
+            favoriteTravelSpotListAdapter.isEditMode = !favoriteTravelSpotListAdapter.isEditMode
+
+            if (favoriteTravelSpotListAdapter.isEditMode) {
+                rvFavoriteTravelSpots.layoutManager = GridLayoutManager(requireContext(), 3)
+                checkboxSelectAllFavoriteTravelSpots.visibility = View.VISIBLE
+                tvLabelFavoriteTravelSpotsDelete.visibility = View.VISIBLE
+                tvLabelMyFavoriteTravelSpots.setText(R.string.label_select_all)
+                tvLabelFavoriteTravelSpotsEdit.setText(R.string.label_edit_complete)
+            } else {
+                rvFavoriteTravelSpots.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                checkboxSelectAllFavoriteTravelSpots.visibility = View.GONE
+                tvLabelFavoriteTravelSpotsDelete.visibility = View.GONE
+                tvLabelMyFavoriteTravelSpots.setText(R.string.label_my_favorite_videos)
+                tvLabelFavoriteTravelSpotsEdit.setText(R.string.label_edit)
+            }
+        }
+
+        tvLabelFavoriteTravelSpotsDelete.setOnClickListener {
+            val selectedItems = favoriteTravelSpotListAdapter.getSelectedItems()
+            if (selectedItems.isNotEmpty()) {
+                favoriteTravelSpotViewModel.removeMultipleFavoriteItems(selectedItems)
+                Toast.makeText(requireContext(), "선택된 아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        checkboxSelectAllFavoriteTravelSpots.setOnCheckedChangeListener { _, isChecked ->
+            favoriteTravelSpotListAdapter.selectAllItems(isChecked)
+        }
+
         tvLabelFavoriteVideosEdit.setOnClickListener {
             // isEditMode를 직접 토글
             favoriteVideoListAdapter.isEditMode = !favoriteVideoListAdapter.isEditMode
@@ -93,9 +128,11 @@ class MyPageFragment : Fragment() {
         favoriteTravelSpotViewModel.favoriteTravelSpots.observe(viewLifecycleOwner) { favoriteTravelSpots ->
             if (favoriteTravelSpots.isNotEmpty()) {
                 favoriteTravelSpotListAdapter.submitList(favoriteTravelSpots)
+                binding.rvFavoriteTravelSpots.visibility = View.VISIBLE
                 binding.tvEmptyFavoriteTravelSpots.visibility = View.INVISIBLE
             } else {
                 favoriteTravelSpotListAdapter.submitList(mutableListOf())
+                binding.rvFavoriteTravelSpots.visibility = View.INVISIBLE
                 binding.tvEmptyFavoriteTravelSpots.visibility = View.VISIBLE
             }
         }

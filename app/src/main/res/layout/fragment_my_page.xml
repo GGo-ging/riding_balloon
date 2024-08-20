@@ -179,7 +179,7 @@
                 android:text="@string/label_my_favorite_videos"
                 app:layout_constraintEnd_toStartOf="@id/tv_label_favorite_videos_delete"
                 app:layout_constraintStart_toEndOf="@id/checkbox_select_all_favorite_videos"
-                app:layout_constraintTop_toBottomOf="@id/tv_empty_favorite_travel_spots" />
+                app:layout_constraintTop_toBottomOf="@id/rv_favorite_travel_spots" />
 
             <TextView
                 android:id="@+id/tv_label_favorite_videos_delete"
