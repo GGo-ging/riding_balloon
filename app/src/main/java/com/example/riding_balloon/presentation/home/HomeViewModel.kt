@@ -20,12 +20,12 @@ import java.util.UUID
 
 fun ChannelDetailsResponse.toListData(): ChannelListModel {
     return ChannelListModel(
-            UUID.randomUUID().toString(),
-            items?.first()?.snippet?.customUrl ?: "",
-            items?.first()?.snippet?.title ?:"",
-            items?.first()?.snippet?.thumbnails?.default?.url ?:"",
-            items?.first()?.statistics?.subscriberCount ?: "",
-        )
+        UUID.randomUUID().toString(),
+        items?.first()?.snippet?.customUrl ?: "",
+        items?.first()?.snippet?.title ?:"",
+        items?.first()?.snippet?.thumbnails?.default?.url ?:"",
+        items?.first()?.statistics?.subscriberCount ?: "",
+    )
 }
 
 fun ItemSnippetStatistics.toListData(): PopularVideoListModel {
