@@ -43,10 +43,15 @@
     </fragment>
     <action
         android:id="@+id/action_global_travel_spot_detail"
-        app:destination="@id/navigation_travel_spot_detail" />
+        app:destination="@id/navigation_travel_spot_detail"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out" />
     <action
         android:id="@+id/action_global_video_detail"
         app:destination="@id/navigation_video_detail"
-        />
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out" />
 
 </navigation>
