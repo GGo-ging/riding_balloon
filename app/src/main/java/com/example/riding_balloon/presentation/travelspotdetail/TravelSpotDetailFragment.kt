@@ -113,7 +113,7 @@ class TravelSpotDetailFragment : Fragment() {
                     ) {
                         isScrollCoroutineRunning = true
                         Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
-                        tsdViewModel.addData()
+//                        tsdViewModel.addData()
                     }
                 }
             })
@@ -146,8 +146,8 @@ class TravelSpotDetailFragment : Fragment() {
         binding.cgTravel.setOnCheckedStateChangeListener { _, ids ->
             val chip = chipList.first { chip -> chip.id == ids.first() }
             tsdViewModel.changeData(chipTag[chipList.indexOf(chip)], false)
-            for (chip1 in chipList) {
-                chip1.isEnabled = false
+            chipList.forEach {
+                it.isEnabled = false
             }
         }
     }
