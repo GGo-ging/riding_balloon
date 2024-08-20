@@ -45,13 +45,21 @@
     <TextView
         android:id="@+id/tv_grid_video_view_count"
         style="@style/TextLabel"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_grid_video_channel"
         app:layout_constraintTop_toTopOf="@id/tv_grid_video_channel"
         tools:text="조회수" />
+
+    <TextView
+        android:id="@+id/tv_grid_video_published_date"
+        style="@style/TextLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_grid_video_view_count"
+        app:layout_constraintTop_toTopOf="@id/tv_grid_video_view_count"
+        tools:text="7일 전" />
 
 <!--    <View-->
 <!--        android:id="@+id/view_grid_video_alpha"-->
