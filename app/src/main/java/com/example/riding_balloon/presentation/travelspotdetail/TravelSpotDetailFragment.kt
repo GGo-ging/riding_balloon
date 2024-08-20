@@ -86,6 +86,8 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //
+
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
             videoListModel = videoListModel.copy(
                 id = videoListModel.id,
