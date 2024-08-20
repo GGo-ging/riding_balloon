@@ -1,6 +1,7 @@
 package com.example.riding_balloon.presentation.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -156,6 +157,11 @@ class MyPageFragment : Fragment() {
             view to "thumbnail_${favoriteVideo.videoId}"
         )
         findNavController().navigate(action, extras)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        favoriteTravelSpotListAdapter.isEditMode = false // 상세 페이지 이동 시 편집 모드 해제
     }
 
     override fun onDestroyView() {
