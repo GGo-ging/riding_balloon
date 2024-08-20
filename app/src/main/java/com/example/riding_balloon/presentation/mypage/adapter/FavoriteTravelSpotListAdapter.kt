@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.databinding.ItemBest10ListBinding
-import com.example.riding_balloon.databinding.ItemGridVideoBinding
 import com.example.riding_balloon.presentation.extensions.load
-import com.example.riding_balloon.presentation.extensions.setPublishedDate
-import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 
 class FavoriteTravelSpotListAdapter(
     private val onClick: (TravelSpotInfo) -> Unit

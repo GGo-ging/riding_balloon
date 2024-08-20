@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.riding_balloon.databinding.ItemGridVideoBinding
+import com.example.riding_balloon.databinding.ItemFavoriteVideoBinding
 import com.example.riding_balloon.presentation.extensions.load
 import com.example.riding_balloon.presentation.extensions.setPublishedDate
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
@@ -57,7 +57,7 @@ class FavoriteVideoListAdapter(
     }
 
     class FavoriteVideoHolder(
-        private val binding: ItemGridVideoBinding,
+        private val binding: ItemFavoriteVideoBinding,
         private val onClick: (View, FavoriteVideoInfo) -> Unit,
         private val selectedItems: MutableSet<FavoriteVideoInfo>
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -108,7 +108,7 @@ class FavoriteVideoListAdapter(
                 selectedItems: MutableSet<FavoriteVideoInfo>
             ): FavoriteVideoHolder {
                 return FavoriteVideoHolder(
-                    ItemGridVideoBinding.inflate(
+                    ItemFavoriteVideoBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false

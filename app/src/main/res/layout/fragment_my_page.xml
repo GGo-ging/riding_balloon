@@ -218,7 +218,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_label_my_favorite_videos"
                 app:spanCount="2"
                 tools:itemCount="6"
-                tools:listitem="@layout/item_grid_video" />
+                tools:listitem="@layout/item_favorite_video" />
 
             <TextView
                 android:id="@+id/tv_empty_favorite_videos"
