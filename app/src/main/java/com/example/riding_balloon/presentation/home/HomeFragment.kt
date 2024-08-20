@@ -65,7 +65,9 @@ class HomeFragment : Fragment() {
         }
 
         with(homeViewModel){
-            channelList.observe(viewLifecycleOwner){ itemList -> channelListAdapter.submitList(itemList) }
+            channelList.observe(viewLifecycleOwner){ itemList ->
+                Log.d("debug1111",itemList.size.toString())
+                channelListAdapter.submitList(itemList) }
             best10List.observe(viewLifecycleOwner){ itemList -> best10ListAdapter.submitList(itemList) }
             popularVideoList.observe(viewLifecycleOwner){ itemList -> popularVideoListAdapter.submitList(itemList) }
         }
