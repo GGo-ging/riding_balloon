@@ -1,29 +1,32 @@
-package com.example.riding_balloon.presentation.travelspotdetail
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter
 
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelChipgroupBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelEmptyBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
+import com.example.riding_balloon.databinding.LayoutItemTravelVideoListLoadingBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
-import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelDiffUtilCallback
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ChipGroupViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.OnTravelSpotClickListener
+import com.example.riding_balloon.presentation.travelspotdetail.UiModel
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.diffutil.TravelDiffUtilCallback
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.ChipGroupViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.EmptyViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.InfoViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.LoadingViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.TravelViewHolder
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.VideoListViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.ViewPagerViewHolderImpl
 
 enum class TSDEnum(val type: Int) {
-    VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), EMPTY(-1)
+    VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), LOADING(4), EMPTY(-1)
 }
 
 class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
@@ -34,9 +37,11 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
     var drawImage: DrawImage? = null
     var drawLayoutManager : DrawLayoutManager? = null
     var selectChip : SelectChip? = null
+    var clickVideo: ClickVideo? = null
+    var list: List<UiModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
-        Log.d("ViewHolder 체크", "리스트 : $currentList")
+        Log.d("ViewHolder 체크", "리스트 : $list")
         val holderType = TSDEnum.entries.find {
             it.type == viewType
         } ?: TSDEnum.EMPTY
@@ -61,7 +66,11 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
             }
             TSDEnum.EMPTY -> {
                 binding = LayoutItemTravelEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                viewHolder = EmptyViewHolder(binding)
+                viewHolder = EmptyViewHolderImpl(binding)
+            }
+            TSDEnum.LOADING -> {
+                binding = LayoutItemTravelVideoListLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                viewHolder = LoadingViewHolderImpl(binding)
             }
         }
         return viewHolder
@@ -74,7 +83,7 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
                 holder.bind(getItem(position), drawImage)
             }
             is VideoListViewHolderImpl -> {
-                holder.bind(getItem(position), drawImage, drawLayoutManager)
+                holder.bind(getItem(position), drawImage, drawLayoutManager, clickVideo)
             }
             is ChipGroupViewHolderImpl -> {
                 holder.bind(getItem(position), selectChip)
@@ -86,29 +95,37 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(getItem(position)) {
+        return when(currentList[position]) {
             is UiModel.ViewPagerModel -> TSDEnum.VIEW_PAGER.type
             is UiModel.InfoModel -> TSDEnum.INFO.type
             is UiModel.TravelVideoListModel -> TSDEnum.VIDEO_LIST.type
             is UiModel.ChipGroupModel -> TSDEnum.CHIP_GROUP.type
+            is UiModel.VideoListLoadingUiModel -> TSDEnum.LOADING.type
         }
     }
-
-    override fun getItemCount(): Int {
-        Log.d("ViewHolder 체크", currentList.size.toString())
-        return currentList.size
-    }
+//
+//    override fun getItem(position: Int): UiModel {
+//        return list[position]
+//    }
+//
+//    override fun getItemCount(): Int = list.size
+//
+//    override fun getItemId(position: Int) = position.toLong()
 
     fun interface DrawImage {
         fun onDraw(url: String): RequestBuilder<Drawable>
     }
 
     fun interface DrawLayoutManager {
-        fun onDraw() : GridLayoutManager
+        fun onDraw() : LinearLayoutManager
     }
 
     fun interface SelectChip {
         fun onSelect(chipText: String)
+    }
+
+    fun interface ClickVideo {
+        fun onClick(videoId: String)
     }
 
 }

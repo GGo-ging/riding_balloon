@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
         setBottomNavigation()
         initButton()
-        tsdViewModel.initData()
     }
 
     private fun setBottomNavigation() = with(binding) {

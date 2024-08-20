@@ -1,13 +1,9 @@
-package com.example.riding_balloon.presentation.travelspotdetail.viewholder
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder
 
-import android.graphics.drawable.Drawable
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
-import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailRecyclerViewAdapter
-import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailViewPagerAdapter
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailViewPagerAdapter
 import com.example.riding_balloon.presentation.travelspotdetail.UiModel
 import com.example.riding_balloon.presentation.travelspotdetail.ViewPagerItemModel
 
