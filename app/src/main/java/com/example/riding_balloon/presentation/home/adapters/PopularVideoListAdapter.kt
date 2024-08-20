@@ -1,6 +1,7 @@
 package com.example.riding_balloon.presentation.home.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,7 +16,7 @@ class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideo
     PopularYoutubeDiffCallback()
 ) {
     interface ItemClick {
-        fun onClickItem(position: Int, item : PopularVideoListModel)
+        fun onClickItem(position: Int, item : PopularVideoListModel, view: View)
     }
     var itemClick: ItemClick? = null
 
@@ -38,9 +39,10 @@ class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideo
 
         with(holder){
             itemView.setOnClickListener{
-                itemClick?.onClickItem(position, item)
+                itemClick?.onClickItem(position, item, image)
             }
             Glide.with(itemView).load(item.thumbnailUrl).into(image)
+            image.transitionName = "thumbnail_${item.id}"
             title.text = item.title
             channelTitle.text = item.channelTitle
             viewCount.setViewCount(item.viewCount.toBigDecimal())
