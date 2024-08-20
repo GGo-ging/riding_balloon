@@ -8,13 +8,15 @@ data class VideoData(
     val videoUrl: String?,
     val videoTitle: String?,
     val videoUploader: String?,
-    val videoViewCount: String?,
+    val videoUploadAt: String?
+//    val videoViewCount: String?,
 )
 
 class VideoSearcher(private val youtubeApi: YoutubeApi) {
     private var nextPageToken : String = ""
 
     private suspend fun getSearchData(keyword: String) : SearchVideoResponse {
+        nextPageToken = ""
         return youtubeApi.searchVideos(query = keyword)
     }
 
@@ -35,17 +37,18 @@ class VideoSearcher(private val youtubeApi: YoutubeApi) {
                 videoUrl = it.snippet?.thumbnails?.medium?.url,
                 videoUploader = it.snippet?.channelTitle,
                 videoTitle = it.snippet?.title,
-                videoViewCount = getVideoDataFromYoutubeApi(videoId = it.id?.videoId)
+                videoUploadAt = it.snippet?.publishedAt,
+//                videoViewCount = getVideoDataFromYoutubeApi(videoId = it.id?.videoId)
             )
         } ?: listOf()
     }
 
-    private suspend fun getVideoDataFromYoutubeApi(videoId: String?) : String {
-        return if (videoId != null) {
-            youtubeApi.getVideoDetails(id = videoId).items?.first()?.statistics?.viewCount ?: "0"
-        } else {
-            "0"
-        }
-    }
+//    private suspend fun getVideoDataFromYoutubeApi(videoId: String?) : String {
+//        return if (videoId != null) {
+//            youtubeApi.getVideoDetails(id = videoId).items?.first()?.statistics?.viewCount ?: "0"
+//        } else {
+//            "0"
+//        }
+//    }
 
 }

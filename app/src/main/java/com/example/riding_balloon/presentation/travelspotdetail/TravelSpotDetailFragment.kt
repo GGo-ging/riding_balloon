@@ -1,33 +1,22 @@
 package com.example.riding_balloon.presentation.travelspotdetail
 
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
-import com.example.riding_balloon.PungsunTagoApplication
-import com.example.riding_balloon.R
-import com.example.riding_balloon.data.source.local.TravelSpotManager
-import com.example.riding_balloon.data.source.local.room.VideoEntity
-import com.example.riding_balloon.data.source.local.room.VideoRoomDB
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
-import com.google.android.material.chip.Chip
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.math.roundToInt
 
 var isScrollCoroutineRunning = false
@@ -42,29 +31,48 @@ class TravelSpotDetailFragment : Fragment() {
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
 
-    private val viewPagerModel = UiModel.ViewPagerModel(imageUrlList = TravelSpotManager.getListByCountry()[0].images)
-    private val infoModel = UiModel.InfoModel(
-        nation = TravelSpotManager.getListByCountry()[0].country,
-        city = TravelSpotManager.getListByCountry()[0].region,
-        desc = TravelSpotManager.getListByCountry()[0].description
-    )
-    private val chipGroupModel = UiModel.ChipGroupModel(
-        city = TravelSpotManager.getListByCountry()[0].region
-    )
-    private val videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
+    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
+
+    private lateinit var viewPagerModel : UiModel.ViewPagerModel
+    private lateinit var infoModel : UiModel.InfoModel
+    private lateinit var chipGroupModel : UiModel.ChipGroupModel
+    // 얘가 계속해서 copy 하니까 문제가 리스트가 초기화되는 문제가 생기는 게 아닐까? -> var 로 바꾸고 그대로 가도록 해보기 -> 깜빡이는 건 사라졌지만 그대로임 -> 안쪽도 바꿔보기?
+    // -> 외부 리사이클러뷰의 arecontentsame가 data class 안의 list를 확인하고 다름을 인식해서 자꾸 맨 위로 초기화되는 것 -> 그러면 list를 따로 전달?
+    // -> 혹은 getPayload?나 arethecontentsame 을 다르게 해서 처리할 수 있을 듯. ai 끝나고 시도 한번 해보고 안 될 거 같으면 애니메이션이나 넣기
+    private var videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
+    private val loadingModel = UiModel.VideoListLoadingUiModel()
+
+    private lateinit var travelSpotInfoUiModel : TravelSpotInfoUiModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        tsdViewModel.initData()
+        tsdViewModel.setTravelSpot(args.travelSpot.id)
+        travelSpotInfoUiModel = tsdViewModel.getTravelSpot()
+        viewPagerModel = UiModel.ViewPagerModel(
+            imageUrlList = travelSpotInfoUiModel.images
+        )
+        infoModel = UiModel.InfoModel(
+            nation = travelSpotInfoUiModel.country,
+            city = travelSpotInfoUiModel.region,
+            desc = travelSpotInfoUiModel.description
+        )
+        chipGroupModel = UiModel.ChipGroupModel(
+            city = travelSpotInfoUiModel.region
+        )
+
         recyclerViewAdapter.submitList(
+//        recyclerViewAdapter.list =
             listOf(
                 viewPagerModel,
                 infoModel,
                 chipGroupModel,
-                videoListModel.copy(videoList = listOf())
+                videoListModel,
+                loadingModel
             )
+//        recyclerViewAdapter.notifyDataSetChanged()
         )
     }
-    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,17 +87,40 @@ class TravelSpotDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //
-        initData()
 
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
+            videoListModel = videoListModel.copy(
+                id = videoListModel.id,
+                videoList = tsdViewModel.videosData.value?.filterIsInstance<VideoListUiModel.TravelVideoModel>()?.map {
+                    VideoListUiModel.TravelVideoModel(
+                        id = it.id,
+                        videoTitle = it.videoTitle,
+                        videoUrl = it.videoUrl,
+                        videoUploader = it.videoUploader,
+                        videoUploadAt = it.videoUploadAt,
+                    )
+                } ?: listOf()
+            )
             recyclerViewAdapter.submitList(
                 listOf(
                     viewPagerModel,
                     infoModel,
                     chipGroupModel,
-                    videoListModel.copy(videoList = tsdViewModel.videosData.value ?: listOf())
+                    videoListModel,
+//                    loadingModel
                 )
             )
+//            recyclerViewAdapter.list =
+//                listOf(
+//                    viewPagerModel,
+//                    infoModel,
+//                    chipGroupModel,
+//                    videoListModel.copy(
+//                        id = videoListModel.id,
+//                        videoList = tsdViewModel.videosData.value ?: listOf()
+//                    )
+//                )
+//            recyclerViewAdapter.notifyDataSetChanged()
         }
 
         // args.travelSpot으로 가져오면 됨.
@@ -99,61 +130,55 @@ class TravelSpotDetailFragment : Fragment() {
             adapter = recyclerViewAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    Log.d("TSD 리사이클러뷰", "$dy 로 변경 중...")
-                    if(
-                        !binding.rvTravel.canScrollVertically(1) &&
-                        tsdViewModel.videosData.value?.isEmpty() == false &&
-                        !isScrollCoroutineRunning
-                        ) {
-                        isScrollCoroutineRunning = true
-                        Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
-                        tsdViewModel.addData()
-                    }
-                }
-            })
+            isNestedScrollingEnabled = false
+//            itemAnimator = null
+
+            // 무한 스크롤
+//            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                    super.onScrolled(recyclerView, dx, dy)
+//                    Log.d("TSD 리사이클러뷰", "$dy 로 변경 중...")
+//                    if (
+//                        !binding.rvTravel.canScrollVertically(1) &&
+//                        tsdViewModel.videosData.value?.isEmpty() == false &&
+//                        !isScrollCoroutineRunning
+//                    ) {
+//                        isScrollCoroutineRunning = true
+//                        Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
+//                        recyclerViewAdapter.submitList(
+////                        recyclerViewAdapter.list =
+//                            listOf(
+//                                viewPagerModel,
+//                                infoModel,
+//                                chipGroupModel,
+//                                videoListModel,
+//                                loadingModel
+//                            )
+//                        )
+////                        recyclerViewAdapter.notifyDataSetChanged()
+//                        tsdViewModel.addData()
+//                    }
+//                }
+//            })
         }
 
 
         recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
             Glide.with(this).load(url)
         }
-
-        recyclerViewAdapter.drawLayoutManager = TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager {
-            GridLayoutManager(requireContext(),2)
-        }
+        recyclerViewAdapter.drawLayoutManager =
+            TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager {
+                GridLayoutManager(requireContext(), 2)
+            }
 
         recyclerViewAdapter.selectChip = TravelSpotDetailRecyclerViewAdapter.SelectChip {
             tsdViewModel.changeData(it, false)
         }
 
-    }
+        recyclerViewAdapter.clickVideo = TravelSpotDetailRecyclerViewAdapter.ClickVideo {
+            sendItemFromTsdToVideo(it)
+        }
 
-    fun initData() {
-        Log.e("initDat", "initData")
-        val travelSpot = args.travelSpot
-        val viewPagerModel = UiModel.ViewPagerModel(imageUrlList = travelSpot.images)
-        Log.e("initDat_viewPagerModel", "$viewPagerModel")
-        val infoModel = UiModel.InfoModel(
-            nation = travelSpot.country,
-            city = travelSpot.region,
-            desc = travelSpot.description
-        )
-        Log.e("initDat_infoModel", "$infoModel")
-
-        val chipGroupModel = UiModel.ChipGroupModel(city = travelSpot.region)
-
-        recyclerViewAdapter.submitList(
-            listOf(
-                viewPagerModel,
-                infoModel,
-                chipGroupModel,
-//                videoListModel.copy(videoList = listOf()),
-                UiModel.TravelVideoListModel(videoList = tsdViewModel.videosData.value ?: listOf())
-            )
-        )
     }
 
     override fun onDestroyView() {
@@ -161,11 +186,9 @@ class TravelSpotDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun insertVideo(video: List<VideoEntity>) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val videoDb = VideoRoomDB.getDatabase((requireActivity().applicationContext as PungsunTagoApplication))
-            videoDb.videoDao().insert(video)
-        }
+    private fun sendItemFromTsdToVideo(videoId: String) {
+        val action = TravelSpotDetailFragmentDirections.actionGlobalVideoDetail(videoId = videoId)
+        findNavController().navigate(action)
     }
 }
 
@@ -177,7 +200,7 @@ class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDec
         state: RecyclerView.State
     ) {
         val position = parent.getChildAdapterPosition(view)
-        val marginBottom = when(position) {
+        val marginBottom = when (position) {
             0 -> px * 16
             1 -> px * 32
             2 -> px * 16
@@ -186,3 +209,11 @@ class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDec
         outRect.bottom = marginBottom
     }
 }
+
+//private fun insertVideo(video: List<VideoEntity>) {
+//    viewLifecycleOwner.lifecycleScope.launch {
+//        val videoDb =
+//            VideoRoomDB.getDatabase((requireActivity().applicationContext as PungsunTagoApplication))
+//        videoDb.videoDao().insert(video)
+//    }
+//}

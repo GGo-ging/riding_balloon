@@ -23,6 +23,9 @@ sealed class UiModel {
         override val id: String = UUID.randomUUID().toString(),
         val videoList : List<VideoListUiModel>
     ): UiModel()
+    data class VideoListLoadingUiModel (
+        override val id: String = "loading",
+    ): UiModel()
 }
 
 sealed class VideoListUiModel {
@@ -33,10 +36,19 @@ sealed class VideoListUiModel {
         val videoUrl: String?,
         val videoTitle: String?,
         val videoUploader: String?,
-        val videoViewCount: String?,
+        val videoUploadAt: String?,
+//        val videoViewCount: String?,
     ) : VideoListUiModel()
 }
 
 data class ViewPagerItemModel(
     val imageUrl: String,
+)
+
+data class TravelSpotInfoUiModel(
+    val id: Int,
+    val images: List<String>,
+    val country: String,
+    val region: String,
+    val description: String,
 )

@@ -1,4 +1,4 @@
-package com.example.riding_balloon.presentation.travelspotdetail
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerItemBinding
-import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelViewPagerDiffUtilCallback
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerItemViewHolder
+import com.example.riding_balloon.presentation.travelspotdetail.ViewPagerItemModel
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.diffutil.TravelViewPagerDiffUtilCallback
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.ViewPagerItemViewHolder
 
 class TravelSpotDetailViewPagerAdapter :
     ListAdapter<ViewPagerItemModel, ViewPagerItemViewHolder>(
