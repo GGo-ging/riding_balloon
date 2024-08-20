@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="105dp"
-    android:layout_height="105dp"
-    android:orientation="vertical">
+    android:layout_width="130dp"
+    android:layout_height="130dp"
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/iv_item_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"
         android:background="@drawable/gridview_list_item_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,12 +26,17 @@
         android:text="일본"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/it_city_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/it_city_name"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.982" />
+        app:layout_constraintVertical_bias="0.982"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"/>
 
     <TextView
         android:id="@+id/it_city_name"
@@ -39,9 +47,14 @@
         android:text="오사카 후쿠오카"
         android:textSize="12sp"
         android:textStyle="normal"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/iv_item_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/iv_item_image" />
+        app:layout_constraintStart_toStartOf="@+id/iv_item_image"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="20"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

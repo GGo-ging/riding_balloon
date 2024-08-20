@@ -78,6 +78,7 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
             recyclerViewAdapter.submitList(
                 listOf(
@@ -112,6 +113,7 @@ class TravelSpotDetailFragment : Fragment() {
                 }
             })
         }
+
 
         recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
             Glide.with(this).load(url)

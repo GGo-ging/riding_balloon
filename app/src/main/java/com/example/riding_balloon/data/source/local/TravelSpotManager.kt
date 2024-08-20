@@ -27,7 +27,7 @@ object TravelSpotManager {
             ),
             TravelSpotInfo(
                 id = 2,
-                thumbnailUrl = "https://www.koreatimes.net/images/attach/PSHW4OZG564MAVI-2017042813045131/20170428-13042069.jpg",
+                thumbnailUrl = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQHh4mJMReRMqAVk_nNuEaMILlSMDu3guJSsTgRga-2tC2YE41J8X85HRn_7tBQ",
                 country = "일본",
                 region = "도쿄",
                 description = "**일본의 수도이자 세계적인 도시, 도쿄!**\n" + " 현대적인 고층빌딩과 전통적인 사원이 조화롭게 어우러진 매력적인 도시입니다. 전통문화와 현대문화가 공존하는 도시에서 다양한 문화와 일본 전통 음식부터 세계 각국의 음식까지 다양하게 즐길 수 있습니다.",
@@ -66,13 +66,13 @@ object TravelSpotManager {
             ),
             TravelSpotInfo(
                 id = 5,
-                thumbnailUrl = "https://i.namu.wiki/i/6ncBHFTm35s4CVBf3Nvy7FlfzuJddHejvX-cCxkM7wI8ohjmQFUuTpYAZh05EZQ5adQ4raoVwF12NqhG3DQttgaAS7h8ENsUDhfif5ixmW55FvJRtuID5By3i978WEY86cqaDS__DU1pBfSHQ46Nuw.webp",
+                thumbnailUrl = "https://www.kkday.com/ko/blog/wp-content/uploads/china_shanghai_city_view.jpg",
                 country = "중국",
                 region = "상하이",
                 description = "**상하이, 동양의 파리를 만나다!** \n" + "동양의 파리라 불리는 상하이는 과거와 현재가 공존하는 매력적인 도시입니다. 화려한 야경과 현대적인 건축물, 그리고 전통적인 중국 문화까지 다채로운 모습을 갖추고 있어 많은 여행객들을 매료시키고 있습니다.",
                 images = listOf(
-                    "https://i.namu.wiki/i/6ncBHFTm35s4CVBf3Nvy7FlfzuJddHejvX-cCxkM7wI8ohjmQFUuTpYAZh05EZQ5adQ4raoVwF12NqhG3DQttgaAS7h8ENsUDhfif5ixmW55FvJRtuID5By3i978WEY86cqaDS__DU1pBfSHQ46Nuw.webp",
-                    "https://i.namu.wiki/i/EYqLAuw-3lteWu8bZ4Vc_6KeyLWu3rhQHKsRDaBcz2fPWUpSgkil3Ve0Lvxh8KY-NZO7dx63annZubNPVNDI-UsVzRSVxqgvNQyNOG3mx8HxQOlnDgz4Im6UMFcosWYxd4CS9B0DOgzm1zN0z6Fc2g.webp",
+                    "https://www.kkday.com/ko/blog/wp-content/uploads/china_shanghai_city_view.jpg",
+                    "https://www.kkday.com/ko/blog/wp-content/uploads/china_shanghai_traditional_shopping_area.jpg",
                     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS4eLWJlinESq3lrarEgv5IMcmMA4egTSNW6KBEwZH2OGQ4fqq313FC_xO5nwZv"
                 ),
                 ranking = 0
@@ -396,13 +396,13 @@ object TravelSpotManager {
 
             TravelSpotInfo(
                 id = 30,
-                thumbnailUrl = "https://cdn.traveltimes.co.kr/news/photo/202310/406489_29617_912.jpg",
+                thumbnailUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1Lue18DVnIl97cxgHi80q-k-sqmdNdeRg4O2EiU9floCCVtHMfwi6GJ_f_EZ",
                 country = "아르헨티나",
                 region = "아르헨티나",
                 description = "남아메리카 대륙의 남쪽 끝에 위치한 아르헨티나는 웅장한 안데스 산맥부터 광활한 팜파스 초원, 아름다운 파타고니아까지 다양한 자연 환경을 품고 있는 매력적인 나라입니다.",
                 images = listOf(
-                    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYPHFSukQys8-_Uxl2PE0UgLk2Ea_GCain9ahEm9Zb7TvpxSZ1RAqisQxDoalg",
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1Lue18DVnIl97cxgHi80q-k-sqmdNdeRg4O2EiU9floCCVtHMfwi6GJ_f_EZ",
+                    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYPHFSukQys8-_Uxl2PE0UgLk2Ea_GCain9ahEm9Zb7TvpxSZ1RAqisQxDoalg",
                     "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSd5l-MgLJ90rRpWil0kjN7SY9EuQ7Sy0WQWEeMr-6aPRWTCjTWhCjP07zreRs9"
                 ),
                 ranking = 0
@@ -476,21 +476,21 @@ object TravelSpotManager {
                     "https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/wlQ/image/k41IemYFNns52pFaSJuJGaPlbfU.jpeg"
                 ),
                 ranking = 5
-            ),
+            )
 
-            TravelSpotInfo(
-                id = 35,
-                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
-                country = "싱가포르",
-                region = "싱가포르",
-                description = "첨단 건축물과 아름다운 정원이 조화를 이루는 싱가포르! 쇼핑몰, 시장, 테마파크 등 다양한 곳에서 즐거운 시간을 보낼 수 있어요.",
-                images = listOf(
-                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
-                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
-                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
-                ),
-                ranking = 0
-            ),
+//            TravelSpotInfo(
+//                id = 35,
+//                thumbnailUrl = "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+//                country = "싱가포르",
+//                region = "싱가포르",
+//                description = "첨단 건축물과 아름다운 정원이 조화를 이루는 싱가포르! 쇼핑몰, 시장, 테마파크 등 다양한 곳에서 즐거운 시간을 보낼 수 있어요.",
+//                images = listOf(
+//                    "https://www.hanbit.co.kr/data/editor/20191017121027_wgbsqeit.png",
+//                    "https://tourimage.interpark.com//Spot/111/10715/202209/6379995266288289440.jpg",
+//                    "https://digitalchosun.dizzo.com/site/data/img_dir/2017/06/27/2017062712165_4.jpg"
+//                ),
+//                ranking = 0
+//            ),
         )
 
     }
