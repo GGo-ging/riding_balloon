@@ -45,10 +45,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchAdapter = SearchFragmentAdapter(TravelSpotManager.getTravelSpots())  //
+
+        searchAdapter = SearchFragmentAdapter(TravelSpotManager.getTravelSpots()) { travelSpot ->
+            Log.e("searchAdapter", "$travelSpot")
+        }
+
+//        searchAdapter = SearchFragmentAdapter(TravelSpotManager.getTravelSpots())
         binding.recyclerViewSearch.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerViewSearch.adapter = searchAdapter
-
 
         searchAdapter.itemClick = object : SearchFragmentAdapter.ItemClick {
             override fun onClickItem(view: View, position: Int) {
