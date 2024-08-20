@@ -51,7 +51,6 @@
     <action
         android:id="@+id/action_global_video_detail"
         app:destination="@id/navigation_video_detail"
-        app:popEnterAnim="@anim/fade_in"
         app:popExitAnim="@anim/slide_out" />
 
 </navigation>
