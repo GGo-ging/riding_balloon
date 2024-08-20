@@ -130,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:clipToPadding="false"
+                android:minHeight="120dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp"

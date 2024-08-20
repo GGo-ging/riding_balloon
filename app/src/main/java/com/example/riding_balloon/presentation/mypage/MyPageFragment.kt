@@ -83,6 +83,7 @@ class MyPageFragment : Fragment() {
             if (selectedItems.isNotEmpty()) {
                 favoriteTravelSpotViewModel.removeMultipleFavoriteItems(selectedItems)
                 Toast.makeText(requireContext(), "선택된 아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                favoriteTravelSpotListAdapter.clearSelectedItems()
             } else {
                 Toast.makeText(requireContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -114,6 +115,7 @@ class MyPageFragment : Fragment() {
             if (selectedItems.isNotEmpty()) {
                 favoriteViewModel.removeMultipleFavoriteItems(selectedItems)
                 Toast.makeText(requireContext(), "선택된 아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                favoriteVideoListAdapter.clearSelectedItems()
             } else {
                 Toast.makeText(requireContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -128,11 +130,9 @@ class MyPageFragment : Fragment() {
         favoriteTravelSpotViewModel.favoriteTravelSpots.observe(viewLifecycleOwner) { favoriteTravelSpots ->
             if (favoriteTravelSpots.isNotEmpty()) {
                 favoriteTravelSpotListAdapter.submitList(favoriteTravelSpots)
-                binding.rvFavoriteTravelSpots.visibility = View.VISIBLE
                 binding.tvEmptyFavoriteTravelSpots.visibility = View.INVISIBLE
             } else {
                 favoriteTravelSpotListAdapter.submitList(mutableListOf())
-                binding.rvFavoriteTravelSpots.visibility = View.INVISIBLE
                 binding.tvEmptyFavoriteTravelSpots.visibility = View.VISIBLE
             }
         }

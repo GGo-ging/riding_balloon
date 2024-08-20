@@ -56,6 +56,11 @@ class FavoriteVideoListAdapter(
         return selectedItems.toList()
     }
 
+    fun clearSelectedItems() {
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
     class FavoriteVideoHolder(
         private val binding: ItemFavoriteVideoBinding,
         private val onClick: (View, FavoriteVideoInfo) -> Unit,

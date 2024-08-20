@@ -76,6 +76,11 @@ class FavoriteTravelSpotListAdapter(
         return selectedItems.toList()
     }
 
+    fun clearSelectedItems() {
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
     class FavoriteTravelSpotViewHolder(
         private val binding: ItemFavoriteTravelSpotBinding,
         private val onClick: (TravelSpotInfo) -> Unit,
