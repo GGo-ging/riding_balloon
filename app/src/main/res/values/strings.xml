@@ -21,6 +21,7 @@
         <item>유럽</item>
         <item>아프리카</item>
         <item>아메리카</item>
+        <item>오세아니아</item>
     </string-array>
 
     <string-array name="spinner_items_country">
@@ -51,9 +52,9 @@
         <item>아르헨티나</item>
         <item>이집트</item>
         <item>호주</item>
-
-
-
+        <item>괌</item>
+        <item>마닐라</item>
+        <item>싱가포르</item>
     </string-array>
     <!-- My Page -->
     <string name="description_my_background_image">내 배경 이미지</string>
