@@ -41,6 +41,17 @@
         app:layout_constraintTop_toBottomOf="@id/cl_back_bar"
         tools:ignore="MissingConstraints" />
 
+    <ImageView
+        android:id="@+id/iv_youtube_player"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:src="@color/grey_shade_60"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_back_bar"
+        tools:ignore="MissingConstraints" />
+
     <ScrollView
         android:id="@+id/sl_detail_page"
         android:layout_width="0dp"

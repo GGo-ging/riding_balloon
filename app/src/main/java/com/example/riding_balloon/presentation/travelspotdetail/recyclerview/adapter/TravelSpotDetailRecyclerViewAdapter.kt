@@ -14,6 +14,7 @@ import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListLoadingBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
+import com.example.riding_balloon.presentation.travelspotdetail.OnTravelSpotClickListener
 import com.example.riding_balloon.presentation.travelspotdetail.UiModel
 import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.diffutil.TravelDiffUtilCallback
 import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.ChipGroupViewHolderImpl
@@ -28,7 +29,9 @@ enum class TSDEnum(val type: Int) {
     VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), LOADING(4), EMPTY(-1)
 }
 
-class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolder>(
+class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
+    private val onTravelSpotClickListener: OnTravelSpotClickListener<T>
+) : ListAdapter<UiModel, TravelViewHolder>(
     TravelDiffUtilCallback()
 ) {
     var drawImage: DrawImage? = null
@@ -51,7 +54,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             }
             TSDEnum.INFO -> {
                 binding = LayoutItemTravelInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                viewHolder = InfoViewHolderImpl(binding)
+                viewHolder = InfoViewHolderImpl(binding, onTravelSpotClickListener as OnTravelSpotClickListener<UiModel.InfoModel>)
             }
             TSDEnum.CHIP_GROUP -> {
                 binding = LayoutItemTravelChipgroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)

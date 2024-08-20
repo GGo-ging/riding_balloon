@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -16,22 +17,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
 import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
+import com.example.riding_balloon.presentation.viewmodel.FavoriteTravelSpotViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
 var isScrollCoroutineRunning = false
 
 @AndroidEntryPoint
-class TravelSpotDetailFragment : Fragment() {
+class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> {
 
     private var _binding: FragmentTravelSpotDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter()
+    private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter(this)
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
 
     private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
+    private val favoriteTravelSpotViewModel by activityViewModels<FavoriteTravelSpotViewModel>()
 
     private lateinit var viewPagerModel : UiModel.ViewPagerModel
     private lateinit var infoModel : UiModel.InfoModel
@@ -55,7 +58,8 @@ class TravelSpotDetailFragment : Fragment() {
         infoModel = UiModel.InfoModel(
             nation = travelSpotInfoUiModel.country,
             city = travelSpotInfoUiModel.region,
-            desc = travelSpotInfoUiModel.description
+            desc = travelSpotInfoUiModel.description,
+            isFavorite = favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)
         )
         chipGroupModel = UiModel.ChipGroupModel(
             city = travelSpotInfoUiModel.region
@@ -187,8 +191,41 @@ class TravelSpotDetailFragment : Fragment() {
     }
 
     private fun sendItemFromTsdToVideo(videoId: String) {
-        val action = TravelSpotDetailFragmentDirections.actionGlobalVideoDetail(videoId = videoId)
+        val action = TravelSpotDetailFragmentDirections.actionGlobalVideoDetail(videoId = videoId, thumbnailUrl = "")
         findNavController().navigate(action)
+    }
+
+    override fun onTravelSpotClick(item: UiModel) {
+        when (item) {
+            is UiModel.InfoModel -> {
+                // InfoModel에 대한 클릭 이벤트 처리
+                if (favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)) {
+                    // 좋아요 해제
+                    favoriteTravelSpotViewModel.removeFavoriteItem(args.travelSpot)
+                    Toast.makeText(context, "좋아요 해제", Toast.LENGTH_SHORT).show()
+                } else {
+                    // 좋아요 추가
+                    favoriteTravelSpotViewModel.addFavoriteItem(args.travelSpot)
+                    Toast.makeText(context, "좋아요 추가", Toast.LENGTH_SHORT).show()
+                }
+            }
+            is UiModel.ViewPagerModel -> {
+                // ViewPagerModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "ViewPager clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.TravelVideoListModel -> {
+                // TravelVideoListModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "Video List clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.ChipGroupModel -> {
+                // ChipGroupModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "${item.city} clicked!", Toast.LENGTH_SHORT).show()
+            }
+            is UiModel.VideoListLoadingUiModel -> {
+                // VideoListLoadingUiModel에 대한 클릭 이벤트 처리
+                Toast.makeText(context, "Loading clicked!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
 
