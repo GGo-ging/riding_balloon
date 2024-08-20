@@ -11,6 +11,9 @@ import androidx.navigation.findNavController
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
+import com.example.riding_balloon.presentation.mypage.adapter.FavoriteTravelSpotListAdapter
+import com.example.riding_balloon.presentation.mypage.adapter.FavoriteVideoListAdapter
+import com.example.riding_balloon.presentation.viewmodel.FavoriteTravelSpotViewModel
 import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +22,12 @@ class MyPageFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
+    private val favoriteTravelSpotListAdapter by lazy {
+        FavoriteTravelSpotListAdapter { travelSpot ->
+            //navigateToTravelSpotDetail(travelSpot)
+            Toast.makeText(requireContext(), "${travelSpot.country}", Toast.LENGTH_SHORT).show()
+        }
+    }
     private val favoriteVideoListAdapter by lazy {
         FavoriteVideoListAdapter { favoriteVideo ->
             navigateToVideoDetail(favoriteVideo)
@@ -26,6 +35,7 @@ class MyPageFragment : Fragment() {
     }
     private val favoriteVideoViewModel by activityViewModels<FavoriteVideoViewModel>()
     private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
+    private val favoriteTravelSpotViewModel by activityViewModels<FavoriteTravelSpotViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +53,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
+        rvFavoriteTravelSpots.adapter = favoriteTravelSpotListAdapter
         rvFavoriteVideos.adapter = favoriteVideoListAdapter
 
         tvLabelFavoriteVideosEdit.setOnClickListener {
@@ -78,10 +89,20 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initViewModel() {
+        favoriteTravelSpotViewModel.favoriteTravelSpots.observe(viewLifecycleOwner) { favoriteTravelSpots ->
+            if (favoriteTravelSpots.isNotEmpty()) {
+                favoriteTravelSpotListAdapter.submitList(favoriteTravelSpots)
+                binding.tvEmptyFavoriteTravelSpots.visibility = View.INVISIBLE
+            } else {
+                favoriteTravelSpotListAdapter.submitList(mutableListOf())
+                binding.tvEmptyFavoriteTravelSpots.visibility = View.VISIBLE
+            }
+        }
+
         favoriteViewModel.favoriteVideos.observe(viewLifecycleOwner) { favoriteVideos ->
             if (favoriteVideos.isNotEmpty()) {
                 favoriteVideoListAdapter.submitList(favoriteVideos)
-                binding.tvEmptyFavoriteVideos.visibility = View.GONE
+                binding.tvEmptyFavoriteVideos.visibility = View.INVISIBLE
             } else {
                 favoriteVideoListAdapter.submitList(mutableListOf())
                 binding.tvEmptyFavoriteVideos.visibility = View.VISIBLE

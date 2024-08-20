@@ -1,4 +1,4 @@
-package com.example.riding_balloon.presentation.mypage
+package com.example.riding_balloon.presentation.mypage.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
