@@ -4,7 +4,7 @@ import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
 import com.example.riding_balloon.network.RetrofitClient.youtubeApi
 
-class ChannelRepositoryImpl: ChannelRepository {
+class ChannelRepositoryImpl : ChannelRepository {
     override suspend fun getChannel(id: String): ChannelDetailsResponse {
         return youtubeApi.getChannelDetails(id = id)
     }
