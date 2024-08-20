@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:maxEms="5"
+        android:maxEms="7"
         android:text="@string/travel_video_list_item_uploader"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/iv_travel_video_list_item"
@@ -55,7 +55,7 @@
         />
 
     <TextView
-        android:id="@+id/tv_travel_video_list_item_view_count"
+        android:id="@+id/tv_travel_video_list_item_upload_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/travel_video_list_item_view_count"

@@ -12,7 +12,8 @@ suspend fun List<VideoData>.toUiModel() : List<VideoListUiModel.TravelVideoModel
             videoTitle = it.videoTitle,
             videoUrl = it.videoUrl,
             videoUploader = it.videoUploader,
-            videoViewCount = it.videoViewCount,
+            videoUploadAt = it.videoUploadAt,
+//            videoViewCount = it.videoViewCount,
         )
     }
 }
