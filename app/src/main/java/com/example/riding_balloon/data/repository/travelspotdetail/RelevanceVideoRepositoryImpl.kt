@@ -1,4 +1,4 @@
-package com.example.riding_balloon.data.repository
+package com.example.riding_balloon.data.repository.travelspotdetail
 
 import com.example.riding_balloon.data.mapper.toUiModel
 import com.example.riding_balloon.data.model.SearchVideoResponse
@@ -10,7 +10,8 @@ import com.example.riding_balloon.data.source.remote.YoutubeApi
 import com.example.riding_balloon.presentation.travelspotdetail.VideoListUiModel
 import javax.inject.Inject
 
-class RelevanceVideoRepositoryImpl @Inject constructor(private val youtubeApi: YoutubeApi) : RelevanceVideoRepository {
+class RelevanceVideoRepositoryImpl @Inject constructor(private val youtubeApi: YoutubeApi) :
+    RelevanceVideoRepository {
     private val videoSearcher: VideoSearcher = VideoSearcher(youtubeApi)
 
     override suspend fun videoDataToUiModel(keyword: String, isNext: Boolean) : List<VideoListUiModel> {

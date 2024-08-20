@@ -18,7 +18,7 @@ import com.example.riding_balloon.databinding.LayoutItemTravelVideoListLoadingBi
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
 import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelDiffUtilCallback
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ChipGroupViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolder
+import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.LoadingViewHolderImpl
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
@@ -64,7 +64,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             }
             TSDEnum.EMPTY -> {
                 binding = LayoutItemTravelEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                viewHolder = EmptyViewHolder(binding)
+                viewHolder = EmptyViewHolderImpl(binding)
             }
             TSDEnum.LOADING -> {
                 binding = LayoutItemTravelVideoListLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)

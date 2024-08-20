@@ -47,22 +47,34 @@ class TravelSpotDetailFragment : Fragment() {
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
 
-    private val viewPagerModel =
-        UiModel.ViewPagerModel(imageUrlList = TravelSpotManager.getListByCountry()[0].images)
-    private val infoModel = UiModel.InfoModel(
-        nation = TravelSpotManager.getListByCountry()[0].country,
-        city = TravelSpotManager.getListByCountry()[0].region,
-        desc = TravelSpotManager.getListByCountry()[0].description
-    )
-    private val chipGroupModel = UiModel.ChipGroupModel(
-        city = TravelSpotManager.getListByCountry()[0].region
-    )
-    private val videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
+    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
+
+    private lateinit var viewPagerModel : UiModel.ViewPagerModel
+    private lateinit var infoModel : UiModel.InfoModel
+    private lateinit var chipGroupModel : UiModel.ChipGroupModel
+    // 얘가 계속해서 copy 하니까 문제가 리스트가 초기화되는 문제가 생기는 게 아닐까? -> var 로 바꾸고 그대로 가도록 해보기 -> 깜빡이는 건 사라졌지만 그대로임 -> 안쪽도 바꿔보기?
+    private var videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
     private val loadingModel = UiModel.VideoListLoadingUiModel()
+
+    private lateinit var travelSpotInfoUiModel : TravelSpotInfoUiModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tsdViewModel.initData()
+        tsdViewModel.setTravelSpot(args.travelSpot.id)
+        travelSpotInfoUiModel = tsdViewModel.getTravelSpot()
+        viewPagerModel = UiModel.ViewPagerModel(
+            imageUrlList = travelSpotInfoUiModel.images
+        )
+        infoModel = UiModel.InfoModel(
+            nation = travelSpotInfoUiModel.country,
+            city = travelSpotInfoUiModel.region,
+            desc = travelSpotInfoUiModel.description
+        )
+        chipGroupModel = UiModel.ChipGroupModel(
+            city = travelSpotInfoUiModel.region
+        )
+
         recyclerViewAdapter.submitList(
 //        recyclerViewAdapter.list =
             listOf(
@@ -76,8 +88,6 @@ class TravelSpotDetailFragment : Fragment() {
         )
     }
 
-    private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -90,17 +100,25 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
+            videoListModel = videoListModel.copy(
+                id = videoListModel.id,
+                videoList = tsdViewModel.videosData.value?.filterIsInstance<VideoListUiModel.TravelVideoModel>()?.map {
+                    VideoListUiModel.TravelVideoModel(
+                        id = it.id,
+                        videoTitle = it.videoTitle,
+                        videoUrl = it.videoUrl,
+                        videoUploader = it.videoUploader,
+                        videoUploadAt = it.videoUploadAt,
+                    )
+                } ?: listOf()
+            )
             recyclerViewAdapter.submitList(
                 listOf(
                     viewPagerModel,
                     infoModel,
                     chipGroupModel,
-                    videoListModel.copy(
-                        id = videoListModel.id,
-                        videoList = tsdViewModel.videosData.value ?: listOf()
-                    ),
+                    videoListModel,
 //                    loadingModel
                 )
             )
@@ -145,10 +163,7 @@ class TravelSpotDetailFragment : Fragment() {
 //                                viewPagerModel,
 //                                infoModel,
 //                                chipGroupModel,
-//                                videoListModel.copy(
-//                                    id = videoListModel.id,
-//                                    videoList = tsdViewModel.videosData.value ?: listOf()
-//                                ),
+//                                videoListModel,
 //                                loadingModel
 //                            )
 //                        )

@@ -44,3 +44,11 @@ sealed class VideoListUiModel {
 data class ViewPagerItemModel(
     val imageUrl: String,
 )
+
+data class TravelSpotInfoUiModel(
+    val id: Int,
+    val images: List<String>,
+    val country: String,
+    val region: String,
+    val description: String,
+)
