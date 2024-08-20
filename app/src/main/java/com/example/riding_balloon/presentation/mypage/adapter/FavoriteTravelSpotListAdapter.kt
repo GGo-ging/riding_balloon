@@ -84,10 +84,10 @@ class FavoriteTravelSpotListAdapter(
 
         fun bind(travelSpot: TravelSpotInfo, isEditMode: Boolean) {
             with(binding) {
-                ivFavoriteTravelSpotThumbnail.setOnClickListener {
-                    onClick(travelSpot)
+                ivFavoriteTravelSpotThumbnail.apply {
+                    load(travelSpot.thumbnailUrl)
+                    setOnClickListener { onClick(travelSpot) }
                 }
-                ivFavoriteTravelSpotThumbnail.load(travelSpot.thumbnailUrl)
                 tvFavoriteTravelSpotCountry.text = travelSpot.country
                 tvFavoriteTravelSpotRegion.text = travelSpot.region
             }
@@ -118,10 +118,10 @@ class FavoriteTravelSpotListAdapter(
 
         fun bind(travelSpot: TravelSpotInfo, isEditMode: Boolean) {
             with(binding) {
-                ivFavoriteTravelSpotEditThumbnail.setOnClickListener {
-                    onClick(travelSpot)
+                ivFavoriteTravelSpotEditThumbnail.apply {
+                    load(travelSpot.thumbnailUrl)
+                    setOnClickListener { onClick(travelSpot) }
                 }
-                ivFavoriteTravelSpotEditThumbnail.load(travelSpot.thumbnailUrl)
                 tvFavoriteTravelSpotEditCountry.text = travelSpot.country
                 tvFavoriteTravelSpotEditRegion.text = travelSpot.region
 
