@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -34,6 +35,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     var drawImage: DrawImage? = null
     var drawLayoutManager : DrawLayoutManager? = null
     var selectChip : SelectChip? = null
+    var clickVideo: ClickVideo? = null
     var list: List<UiModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
@@ -79,7 +81,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
                 holder.bind(getItem(position), drawImage)
             }
             is VideoListViewHolderImpl -> {
-                holder.bind(getItem(position), drawImage, drawLayoutManager)
+                holder.bind(getItem(position), drawImage, drawLayoutManager, clickVideo)
             }
             is ChipGroupViewHolderImpl -> {
                 holder.bind(getItem(position), selectChip)
@@ -113,11 +115,15 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     }
 
     fun interface DrawLayoutManager {
-        fun onDraw() : GridLayoutManager
+        fun onDraw() : LinearLayoutManager
     }
 
     fun interface SelectChip {
         fun onSelect(chipText: String)
+    }
+
+    fun interface ClickVideo {
+        fun onClick(videoId: String)
     }
 
 }

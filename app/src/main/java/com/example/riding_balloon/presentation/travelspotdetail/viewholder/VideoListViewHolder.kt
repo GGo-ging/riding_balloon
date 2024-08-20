@@ -21,6 +21,7 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         item: UiModel,
         drawImage: TravelSpotDetailRecyclerViewAdapter.DrawImage?,
         drawLayoutManager: TravelSpotDetailRecyclerViewAdapter.DrawLayoutManager?,
+        clickVideo: TravelSpotDetailRecyclerViewAdapter.ClickVideo?,
     ) {
         Log.d("ViewHolder 체크", "VideoList $item")
         travelSpotDetailVideoListAdapter.drawImage = TravelSpotDetailVideoListAdapter.DrawImage { url ->
@@ -28,10 +29,14 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         }
         binding.rvTravelVideoList.adapter = travelSpotDetailVideoListAdapter
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
-        binding.rvTravelVideoList.isNestedScrollingEnabled = true
+        binding.rvTravelVideoList.isNestedScrollingEnabled = false
+//        binding.rvTravelVideoList.itemAnimator = null
 //        travelSpotDetailVideoListAdapter.list = (item as UiModel.TravelVideoListModel).videoList
 //        travelSpotDetailVideoListAdapter.notifyDataSetChanged()
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
+        travelSpotDetailVideoListAdapter.clickVideo = TravelSpotDetailVideoListAdapter.ClickVideo {
+            clickVideo?.onClick(it)
+        }
 
     }
 }

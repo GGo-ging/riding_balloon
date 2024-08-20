@@ -12,10 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.PungsunTagoApplication
@@ -24,6 +27,7 @@ import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.data.source.local.room.VideoEntity
 import com.example.riding_balloon.data.source.local.room.VideoRoomDB
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
+import com.example.riding_balloon.presentation.home.HomeFragmentDirections
 import com.example.riding_balloon.presentation.travelspotdetail.viewholder.LoadingViewHolderImpl
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,6 +69,7 @@ class TravelSpotDetailFragment : Fragment() {
                 viewPagerModel,
                 infoModel,
                 chipGroupModel,
+                videoListModel,
                 loadingModel
             )
 //        recyclerViewAdapter.notifyDataSetChanged()
@@ -94,7 +99,8 @@ class TravelSpotDetailFragment : Fragment() {
                     videoListModel.copy(
                         id = videoListModel.id,
                         videoList = tsdViewModel.videosData.value ?: listOf()
-                    )
+                    ),
+//                    loadingModel
                 )
             )
 //            recyclerViewAdapter.list =
@@ -118,36 +124,38 @@ class TravelSpotDetailFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(TsdRecyclerViewSpaceDecoration(resources.displayMetrics.density.roundToInt()))
             isNestedScrollingEnabled = false
+//            itemAnimator = null
 
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    Log.d("TSD 리사이클러뷰", "$dy 로 변경 중...")
-                    if (
-                        !binding.rvTravel.canScrollVertically(1) &&
-                        tsdViewModel.videosData.value?.isEmpty() == false &&
-                        !isScrollCoroutineRunning
-                    ) {
-                        isScrollCoroutineRunning = true
-                        Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
-                        recyclerViewAdapter.submitList(
-//                        recyclerViewAdapter.list =
-                            listOf(
-                                viewPagerModel,
-                                infoModel,
-                                chipGroupModel,
-                                videoListModel.copy(
-                                    id = videoListModel.id,
-                                    videoList = tsdViewModel.videosData.value ?: listOf()
-                                ),
-                                UiModel.VideoListLoadingUiModel()
-                            )
-                        )
-//                        recyclerViewAdapter.notifyDataSetChanged()
-                        tsdViewModel.addData()
-                    }
-                }
-            })
+            // 무한 스크롤
+//            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                    super.onScrolled(recyclerView, dx, dy)
+//                    Log.d("TSD 리사이클러뷰", "$dy 로 변경 중...")
+//                    if (
+//                        !binding.rvTravel.canScrollVertically(1) &&
+//                        tsdViewModel.videosData.value?.isEmpty() == false &&
+//                        !isScrollCoroutineRunning
+//                    ) {
+//                        isScrollCoroutineRunning = true
+//                        Log.d("TSD 리사이클러뷰", "더 이상 이동 불가!")
+//                        recyclerViewAdapter.submitList(
+////                        recyclerViewAdapter.list =
+//                            listOf(
+//                                viewPagerModel,
+//                                infoModel,
+//                                chipGroupModel,
+//                                videoListModel.copy(
+//                                    id = videoListModel.id,
+//                                    videoList = tsdViewModel.videosData.value ?: listOf()
+//                                ),
+//                                loadingModel
+//                            )
+//                        )
+////                        recyclerViewAdapter.notifyDataSetChanged()
+//                        tsdViewModel.addData()
+//                    }
+//                }
+//            })
         }
 
         recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
@@ -162,11 +170,20 @@ class TravelSpotDetailFragment : Fragment() {
             tsdViewModel.changeData(it, false)
         }
 
+        recyclerViewAdapter.clickVideo = TravelSpotDetailRecyclerViewAdapter.ClickVideo {
+            sendItemFromTsdToVideo(it)
+        }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun sendItemFromTsdToVideo(videoId: String) {
+        val action = TravelSpotDetailFragmentDirections.actionGlobalVideoDetail(videoId = videoId)
+        findNavController().navigate(action)
     }
 }
 
