@@ -76,4 +76,9 @@ class TravelSpotDetailViewModel @Inject constructor (
         return travelSpotRepositoryImpl.getTravelSpotUiModel(travelSpotId)
     }
 
+    fun getTravelSpotName() : String {
+        val pair = travelSpotRepositoryImpl.getTravelSpotCountryAndRegion(travelSpotId)
+        return if(pair.first == pair.second) pair.first else "${pair.first} ${pair.second}"
+    }
+
 }

@@ -6,13 +6,16 @@ import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.presentation.travelspotdetail.OnTravelSpotClickListener
 import com.example.riding_balloon.presentation.travelspotdetail.UiModel
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
 
 class InfoViewHolderImpl(
     private val binding: LayoutItemTravelInfoBinding,
     private val onTravelSpotClickListener: OnTravelSpotClickListener<UiModel.InfoModel>
 ) : TravelViewHolder(binding) {
 
-    override fun bind(item: UiModel) {
+    override fun bind(item: UiModel) {}
+
+    fun bind(item: UiModel, clickAiButton: TravelSpotDetailRecyclerViewAdapter.ClickAiButton?) {
         Log.d("ViewHolder 체크", "Info")
         item as UiModel.InfoModel
         binding.apply {
@@ -29,6 +32,9 @@ class InfoViewHolderImpl(
                     // 클릭 이벤트를 전달
                     onTravelSpotClickListener.onTravelSpotClick(item.copy(isFavorite = it.isSelected))
                 }
+            }
+            ivTravelAiBtn.setOnClickListener {
+                clickAiButton?.onClick()
             }
         }
     }

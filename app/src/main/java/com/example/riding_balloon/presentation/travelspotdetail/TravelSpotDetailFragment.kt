@@ -7,15 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
+import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
+import com.example.riding_balloon.presentation.mypage.MyPageFragmentDirections
 import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
 import com.example.riding_balloon.presentation.viewmodel.FavoriteTravelSpotViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +38,7 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
     private val recyclerViewAdapter = TravelSpotDetailRecyclerViewAdapter(this)
 
     private val tsdViewModel by activityViewModels<TravelSpotDetailViewModel>()
+    private val aiViewModel by activityViewModels<AiBottomSheetViewModel>()
 
     private val args: TravelSpotDetailFragmentArgs by navArgs() // 네비게이션으로 전달받은 인자를 사용하기 위한 변수
     private val favoriteTravelSpotViewModel by activityViewModels<FavoriteTravelSpotViewModel>()
@@ -44,6 +51,8 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
     // -> 혹은 getPayload?나 arethecontentsame 을 다르게 해서 처리할 수 있을 듯. ai 끝나고 시도 한번 해보고 안 될 거 같으면 애니메이션이나 넣기
     private var videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
     private val loadingModel = UiModel.VideoListLoadingUiModel()
+
+    private val gptLoadingFragment = GptLoadingFragment()
 
     private lateinit var travelSpotInfoUiModel : TravelSpotInfoUiModel
 
@@ -178,10 +187,31 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
             tsdViewModel.changeData(it, false)
         }
 
-        recyclerViewAdapter.clickVideo = TravelSpotDetailRecyclerViewAdapter.ClickVideo {
-            sendItemFromTsdToVideo(it)
+        recyclerViewAdapter.clickVideo = TravelSpotDetailRecyclerViewAdapter.ClickVideo { videoId, thumbnailUrl, view ->
+            sendItemFromTsdToVideo(videoId, thumbnailUrl, view)
         }
 
+        recyclerViewAdapter.clickAiButton = TravelSpotDetailRecyclerViewAdapter.ClickAiButton {
+            requireActivity().supportFragmentManager.commit {
+                add(R.id.container_main, gptLoadingFragment)
+            }
+            aiViewModel.getAiMessage(tsdViewModel.getTravelSpotName())
+        }
+
+        aiViewModel.aiMessage.observe(viewLifecycleOwner) {
+//            modalWithRoundCorner()
+            requireActivity().supportFragmentManager.commit {
+                remove(gptLoadingFragment)
+            }
+            TsdAiDialogFragment().show(requireActivity().supportFragmentManager, "ai dialog")
+        }
+
+    }
+
+    private fun modalWithRoundCorner() {
+        val bottomSheetFragment = TsdAiBottomSheetFragment()
+        bottomSheetFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialog)
+        bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
     }
 
     override fun onDestroyView() {
@@ -189,9 +219,12 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
         _binding = null
     }
 
-    private fun sendItemFromTsdToVideo(videoId: String) {
-        val action = TravelSpotDetailFragmentDirections.actionGlobalVideoDetail(videoId = videoId, thumbnailUrl = "")
-        findNavController().navigate(action)
+    private fun sendItemFromTsdToVideo(videoId: String, thumbnailUrl: String, view: View) {
+        val action = TravelSpotDetailFragmentDirections.actionGlobalVideoDetail(videoId = videoId, thumbnailUrl = thumbnailUrl)
+        val extras = FragmentNavigatorExtras(
+            view to "thumbnail_${videoId}"
+        )
+        findNavController().navigate(action, extras)
     }
 
     override fun onTravelSpotClick(item: UiModel) {
@@ -250,6 +283,7 @@ class TsdRecyclerViewSpaceDecoration(private val px: Int) : RecyclerView.ItemDec
         outRect.bottom = marginBottom
     }
 }
+
 
 //private fun insertVideo(video: List<VideoEntity>) {
 //    viewLifecycleOwner.lifecycleScope.launch {
