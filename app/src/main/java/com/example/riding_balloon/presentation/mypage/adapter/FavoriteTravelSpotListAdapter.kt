@@ -90,32 +90,6 @@ class FavoriteTravelSpotListAdapter(
                 ivFavoriteTravelSpotThumbnail.load(travelSpot.thumbnailUrl)
                 tvFavoriteTravelSpotCountry.text = travelSpot.country
                 tvFavoriteTravelSpotRegion.text = travelSpot.region
-
-                // 편집 모드에 따라 뷰의 가시성 조정
-//                viewGridVideoAlpha.isVisible = isEditMode
-//                checkboxFavoriteVideo.isVisible = isEditMode
-//
-//                checkboxFavoriteVideo.isChecked = selectedItems.contains(travelSpot)
-//
-//                // viewGridVideoAlpha 클릭 시 체크박스 상태를 변경
-//                viewGridVideoAlpha.setOnClickListener {
-//                    val isChecked = !checkboxFavoriteVideo.isChecked
-//                    checkboxFavoriteVideo.isChecked = isChecked
-//                    if (isChecked) {
-//                        selectedItems.add(travelSpot)
-//                    } else {
-//                        selectedItems.remove(travelSpot)
-//                    }
-//                }
-//
-//                // 체크박스 상태 변경 시 selectedItems에 추가 또는 제거
-//                checkboxFavoriteVideo.setOnCheckedChangeListener { _, isChecked ->
-//                    if (isChecked) {
-//                        selectedItems.add(travelSpot)
-//                    } else {
-//                        selectedItems.remove(travelSpot)
-//                    }
-//                }
             }
         }
 
@@ -151,31 +125,29 @@ class FavoriteTravelSpotListAdapter(
                 tvFavoriteTravelSpotEditCountry.text = travelSpot.country
                 tvFavoriteTravelSpotEditRegion.text = travelSpot.region
 
-                // 편집 모드에 따라 뷰의 가시성 조정
-//                viewGridVideoAlpha.isVisible = isEditMode
-//                checkboxFavoriteVideo.isVisible = isEditMode
-//
-//                checkboxFavoriteVideo.isChecked = selectedItems.contains(travelSpot)
-//
-//                // viewGridVideoAlpha 클릭 시 체크박스 상태를 변경
-//                viewGridVideoAlpha.setOnClickListener {
-//                    val isChecked = !checkboxFavoriteVideo.isChecked
-//                    checkboxFavoriteVideo.isChecked = isChecked
-//                    if (isChecked) {
-//                        selectedItems.add(travelSpot)
-//                    } else {
-//                        selectedItems.remove(travelSpot)
-//                    }
-//                }
-//
-//                // 체크박스 상태 변경 시 selectedItems에 추가 또는 제거
-//                checkboxFavoriteVideo.setOnCheckedChangeListener { _, isChecked ->
-//                    if (isChecked) {
-//                        selectedItems.add(travelSpot)
-//                    } else {
-//                        selectedItems.remove(travelSpot)
-//                    }
-//                }
+                checkboxFavoriteTravelSpotEdit.isChecked = selectedItems.contains(travelSpot)
+
+                // isEditMode가 true 일 때만 viewFavoriteTravelSpotEditAlpha 클릭 시 체크박스 상태를 변경
+                if (isEditMode) {
+                    viewFavoriteTravelSpotEditAlpha.setOnClickListener {
+                        val isChecked = !checkboxFavoriteTravelSpotEdit.isChecked
+                        checkboxFavoriteTravelSpotEdit.isChecked = isChecked
+                        if (isChecked) {
+                            selectedItems.add(travelSpot)
+                        } else {
+                            selectedItems.remove(travelSpot)
+                        }
+                    }
+                }
+
+                // 체크박스 상태 변경 시 selectedItems에 추가 또는 제거
+                checkboxFavoriteTravelSpotEdit.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        selectedItems.add(travelSpot)
+                    } else {
+                        selectedItems.remove(travelSpot)
+                    }
+                }
             }
         }
 
