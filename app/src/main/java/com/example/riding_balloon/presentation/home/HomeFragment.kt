@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         rvPopularVideoList.adapter = popularVideoListAdapter
         popularVideoListAdapter.itemClick = object : PopularVideoListAdapter.ItemClick {
             override fun onClickItem(position: Int, item: PopularVideoListModel) {
-                val action = HomeFragmentDirections.actionGlobalVideoDetail(item.id)
+                val action = HomeFragmentDirections.actionGlobalVideoDetail(item.id, "")
                 requireActivity().findNavController(R.id.container_main).navigate(action)
             }
         }

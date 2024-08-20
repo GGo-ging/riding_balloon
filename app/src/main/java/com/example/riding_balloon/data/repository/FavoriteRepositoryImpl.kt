@@ -4,16 +4,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
-import com.example.riding_balloon.util.Constants.PREF_FAVORITE
+import com.example.riding_balloon.util.Constants.PREF_FAVORITE_VIDEOS
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
 class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRepository {
 
-    private val gson = GsonBuilder().registerTypeAdapter(FavoriteVideoInfo::class.java, CustomDeserializer()).create()
+    private val gson = GsonBuilder().registerTypeAdapter(FavoriteVideoInfo::class.java, FavoriteVideoDeserializer()).create()
     private val sharedPreferences: SharedPreferences =
-        context.getSharedPreferences(PREF_FAVORITE, Context.MODE_PRIVATE)
+        context.getSharedPreferences(PREF_FAVORITE_VIDEOS, Context.MODE_PRIVATE)
     private val _favoriteVideos = loadFavoriteVideos()
 
     override val favoriteVideos: List<FavoriteVideoInfo>
@@ -38,11 +38,11 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
 
     override fun saveFavoriteVideos() {
         val json = gson.toJson(_favoriteVideos)
-        sharedPreferences.edit().putString(PREF_FAVORITE, json).apply()
+        sharedPreferences.edit().putString(PREF_FAVORITE_VIDEOS, json).apply()
     }
 
     override fun loadFavoriteVideos(): MutableList<FavoriteVideoInfo> {
-        val json = sharedPreferences.getString(PREF_FAVORITE, null) ?: return mutableListOf()
+        val json = sharedPreferences.getString(PREF_FAVORITE_VIDEOS, null) ?: return mutableListOf()
         val type = object : TypeToken<MutableList<FavoriteVideoInfo>>() {}.type
         return gson.fromJson(json, type)
     }
