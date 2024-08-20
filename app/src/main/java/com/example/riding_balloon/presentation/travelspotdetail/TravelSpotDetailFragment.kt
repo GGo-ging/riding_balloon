@@ -49,8 +49,9 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tsdViewModel.initData()
+        Log.d("Args 확인 OnCreate", "${args.travelSpot.id}")
         tsdViewModel.setTravelSpot(args.travelSpot.id)
+        tsdViewModel.initData()
         travelSpotInfoUiModel = tsdViewModel.getTravelSpot()
         viewPagerModel = UiModel.ViewPagerModel(
             imageUrlList = travelSpotInfoUiModel.images
@@ -64,14 +65,13 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
         chipGroupModel = UiModel.ChipGroupModel(
             city = travelSpotInfoUiModel.region
         )
-
         recyclerViewAdapter.submitList(
 //        recyclerViewAdapter.list =
             listOf(
                 viewPagerModel,
                 infoModel,
                 chipGroupModel,
-                videoListModel,
+//                videoListModel,
                 loadingModel
             )
 //        recyclerViewAdapter.notifyDataSetChanged()
@@ -83,14 +83,13 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("Args 확인 OnCreateView", "${args.travelSpot.id}")
         _binding = FragmentTravelSpotDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //
 
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
             videoListModel = videoListModel.copy(
@@ -226,6 +225,11 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
                 Toast.makeText(context, "Loading clicked!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("Args 확인 OnResume", "${args.travelSpot.id}")
     }
 }
 
