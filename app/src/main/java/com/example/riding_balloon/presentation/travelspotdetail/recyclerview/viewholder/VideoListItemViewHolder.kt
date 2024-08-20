@@ -14,8 +14,9 @@ class VideoListItemViewHolder(private val binding : LayoutItemTravelVideoListIte
                 binding.tvTravelVideoListItemChannel.text = uiModel.videoUploader
                 binding.tvTravelVideoListItemUploadDate.setPublishedDate(uiModel.videoUploadAt ?: "1900-01-01T00:00:00Z")
                 uiModel.videoUrl?.let { drawImage?.onDraw(it)?.into(binding.ivTravelVideoListItem) }
+                binding.ivTravelVideoListItem.transitionName = "thumbnail_${uiModel.id}"
                 binding.root.setOnClickListener {
-                    clickVideo?.onClick(uiModel.id)
+                    clickVideo?.onClick(uiModel.id, uiModel.videoUrl ?: "", binding.ivTravelVideoListItem)
                 }
             }
         }

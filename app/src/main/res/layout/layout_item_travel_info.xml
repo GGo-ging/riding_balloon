@@ -21,10 +21,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/travel_city"
+        android:maxEms="10"
         app:layout_constraintStart_toStartOf="@id/tv_travel_nation"
         app:layout_constraintTop_toBottomOf="@id/tv_travel_nation"
         android:textStyle="bold"
         android:textSize="20sp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_travel_ai_btn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_tsd_ai_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_travel_description"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         />
 
     <ImageView
@@ -47,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_travel_city"
         android:textStyle="bold"
         android:textSize="14sp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:paddingHorizontal="16dp"
         />
 

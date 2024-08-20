@@ -19,7 +19,7 @@ object RetrofitClient {
     private fun createRetrofit(baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(okHttpClient)
+            .client(thirtyTimeOutOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -29,6 +29,18 @@ object RetrofitClient {
             .baseUrl(YOUTUBE_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private val thirtyTimeOutOkHttpClient by lazy {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        OkHttpClient.Builder()
+            .addInterceptor(AuthorizationInterceptor())
+            .addNetworkInterceptor(interceptor)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
 
