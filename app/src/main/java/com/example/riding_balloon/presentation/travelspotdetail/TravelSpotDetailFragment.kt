@@ -174,6 +174,9 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
 //            })
         }
 
+        binding.toolbarTravelBack.ivToolbarBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         recyclerViewAdapter.drawImage = TravelSpotDetailRecyclerViewAdapter.DrawImage { url ->
             Glide.with(this).load(url)
