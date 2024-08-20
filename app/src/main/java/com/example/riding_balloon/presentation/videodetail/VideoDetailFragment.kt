@@ -39,7 +39,6 @@ class VideoDetailFragment : Fragment() {
     private lateinit var video: VideoItem
     private lateinit var favoriteVideoItem: FavoriteVideoInfo
 
-    //    private val videoId: String = ""
     private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
 
     override fun onCreateView(
@@ -68,9 +67,7 @@ class VideoDetailFragment : Fragment() {
         //url = "https://youtu.be/_UyQLveYyzI?si=4Uh2TVQ1MNwvR7ik"
 
         val videoId = args.videoId
-//        if (videoId != null) {
-        viewModel.videoDetailsGet(videoId)
-//        }
+            viewModel.videoDetailsGet(videoId)
 
         val player = binding.ypYoutubePlayer
         lifecycle.addObserver(player)
@@ -80,11 +77,7 @@ class VideoDetailFragment : Fragment() {
                 super.onReady(youTubePlayer)
                 binding.ivYoutubePlayer.visibility = View.GONE
 
-//                if (videoId != null) {
-                youTubePlayer.loadVideo(videoId, 0F)
-//                } else {
-//                    Toast.makeText(requireContext(), "영상을 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
-//                }
+                    youTubePlayer.loadVideo(videoId, 0F)
             }
         })
 
@@ -110,7 +103,7 @@ class VideoDetailFragment : Fragment() {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
 
-            val content = "링크 공유를 할 수 있습니다. 어디에 공유 할까요?"
+            val content = "링크를 어디에 공유할까요"
             intent.putExtra(Intent.EXTRA_TEXT, "$content\n\n$url")
 
             val chooseTitle = "친구에게 공유하기"
@@ -123,27 +116,8 @@ class VideoDetailFragment : Fragment() {
             startActivity(intent)
         }
 
-//        if (videoId != null) {
-        initFavoriteButton(videoId)
-//        }
+            initFavoriteButton(videoId)
     }
-
-//    private fun videoIdSlice(videoUrl: String?): String? {
-//        if (videoUrl == null) return null
-//
-//        val videoIdPattern = listOf(
-//            Regex("v=([a-zA-Z0-9_-]{11})"),
-//            Regex("youtu.be/([a-zA-Z0-9_-]{11})")
-//        )
-//        for (videoIdSlice in videoIdPattern) {
-//            val sliceId = videoIdSlice.find(videoUrl)
-//            if (sliceId != null) {
-//                return sliceId.groupValues[1]
-//            }
-//        }
-//
-//        return null
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
