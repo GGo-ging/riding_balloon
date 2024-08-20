@@ -1,16 +1,11 @@
 package com.example.riding_balloon.presentation.search
 
-import android.content.Context
-import android.print.PrintDocumentAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.riding_balloon.R
 import com.example.riding_balloon.data.model.TravelSpotInfo
@@ -28,7 +23,7 @@ class SearchFragmentAdapter(private var data : List<TravelSpotInfo>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.gridview_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_gridview_list, parent, false)
 
         return ViewHolder(view)
     }
