@@ -11,6 +11,5 @@ fun VideoItem.toFavoriteVideoInfo(isFavorite: Boolean): FavoriteVideoInfo {
         channelTitle = snippet?.channelTitle ?: "",
         publishedAt = snippet?.publishedAt ?: "",
         viewCount = statistics?.viewCount ?: "",
-        isFavorite = isFavorite
     )
 }

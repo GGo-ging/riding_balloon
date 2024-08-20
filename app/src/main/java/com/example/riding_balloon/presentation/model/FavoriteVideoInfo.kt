@@ -7,5 +7,4 @@ data class FavoriteVideoInfo(
     val channelTitle: String,
     val publishedAt: String,
     val viewCount: String = "",
-    val isFavorite: Boolean = false
 )

@@ -49,12 +49,7 @@ class FavoriteRepositoryImpl @Inject constructor(context: Context) : FavoriteRep
 
     override fun isFavorite(videoId: String): Boolean {
         val video = _favoriteVideos.find { it.videoId == videoId }
-        if (video == null) {
-            Log.d("FavoriteRepositoryImpl", "isFavorite: $videoId, false")
-            return false
-        } else {
-            Log.d("FavoriteRepositoryImpl", "isFavorite: $videoId, true")
-        }
-        return true
+        Log.d("FavoriteRepositoryImpl", "isFavorite() videoId: $videoId, video: $video")
+        return video != null
     }
 }
