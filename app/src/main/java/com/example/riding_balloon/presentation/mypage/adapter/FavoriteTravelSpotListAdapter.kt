@@ -69,7 +69,7 @@ class FavoriteTravelSpotListAdapter(
                     onClick(travelSpot)
                 }
                 ivBackgroundImg.load(travelSpot.thumbnailUrl)
-                tvCountry.text = travelSpot.country
+                tvCountry.text = travelSpot.region
 
                 // 편집 모드에 따라 뷰의 가시성 조정
 //                viewGridVideoAlpha.isVisible = isEditMode
