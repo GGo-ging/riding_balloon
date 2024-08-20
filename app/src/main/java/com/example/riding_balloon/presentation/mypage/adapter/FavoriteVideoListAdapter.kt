@@ -1,6 +1,7 @@
 package com.example.riding_balloon.presentation.mypage.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +13,7 @@ import com.example.riding_balloon.presentation.extensions.setPublishedDate
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 
 class FavoriteVideoListAdapter(
-    private val onClick: (FavoriteVideoInfo) -> Unit
+    private val onClick: (View, FavoriteVideoInfo) -> Unit
 ) : ListAdapter<FavoriteVideoInfo, FavoriteVideoListAdapter.FavoriteVideoHolder>(
     FavoriteVideoDiffCallback()
 ) {
@@ -57,14 +58,15 @@ class FavoriteVideoListAdapter(
 
     class FavoriteVideoHolder(
         private val binding: ItemGridVideoBinding,
-        private val onClick: (FavoriteVideoInfo) -> Unit,
+        private val onClick: (View, FavoriteVideoInfo) -> Unit,
         private val selectedItems: MutableSet<FavoriteVideoInfo>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(video: FavoriteVideoInfo, isEditMode: Boolean) {
             with(binding) {
+                ivGridVideoThumbnail.transitionName = "thumbnail_${video.videoId}"
                 ivGridVideoThumbnail.setOnClickListener {
-                    onClick(video)
+                    onClick(it, video)
                 }
                 ivGridVideoThumbnail.load(video.thumbnailUrl)
                 tvGridVideoTitle.text = video.title
@@ -102,7 +104,7 @@ class FavoriteVideoListAdapter(
         companion object {
             fun from(
                 parent: ViewGroup,
-                onClick: (FavoriteVideoInfo) -> Unit,
+                onClick: (View, FavoriteVideoInfo) -> Unit,
                 selectedItems: MutableSet<FavoriteVideoInfo>
             ): FavoriteVideoHolder {
                 return FavoriteVideoHolder(

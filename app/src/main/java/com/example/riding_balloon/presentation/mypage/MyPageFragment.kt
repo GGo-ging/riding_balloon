@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
@@ -29,8 +30,8 @@ class MyPageFragment : Fragment() {
         }
     }
     private val favoriteVideoListAdapter by lazy {
-        FavoriteVideoListAdapter { favoriteVideo ->
-            navigateToVideoDetail(favoriteVideo)
+        FavoriteVideoListAdapter { view, favoriteVideo ->
+            navigateToVideoDetail(view, favoriteVideo)
         }
     }
     private val favoriteVideoViewModel by activityViewModels<FavoriteVideoViewModel>()
@@ -110,9 +111,14 @@ class MyPageFragment : Fragment() {
         }
     }
 
-    private fun navigateToVideoDetail(favoriteVideo: FavoriteVideoInfo) {
-        val action = MyPageFragmentDirections.actionGlobalVideoDetail(favoriteVideo.videoId)
-        requireActivity().findNavController(R.id.container_main).navigate(action)
+    private fun navigateToVideoDetail(view: View, favoriteVideo: FavoriteVideoInfo) {
+        val action = MyPageFragmentDirections.actionGlobalVideoDetail(favoriteVideo.videoId, favoriteVideo.thumbnailUrl)
+
+        // transitionName을 가진 뷰를 FragmentNavigatorExtras에 전달
+        val extras = FragmentNavigatorExtras(
+            view to "thumbnail_${favoriteVideo.videoId}"
+        )
+        findNavController().navigate(action, extras)
     }
 
     override fun onDestroyView() {

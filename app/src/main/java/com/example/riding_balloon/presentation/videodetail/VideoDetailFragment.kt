@@ -1,7 +1,9 @@
 package com.example.riding_balloon.presentation.videodetail
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import com.example.riding_balloon.presentation.extensions.toFavoriteVideoInfo
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import com.example.riding_balloon.presentation.viewmodel.FavoriteViewModel
 import com.example.riding_balloon.presentation.MainActivity
+import com.example.riding_balloon.presentation.extensions.load
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import java.text.DecimalFormat
@@ -45,6 +48,13 @@ class VideoDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentVideoDetailBinding.inflate(inflater, container, false)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        binding.ivYoutubePlayer.apply {
+            transitionName = "thumbnail_${args.videoId}"
+            load(args.thumbnailUrl)
+        }
+
         return binding.root
     }
 
@@ -68,6 +78,7 @@ class VideoDetailFragment : Fragment() {
         player.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 super.onReady(youTubePlayer)
+                binding.ivYoutubePlayer.visibility = View.GONE
 
 //                if (videoId != null) {
                 youTubePlayer.loadVideo(videoId, 0F)
