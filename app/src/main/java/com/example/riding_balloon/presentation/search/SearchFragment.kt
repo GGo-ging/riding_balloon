@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.riding_balloon.R
 import com.example.riding_balloon.data.model.TravelSpotInfo
@@ -45,7 +46,6 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         searchAdapter = SearchFragmentAdapter(TravelSpotManager.getTravelSpots()) { travelSpot ->
             Log.e("searchAdapter", "$travelSpot")
         }
@@ -54,9 +54,17 @@ class SearchFragment : Fragment() {
         binding.recyclerViewSearch.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerViewSearch.adapter = searchAdapter
 
+
+        /////////
         searchAdapter.itemClick = object : SearchFragmentAdapter.ItemClick {
             override fun onClickItem(view: View, position: Int) {
-                Log.d("itemClicking~ working?", "working in here! $position")
+                Log.d("itemClicking~ working?", "working in here! $position $view")
+
+                val selectedTravelSpot = searchAdapter.getItem(position)
+
+                val action = SearchFragmentDirections.actionGlobalTravelSpotDetail(selectedTravelSpot)
+                findNavController().navigate(action)
+
             }
         }
 
