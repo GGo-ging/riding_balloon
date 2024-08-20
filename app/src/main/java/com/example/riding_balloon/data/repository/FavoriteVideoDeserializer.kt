@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import java.lang.reflect.Type
 
-class CustomDeserializer : JsonDeserializer<FavoriteVideoInfo> {
+class FavoriteVideoDeserializer : JsonDeserializer<FavoriteVideoInfo> {
 
     override fun deserialize(
         json: JsonElement,

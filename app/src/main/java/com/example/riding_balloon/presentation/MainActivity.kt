@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val travelSpotItem by lazy { TravelSpotManager.getFirstItem() }
+    //private val travelSpotItem by lazy { TravelSpotManager.getFirstItem() }
 
     val tsdViewModel by viewModels<TravelSpotDetailViewModel>()
 
@@ -71,6 +71,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
+            val randomIndex = (1..35).random()
+            val travelSpotItem = TravelSpotManager.getRandomItem(randomIndex)
             val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
             findNavController(R.id.container_main).navigate(action)
         }
@@ -78,13 +80,8 @@ class MainActivity : AppCompatActivity() {
             val randomIndex = (0..6).random()
             val randomVideoId = videosMap[randomIndex] ?: "RSv0K4hQyV8"
 
-            val action = HomeFragmentDirections.actionGlobalVideoDetail(randomVideoId)
+            val action = HomeFragmentDirections.actionGlobalVideoDetail(randomVideoId, "")
             findNavController(R.id.container_main).navigate(action)
         }
-    }
-
-    private fun sendTravelSpotItem() {
-        val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
-        findNavController(R.id.container_main).navigate(action)
     }
 }
