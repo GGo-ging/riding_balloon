@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.databinding.ItemBest10ListBinding
+import com.example.riding_balloon.databinding.ItemFavoriteTravelSpotBinding
 import com.example.riding_balloon.presentation.extensions.load
 
 class FavoriteTravelSpotListAdapter(
@@ -55,18 +56,19 @@ class FavoriteTravelSpotListAdapter(
     }
 
     class FavoriteTravelSpotViewHolder(
-        private val binding: ItemBest10ListBinding,
+        private val binding: ItemFavoriteTravelSpotBinding,
         private val onClick: (TravelSpotInfo) -> Unit,
         private val selectedItems: MutableSet<TravelSpotInfo>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(travelSpot: TravelSpotInfo, isEditMode: Boolean) {
             with(binding) {
-                ivBackgroundImg.setOnClickListener {
+                ivFavoriteTravelSpotThumbnail.setOnClickListener {
                     onClick(travelSpot)
                 }
-                ivBackgroundImg.load(travelSpot.thumbnailUrl)
-                tvCountry.text = travelSpot.region
+                ivFavoriteTravelSpotThumbnail.load(travelSpot.thumbnailUrl)
+                tvFavoriteTravelSpotCountry.text = travelSpot.country
+                tvFavoriteTravelSpotRegion.text = travelSpot.region
 
                 // 편집 모드에 따라 뷰의 가시성 조정
 //                viewGridVideoAlpha.isVisible = isEditMode
@@ -103,7 +105,7 @@ class FavoriteTravelSpotListAdapter(
                 selectedItems: MutableSet<TravelSpotInfo>
             ): FavoriteTravelSpotViewHolder {
                 return FavoriteTravelSpotViewHolder(
-                    ItemBest10ListBinding.inflate(
+                    ItemFavoriteTravelSpotBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
