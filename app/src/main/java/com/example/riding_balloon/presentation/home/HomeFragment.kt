@@ -3,17 +3,22 @@ package com.example.riding_balloon.presentation.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentHomeBinding
 import com.example.riding_balloon.presentation.home.adapters.Best10ListAdapter
 import com.example.riding_balloon.presentation.home.adapters.ChannelListAdapter
 import com.example.riding_balloon.presentation.home.adapters.PopularVideoListAdapter
 import com.example.riding_balloon.presentation.model.ChannelListModel
+import com.example.riding_balloon.presentation.model.PopularVideoListModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -52,6 +57,12 @@ class HomeFragment : Fragment() {
         }
 
         rvPopularVideoList.adapter = popularVideoListAdapter
+        popularVideoListAdapter.itemClick = object : PopularVideoListAdapter.ItemClick {
+            override fun onClickItem(position: Int, item: PopularVideoListModel) {
+                val action = HomeFragmentDirections.actionGlobalVideoDetail(item.id)
+                requireActivity().findNavController(R.id.container_main).navigate(action)
+            }
+        }
 
         with(homeViewModel){
             channelList.observe(viewLifecycleOwner){ itemList -> channelListAdapter.submitList(itemList) }

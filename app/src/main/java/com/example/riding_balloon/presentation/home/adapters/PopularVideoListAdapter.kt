@@ -12,6 +12,11 @@ import com.example.riding_balloon.presentation.model.PopularVideoListModel
 class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideoListAdapter.PopularYoutubeHolder>(
     PopularYoutubeDiffCallback()
 ) {
+    interface ItemClick {
+        fun onClickItem(position: Int, item : PopularVideoListModel)
+    }
+    var itemClick: ItemClick? = null
+
     class PopularYoutubeHolder(binding: ItemHomeVideoListBinding) : RecyclerView.ViewHolder(binding.root){
         val image =  binding.ivGridVideoThumbnail
         val title = binding.tvGridVideoTitle
@@ -28,6 +33,9 @@ class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideo
         val item = getItem(position)
 
         with(holder){
+            itemView.setOnClickListener{
+                itemClick?.onClickItem(position, item)
+            }
             Glide.with(itemView).load(item.thumbnailUrl).into(image)
             title.text = item.title
             channelTitle.text = item.channelTitle
