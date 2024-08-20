@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="2dp"
+    android:layout_marginBottom="4dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_travel_video_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_travel_video_list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:text="@string/travel_video_list_item_title"
+        app:layout_constraintTop_toBottomOf="@id/iv_travel_video_list_item"
+        app:layout_constraintStart_toStartOf="@id/iv_travel_video_list_item"
+        />
+
+    <TextView
+        android:id="@+id/tv_travel_video_list_item_channel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxEms="5"
+        android:text="@string/travel_video_list_item_uploader"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/iv_travel_video_list_item"
+        app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_item_title" />
+
+    <TextView
+        android:id="@+id/tv_travel_video_list_item_bridge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text=" · "
+        app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_item_title"
+        app:layout_constraintStart_toEndOf="@id/tv_travel_video_list_item_channel"
+        />
+
+    <TextView
+        android:id="@+id/tv_travel_video_list_item_view_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/travel_video_list_item_view_count"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_item_title"
+        app:layout_constraintStart_toEndOf="@id/tv_travel_video_list_item_bridge"
+        android:layout_marginEnd="4dp"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_travel_video_list_item_desc"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ellipsize="end"-->
+<!--        android:maxLines="1"-->
+<!--        android:text="@string/travel_video_list_item_uploader"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/iv_travel_video_list_item"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tv_travel_video_list_item_title" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

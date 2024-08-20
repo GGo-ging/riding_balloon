@@ -40,6 +40,16 @@ class FavoriteVideoListAdapter(
 //        notifyDataSetChanged()
 //    }
 
+    // 선택된 아이템을 모두 선택하는 함수
+    fun selectAllItems(isChecked: Boolean) {
+        if (isChecked) {
+            selectedItems.addAll(currentList)
+        } else {
+            selectedItems.clear()
+        }
+        notifyDataSetChanged()
+    }
+
     // 선택된 아이템들을 가져오는 함수
     fun getSelectedItems(): List<FavoriteVideoInfo> {
         return selectedItems.toList()

@@ -1,6 +1,9 @@
 package com.example.riding_balloon.presentation.search
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +15,8 @@ import com.example.riding_balloon.R
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.databinding.FragmentSearchBinding
+import com.example.riding_balloon.presentation.home.adapters.ChannelListAdapter
+import com.example.riding_balloon.presentation.model.ChannelListModel
 
 class SearchFragment : Fragment() {
 
@@ -40,9 +45,12 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchAdapter = SearchFragmentAdapter(TravelSpotManager.getTravelSpots())
+        searchAdapter = SearchFragmentAdapter(TravelSpotManager.getTravelSpots()) { travelSpot ->
+            Log.e("searchAdapter", "$travelSpot")
+        }
         binding.recyclerViewSearch.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerViewSearch.adapter = searchAdapter
+
 
         val continentAdapter = ArrayAdapter.createFromResource(
             requireContext(),

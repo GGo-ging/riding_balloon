@@ -64,8 +64,10 @@
     <string name="label_my_favorite_videos">내가 좋아하는 영상</string>
     <string name="description_youtube_video_thumbnail">유튜브 비디오 썸네일 이미지</string>
     <string name="guide_message_empty_favorite_videos">좋아요 누른 영상이 없습니다.</string>
-    <string name="label_edit">편집</string>
-    <string name="label_edit_complete">편집완료</string>
+    <string name="label_select_all">전체선택</string>
+    <string name="label_select_delete">선택삭제 |</string>
+    <string name="label_edit">&#160;편집</string>
+    <string name="label_edit_complete">&#160;편집완료</string>
     <string name="format_diff_year">%d년 전</string>
     <string name="format_diff_month">%d개월 전</string>
     <string name="format_diff_day">%d일 전</string>
@@ -79,6 +81,16 @@
     <string name="travel_city">도시</string>
     <string name="travel_description">이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다. 이것은 여행지 설명입니다.</string>
     <string name="travel_video_list_title">여행지 간접 여행하기</string>
+    <string name="travel_video_list_item_title">영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목 영상 제목</string>
+    <string name="travel_video_list_item_uploader">영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 영상 업로더 </string>
+    <string name="travel_video_list_item_view_count">조회수 1000만회</string>
+
+    <string name="travel_chip_all">#전체</string>
+    <string name="travel_chip_train">#기차여행</string>
+    <string name="travel_chip_restaurant">#맛집여행</string>
+    <string name="travel_chip_backpacking">#배낭여행</string>
+    <string name="travel_chip_honeymoon">#신혼여행</string>
+    <string name="travel_chip_healing">#힐링여행</string>
 
     <string-array name="travel_chips">
         <item>전체</item>

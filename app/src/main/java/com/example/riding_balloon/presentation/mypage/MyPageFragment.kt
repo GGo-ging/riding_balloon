@@ -50,20 +50,30 @@ class MyPageFragment : Fragment() {
             favoriteVideoListAdapter.isEditMode = !favoriteVideoListAdapter.isEditMode
 
             if (favoriteVideoListAdapter.isEditMode) {
-                tvLabelFavoriteVideosEdit.text = getString(R.string.label_edit_complete)
+                checkboxSelectAllFavoriteVideos.visibility = View.VISIBLE
+                tvLabelFavoriteVideosDelete.visibility = View.VISIBLE
+                tvLabelMyFavoriteVideos.setText(R.string.label_select_all)
+                tvLabelFavoriteVideosEdit.setText(R.string.label_edit_complete)
             } else {
-                tvLabelFavoriteVideosEdit.text = getString(R.string.label_edit)
+                checkboxSelectAllFavoriteVideos.visibility = View.GONE
+                tvLabelFavoriteVideosDelete.visibility = View.GONE
+                tvLabelMyFavoriteVideos.setText(R.string.label_my_favorite_videos)
+                tvLabelFavoriteVideosEdit.setText(R.string.label_edit)
             }
         }
 
-        tvLabelMyFavoriteVideos.setOnClickListener {
+        tvLabelFavoriteVideosDelete.setOnClickListener {
             val selectedItems = favoriteVideoListAdapter.getSelectedItems()
             if (selectedItems.isNotEmpty()) {
                 favoriteViewModel.removeMultipleFavoriteItems(selectedItems)
-                Toast.makeText(requireContext(), "선택된 아이템 개수: ${selectedItems.size}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "선택된 아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "선택된 아이템이 없습니다.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        checkboxSelectAllFavoriteVideos.setOnCheckedChangeListener { _, isChecked ->
+            favoriteVideoListAdapter.selectAllItems(isChecked)
         }
     }
 

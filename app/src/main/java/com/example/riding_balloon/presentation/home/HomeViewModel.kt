@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.riding_balloon.data.model.ItemSnippetStatistics
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
@@ -19,20 +20,34 @@ import java.util.UUID
 
 fun ChannelDetailsResponse.toListData(): ChannelListModel {
     return ChannelListModel(
-            UUID.randomUUID().toString(),
-            items?.first()?.snippet?.customUrl ?: "",
-            items?.first()?.snippet?.title ?:"",
-            items?.first()?.snippet?.thumbnails?.default?.url ?:"",
-            items?.first()?.statistics?.subscriberCount ?: "",
-        )
+        UUID.randomUUID().toString(),
+        items?.first()?.snippet?.customUrl ?: "",
+        items?.first()?.snippet?.title ?:"",
+        items?.first()?.snippet?.thumbnails?.default?.url ?:"",
+        items?.first()?.statistics?.subscriberCount ?: "",
+    )
+}
+
+fun ItemSnippetStatistics.toListData(): PopularVideoListModel {
+    return PopularVideoListModel(
+        id.toString(),
+        snippet?.thumbnails?.standard?.url ?: "",
+        snippet?.title ?: "",
+        snippet?.channelTitle ?: "",
+        statistics?.viewCount.toString(),
+        snippet?.publishedAt.toString(),
+    )
+
 }
 
 fun TrendingVideoResponse.toListData(): PopularVideoListModel {
     return PopularVideoListModel(
-        UUID.randomUUID().toString(),
-        items?.map { it.snippet?.thumbnails?.default?.url }?.get(0) ?: "",
+        items?.map { it.id }.toString(),
+        items?.map { it.snippet?.thumbnails?.standard?.url }?.get(0) ?: "",
         items?.map { it.snippet?.title }?.get(0) ?: "",
-        items?.map { it.snippet?.channelTitle }?.get(0) ?: ""
+        items?.map { it.snippet?.channelTitle }?.get(0) ?: "",
+        items?.map{ it.statistics?.viewCount }.toString(),
+        items?.map{ it.snippet?.publishedAt }.toString(),
     )
 }
 
@@ -72,29 +87,27 @@ class HomeViewModel(
         }
     }
 
+    fun getBest10List(){
+        val rankingList = TravelSpotManager.getListByRanking()
+        _best10List.value = rankingList
+    }
+
     fun fetchPopularVideoList(){
         viewModelScope.launch {
             runCatching {
                 val fetchResult = async { return@async channelRepository.getVideos() }
                 val result = fetchResult.await()
-                result.items?.filter { it.snippet?.categoryId == "19" }
-                _popularVideoList.value = listOf(result.toListData())
+                val filteredResult = result.items?.filter { it.snippet?.categoryId == "19" }
+                _popularVideoList.value = filteredResult?.map{ it.toListData() }
             }.onFailure {
                 Log.e("💡HomeViewModel fetchPopularVideoList", "fetchPopularVideoList() onFailure: ${it.message}")
             }
         }
     }
 
-    fun fetchChannelList(){ }
-
     fun clearList() {
         _channelList.value = listOf()
         _best10List.value = listOf()
         _popularVideoList.value = listOf()
-    }
-
-    fun getBest10List(){
-        val rankingList = TravelSpotManager.getListByRanking()
-        _best10List.value = rankingList
     }
 }
