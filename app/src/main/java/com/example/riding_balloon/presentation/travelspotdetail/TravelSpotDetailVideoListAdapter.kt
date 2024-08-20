@@ -15,6 +15,7 @@ class TravelSpotDetailVideoListAdapter : ListAdapter<VideoListUiModel, RecyclerV
     TravelVideoListDiffUtilCallback()
 ) {
     var drawImage : DrawImage? = null
+    var list: List<VideoListUiModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = LayoutItemTravelVideoListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,6 +28,14 @@ class TravelSpotDetailVideoListAdapter : ListAdapter<VideoListUiModel, RecyclerV
             is VideoListItemViewHolder -> holder.bind(uiModel = getItem(position), drawImage = drawImage)
         }
     }
+
+//    override fun getItem(position: Int): VideoListUiModel {
+//        return list[position]
+//    }
+//
+//    override fun getItemCount(): Int = list.size
+//
+//    override fun getItemId(position: Int) = position.toLong()
 
     fun interface DrawImage {
         fun onDraw(url: String): RequestBuilder<Drawable>

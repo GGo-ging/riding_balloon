@@ -29,7 +29,10 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
         binding.rvTravelVideoList.adapter = travelSpotDetailVideoListAdapter
         binding.rvTravelVideoList.layoutManager = drawLayoutManager?.onDraw()
         binding.rvTravelVideoList.isNestedScrollingEnabled = true
+//        travelSpotDetailVideoListAdapter.list = (item as UiModel.TravelVideoListModel).videoList
+//        travelSpotDetailVideoListAdapter.notifyDataSetChanged()
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
+
     }
 }
 

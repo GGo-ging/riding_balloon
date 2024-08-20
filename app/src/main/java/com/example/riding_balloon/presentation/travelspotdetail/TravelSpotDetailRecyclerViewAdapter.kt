@@ -34,9 +34,10 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     var drawImage: DrawImage? = null
     var drawLayoutManager : DrawLayoutManager? = null
     var selectChip : SelectChip? = null
+    var list: List<UiModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
-        Log.d("ViewHolder 체크", "리스트 : $currentList")
+        Log.d("ViewHolder 체크", "리스트 : $list")
         val holderType = TSDEnum.entries.find {
             it.type == viewType
         } ?: TSDEnum.EMPTY
@@ -90,7 +91,7 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(getItem(position)) {
+        return when(currentList[position]) {
             is UiModel.ViewPagerModel -> TSDEnum.VIEW_PAGER.type
             is UiModel.InfoModel -> TSDEnum.INFO.type
             is UiModel.TravelVideoListModel -> TSDEnum.VIDEO_LIST.type
@@ -98,11 +99,14 @@ class TravelSpotDetailRecyclerViewAdapter : ListAdapter<UiModel, TravelViewHolde
             is UiModel.VideoListLoadingUiModel -> TSDEnum.LOADING.type
         }
     }
-
-    override fun getItemCount(): Int {
-        Log.d("ViewHolder 체크", currentList.size.toString())
-        return currentList.size
-    }
+//
+//    override fun getItem(position: Int): UiModel {
+//        return list[position]
+//    }
+//
+//    override fun getItemCount(): Int = list.size
+//
+//    override fun getItemId(position: Int) = position.toLong()
 
     fun interface DrawImage {
         fun onDraw(url: String): RequestBuilder<Drawable>
