@@ -26,6 +26,7 @@ android {
         versionName = "1.0"
 
         buildConfigField("String", "YOUTUBE_API_KEY", "\"${properties["youtube.api.key"]}\"")
+        buildConfigField("String", "OPENAI_API_KEY", "\"${properties["openai.api.key"]}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

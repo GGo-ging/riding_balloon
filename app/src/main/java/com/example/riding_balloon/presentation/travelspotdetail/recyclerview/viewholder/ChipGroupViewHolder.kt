@@ -1,7 +1,7 @@
-package com.example.riding_balloon.presentation.travelspotdetail.viewholder
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder
 
 import com.example.riding_balloon.databinding.LayoutItemTravelChipgroupBinding
-import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailRecyclerViewAdapter
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
 import com.example.riding_balloon.presentation.travelspotdetail.UiModel
 
 class ChipGroupViewHolderImpl(private val binding: LayoutItemTravelChipgroupBinding) : TravelViewHolder(binding) {

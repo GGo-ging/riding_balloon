@@ -1,4 +1,4 @@
-package com.example.riding_balloon.presentation.travelspotdetail.diffutil
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.diffutil
 
 import android.util.Log
 import androidx.recyclerview.widget.DiffUtil

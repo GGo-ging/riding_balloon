@@ -1,4 +1,4 @@
-package com.example.riding_balloon.presentation.travelspotdetail.viewholder
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

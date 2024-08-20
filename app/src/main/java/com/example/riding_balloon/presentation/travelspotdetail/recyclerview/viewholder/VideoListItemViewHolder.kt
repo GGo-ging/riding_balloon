@@ -1,9 +1,9 @@
-package com.example.riding_balloon.presentation.travelspotdetail.viewholder
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListItemBinding
 import com.example.riding_balloon.presentation.extensions.setPublishedDate
-import com.example.riding_balloon.presentation.travelspotdetail.TravelSpotDetailVideoListAdapter
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailVideoListAdapter
 import com.example.riding_balloon.presentation.travelspotdetail.VideoListUiModel
 
 class VideoListItemViewHolder(private val binding : LayoutItemTravelVideoListItemBinding) : RecyclerView.ViewHolder(binding.root) {

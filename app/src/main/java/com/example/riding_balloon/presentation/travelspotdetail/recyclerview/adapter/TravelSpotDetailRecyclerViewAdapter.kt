@@ -1,13 +1,11 @@
-package com.example.riding_balloon.presentation.travelspotdetail
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter
 
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelChipgroupBinding
@@ -16,14 +14,15 @@ import com.example.riding_balloon.databinding.LayoutItemTravelInfoBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListLoadingBinding
 import com.example.riding_balloon.databinding.LayoutItemTravelViewpagerBinding
-import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelDiffUtilCallback
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ChipGroupViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.EmptyViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.InfoViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.LoadingViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.TravelViewHolder
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListViewHolderImpl
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.ViewPagerViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.UiModel
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.diffutil.TravelDiffUtilCallback
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.ChipGroupViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.EmptyViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.InfoViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.LoadingViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.TravelViewHolder
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.VideoListViewHolderImpl
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.ViewPagerViewHolderImpl
 
 enum class TSDEnum(val type: Int) {
     VIEW_PAGER(0), INFO(1), CHIP_GROUP(2), VIDEO_LIST(3), LOADING(4), EMPTY(-1)

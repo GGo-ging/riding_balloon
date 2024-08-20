@@ -1,15 +1,15 @@
-package com.example.riding_balloon.presentation.travelspotdetail
+package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestBuilder
 import com.example.riding_balloon.databinding.LayoutItemTravelVideoListItemBinding
-import com.example.riding_balloon.presentation.travelspotdetail.diffutil.TravelVideoListDiffUtilCallback
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.VideoListItemViewHolder
+import com.example.riding_balloon.presentation.travelspotdetail.VideoListUiModel
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.diffutil.TravelVideoListDiffUtilCallback
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.viewholder.VideoListItemViewHolder
 
 class TravelSpotDetailVideoListAdapter : ListAdapter<VideoListUiModel, RecyclerView.ViewHolder>(
     TravelVideoListDiffUtilCallback()

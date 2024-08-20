@@ -1,38 +1,22 @@
 package com.example.riding_balloon.presentation.travelspotdetail
 
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
-import com.example.riding_balloon.PungsunTagoApplication
-import com.example.riding_balloon.R
-import com.example.riding_balloon.data.source.local.TravelSpotManager
-import com.example.riding_balloon.data.source.local.room.VideoEntity
-import com.example.riding_balloon.data.source.local.room.VideoRoomDB
 import com.example.riding_balloon.databinding.FragmentTravelSpotDetailBinding
-import com.example.riding_balloon.presentation.home.HomeFragmentDirections
-import com.example.riding_balloon.presentation.travelspotdetail.viewholder.LoadingViewHolderImpl
-import com.google.android.material.chip.Chip
+import com.example.riding_balloon.presentation.travelspotdetail.recyclerview.adapter.TravelSpotDetailRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.math.roundToInt
 
 var isScrollCoroutineRunning = false
@@ -53,6 +37,8 @@ class TravelSpotDetailFragment : Fragment() {
     private lateinit var infoModel : UiModel.InfoModel
     private lateinit var chipGroupModel : UiModel.ChipGroupModel
     // 얘가 계속해서 copy 하니까 문제가 리스트가 초기화되는 문제가 생기는 게 아닐까? -> var 로 바꾸고 그대로 가도록 해보기 -> 깜빡이는 건 사라졌지만 그대로임 -> 안쪽도 바꿔보기?
+    // -> 외부 리사이클러뷰의 arecontentsame가 data class 안의 list를 확인하고 다름을 인식해서 자꾸 맨 위로 초기화되는 것 -> 그러면 list를 따로 전달?
+    // -> 혹은 getPayload?나 arethecontentsame 을 다르게 해서 처리할 수 있을 듯. ai 끝나고 시도 한번 해보고 안 될 거 같으면 애니메이션이나 넣기
     private var videoListModel = UiModel.TravelVideoListModel(videoList = listOf())
     private val loadingModel = UiModel.VideoListLoadingUiModel()
 
