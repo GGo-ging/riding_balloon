@@ -15,6 +15,11 @@
 
     <string name="home_channel_list_subscribers">구독자 %s명</string>
 
+    <string name="format_view_count">조회수 %s회</string>
+    <string name="format_view_count_thousand">조회수 %s천회</string>
+    <string name="format_view_count_million">조회수 %s만회</string>
+    <string name="format_view_count_billion">조회수 %s억회</string>
+
     <!-- Search -->
     <string-array name="spinner_items_continent">
         <item>아시아</item>

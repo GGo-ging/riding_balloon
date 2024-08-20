@@ -43,7 +43,7 @@
         tools:text="곽튜브" />
 
     <TextView
-        android:id="@+id/tv_grid_video_publish_date"
+        android:id="@+id/tv_grid_video_view_count"
         style="@style/TextLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

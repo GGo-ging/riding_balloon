@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.riding_balloon.databinding.ItemHomeVideoListBinding
+import com.example.riding_balloon.presentation.extensions.setViewCount
 import com.example.riding_balloon.presentation.model.PopularVideoListModel
 
 class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideoListAdapter.PopularYoutubeHolder>(
@@ -21,6 +22,7 @@ class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideo
         val image =  binding.ivGridVideoThumbnail
         val title = binding.tvGridVideoTitle
         val channelTitle = binding.tvGridVideoChannel
+        val viewCount = binding.tvGridVideoViewCount
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularYoutubeHolder {
@@ -39,6 +41,7 @@ class PopularVideoListAdapter(): ListAdapter<PopularVideoListModel, PopularVideo
             Glide.with(itemView).load(item.thumbnailUrl).into(image)
             title.text = item.title
             channelTitle.text = item.channelTitle
+            viewCount.setViewCount(item.viewCount.toBigDecimal())
         }
     }
 
