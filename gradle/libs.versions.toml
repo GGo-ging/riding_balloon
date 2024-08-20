@@ -20,6 +20,8 @@ youtube-player="11.1.0"
 viewmodel = "2.6.1"
 hilt = "2.52"
 room = "2.4.3"
+markwon = "4.6.2"
+lottie = "6.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +61,13 @@ room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 
+markwon = { group = "io.noties.markwon", name = "core", version.ref = "markwon" }
+markwon-syntax = { group = "io.noties.markwon", name = "syntax-highlight", version.ref = "markwon" }
+markwon-image = { group = "io.noties.markwon", name = "image-glide", version.ref = "markwon" }
+markwon-table = { group = "io.noties.markwon", name = "ext-tables", version.ref = "markwon" }
+
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+
 [bundles]
 retrofit = [
     "retrofit",
@@ -77,6 +86,12 @@ videoplayers = [
 viewmodel = [
     "viewmodel",
     "livedata"
+]
+markwon = [
+    "markwon",
+    "markwon-image",
+    "markwon-syntax",
+    "markwon-table",
 ]
 
 [plugins]

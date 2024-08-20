@@ -91,6 +91,12 @@ dependencies {
     implementation(libs.room)
     annotationProcessor(libs.room.compiler)
 
+    // Markwon
+    implementation(libs.markwon)
+
+    // Lottie
+    implementation(libs.lottie)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

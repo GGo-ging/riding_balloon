@@ -2,6 +2,7 @@ package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.ad
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,6 @@ class TravelSpotDetailVideoListAdapter : ListAdapter<VideoListUiModel, RecyclerV
     }
 
     fun interface ClickVideo {
-        fun onClick(videoId: String)
+        fun onClick(videoId: String, thumbnailUrl: String, view: View)
     }
 }

@@ -3,6 +3,7 @@ package com.example.riding_balloon.presentation.travelspotdetail.recyclerview.ad
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -38,6 +39,7 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
     var drawLayoutManager : DrawLayoutManager? = null
     var selectChip : SelectChip? = null
     var clickVideo: ClickVideo? = null
+    var clickAiButton: ClickAiButton? = null
     var list: List<UiModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
@@ -88,6 +90,9 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
             is ChipGroupViewHolderImpl -> {
                 holder.bind(getItem(position), selectChip)
             }
+            is InfoViewHolderImpl -> {
+                holder.bind(getItem(position), clickAiButton)
+            }
             else -> {
                 holder.bind(getItem(position))
             }
@@ -125,7 +130,11 @@ class TravelSpotDetailRecyclerViewAdapter<T: UiModel>(
     }
 
     fun interface ClickVideo {
-        fun onClick(videoId: String)
+        fun onClick(videoId: String, thumbnailUrl: String, view: View)
+    }
+
+    fun interface ClickAiButton {
+        fun onClick()
     }
 
 }

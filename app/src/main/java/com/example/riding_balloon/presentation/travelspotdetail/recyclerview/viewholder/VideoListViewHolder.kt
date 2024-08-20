@@ -26,8 +26,8 @@ class VideoListViewHolderImpl(val binding: LayoutItemTravelVideoListBinding) : T
 //        travelSpotDetailVideoListAdapter.list = (item as UiModel.TravelVideoListModel).videoList
 //        travelSpotDetailVideoListAdapter.notifyDataSetChanged()
         travelSpotDetailVideoListAdapter.submitList((item as UiModel.TravelVideoListModel).videoList)
-        travelSpotDetailVideoListAdapter.clickVideo = TravelSpotDetailVideoListAdapter.ClickVideo {
-            clickVideo?.onClick(it)
+        travelSpotDetailVideoListAdapter.clickVideo = TravelSpotDetailVideoListAdapter.ClickVideo { videoId, thumbnailUrl, view ->
+            clickVideo?.onClick(videoId, thumbnailUrl, view)
         }
 
     }
