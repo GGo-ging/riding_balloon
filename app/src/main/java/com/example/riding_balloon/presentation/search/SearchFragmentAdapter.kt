@@ -39,6 +39,7 @@ class SearchFragmentAdapter(private var data : List<TravelSpotInfo>, private val
 
         holder.itemView.setOnClickListener{
             itemClick?.onClickItem(it, position)
+            itemClickListener(data)
         }
 
         Glide.with(holder.imageView.context)
@@ -56,5 +57,9 @@ class SearchFragmentAdapter(private var data : List<TravelSpotInfo>, private val
     fun updateData(newData: List<TravelSpotInfo>) {
         data = newData // 새로운 데이터로 교체
         notifyDataSetChanged() // 데이터 변경을 알림
+    }
+
+    fun getItem(position: Int): TravelSpotInfo {
+        return data[position]
     }
 }

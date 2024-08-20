@@ -78,6 +78,8 @@ class TravelSpotDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //
+        initData()
 
         tsdViewModel.videosData.observe(viewLifecycleOwner) {
             recyclerViewAdapter.submitList(
@@ -127,6 +129,31 @@ class TravelSpotDetailFragment : Fragment() {
             tsdViewModel.changeData(it, false)
         }
 
+    }
+
+    fun initData() {
+        Log.e("initDat", "initData")
+        val travelSpot = args.travelSpot
+        val viewPagerModel = UiModel.ViewPagerModel(imageUrlList = travelSpot.images)
+        Log.e("initDat_viewPagerModel", "$viewPagerModel")
+        val infoModel = UiModel.InfoModel(
+            nation = travelSpot.country,
+            city = travelSpot.region,
+            desc = travelSpot.description
+        )
+        Log.e("initDat_infoModel", "$infoModel")
+
+        val chipGroupModel = UiModel.ChipGroupModel(city = travelSpot.region)
+
+        recyclerViewAdapter.submitList(
+            listOf(
+                viewPagerModel,
+                infoModel,
+                chipGroupModel,
+//                videoListModel.copy(videoList = listOf()),
+                UiModel.TravelVideoListModel(videoList = tsdViewModel.videosData.value ?: listOf())
+            )
+        )
     }
 
     override fun onDestroyView() {
