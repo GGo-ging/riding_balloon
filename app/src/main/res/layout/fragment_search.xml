@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="4dp"
         android:orientation="horizontal"
-        android:id="@+id/layout">
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
             android:id="@+id/spinnerContinent"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
             android:layout_centerInParent="true"
+            android:layout_weight="1"
             android:background="@drawable/spinner_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +36,8 @@
             android:id="@+id/spinnerCountry"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
             android:layout_centerInParent="true"
+            android:layout_weight="1"
             android:background="@drawable/spinner_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +52,7 @@
         android:id="@+id/recyclerView_Search"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="13dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
