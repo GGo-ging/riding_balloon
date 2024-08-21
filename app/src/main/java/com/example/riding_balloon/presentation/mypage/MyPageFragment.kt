@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.riding_balloon.R
+import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.databinding.FragmentMyPageBinding
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
 import com.example.riding_balloon.presentation.mypage.adapter.FavoriteTravelSpotListAdapter
@@ -28,8 +29,7 @@ class MyPageFragment : Fragment() {
     private val binding get() = _binding!!
     private val favoriteTravelSpotListAdapter by lazy {
         FavoriteTravelSpotListAdapter { travelSpot ->
-            //navigateToTravelSpotDetail(travelSpot)
-            Toast.makeText(requireContext(), "${travelSpot.country}", Toast.LENGTH_SHORT).show()
+            navigateToTravelSpotDetail(travelSpot)
         }
     }
     private val favoriteVideoListAdapter by lazy {
@@ -157,6 +157,11 @@ class MyPageFragment : Fragment() {
             view to "thumbnail_${favoriteVideo.videoId}"
         )
         findNavController().navigate(action, extras)
+    }
+
+    private fun navigateToTravelSpotDetail(travelSpot: TravelSpotInfo) {
+        val action = MyPageFragmentDirections.actionGlobalTravelSpotDetail(travelSpot)
+        findNavController().navigate(action)
     }
 
     override fun onStop() {
