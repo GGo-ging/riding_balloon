@@ -25,7 +25,7 @@
             android:id="@+id/iv_back_bar_heart"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_heart_border"
+            android:src="@drawable/sel_favorite_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

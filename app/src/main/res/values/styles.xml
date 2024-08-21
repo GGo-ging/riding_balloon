@@ -6,6 +6,11 @@
         <item name="android:textSize">@dimen/text_size_16sp</item>
     </style>
 
+    <!--  RoundedImage  -->
+    <style name="RoundedImage">
+        <item name="cornerSize">8dp</item>
+    </style>
+
     <!--  Text  -->
     <style name="TextTitle">
         <item name="android:textStyle">bold</item>
@@ -14,6 +19,10 @@
 
     <style name="TextTitle.S20">
         <item name="android:textSize">@dimen/text_size_20sp</item>
+    </style>
+
+    <style name="TextTitle.S16">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
     </style>
 
     <style name="TextBody">
@@ -27,6 +36,10 @@
 
     <style name="TextBody.S16">
         <item name="android:textSize">@dimen/text_size_16sp</item>
+    </style>
+
+    <style name="TextBody.S12">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
 
     <style name="TextLabel">

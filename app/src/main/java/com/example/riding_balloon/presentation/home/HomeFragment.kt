@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.riding_balloon.R
 import com.example.riding_balloon.databinding.FragmentHomeBinding
@@ -56,9 +58,10 @@ class HomeFragment : Fragment() {
 
         rvPopularVideoList.adapter = popularVideoListAdapter
         popularVideoListAdapter.itemClick = object : PopularVideoListAdapter.ItemClick {
-            override fun onClickItem(position: Int, item: PopularVideoListModel) {
-                val action = HomeFragmentDirections.actionGlobalVideoDetail(item.id, "")
-                requireActivity().findNavController(R.id.container_main).navigate(action)
+            override fun onClickItem(position: Int, item: PopularVideoListModel, view: View) {
+                val action = HomeFragmentDirections.actionGlobalVideoDetail(item.id, item.thumbnailUrl)
+                val extras = FragmentNavigatorExtras(view to "thumbnail_${item.id}")
+                findNavController().navigate(action, extras)
             }
         }
 

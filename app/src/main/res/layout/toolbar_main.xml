@@ -17,20 +17,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_toolbar_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비디오"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_toolbar_travel_spot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="여행지"
-        app:layout_constraintEnd_toStartOf="@id/btn_toolbar_video"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

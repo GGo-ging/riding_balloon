@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">풍선타고</string>
 
+    <!-- Common -->
+    <string name="format_diff_year">%d년 전</string>
+    <string name="format_diff_month">%d개월 전</string>
+    <string name="format_diff_day">%d일 전</string>
+    <string name="format_diff_hour">%d시간 전</string>
+    <string name="format_diff_minute">%d분 전</string>
+    <string name="format_diff_second">%d초 전</string>
+
     <!-- Main -->
     <string name="label_home">메인</string>
     <string name="label_search">검색</string>
@@ -14,6 +22,11 @@
     <string name="home_title3_popular">지금 인기 많은 여행 유튜브</string>
 
     <string name="home_channel_list_subscribers">구독자 %s명</string>
+
+    <string name="format_view_count">&#160;· 조회수 %s회 ·&#160;</string>
+    <string name="format_view_count_thousand">&#160;· 조회수 %s천회 ·&#160;</string>
+    <string name="format_view_count_million">&#160;· 조회수 %s만회 ·&#160;</string>
+    <string name="format_view_count_billion">&#160;· 조회수 %s억회 ·&#160;</string>
 
     <!-- Search -->
     <string-array name="spinner_items_continent">
@@ -66,16 +79,11 @@
     <string name="label_my_favorite_videos">내가 좋아하는 영상</string>
     <string name="description_youtube_video_thumbnail">유튜브 비디오 썸네일 이미지</string>
     <string name="guide_message_empty_favorite_videos">좋아요 누른 영상이 없습니다.</string>
+    <string name="description_favorite_travel_spot_thumbnail">좋아요한 여행지 썸네일 이미지</string>
     <string name="label_select_all">전체선택</string>
     <string name="label_select_delete">선택삭제 |</string>
     <string name="label_edit">&#160;편집</string>
     <string name="label_edit_complete">&#160;편집완료</string>
-    <string name="format_diff_year">%d년 전</string>
-    <string name="format_diff_month">%d개월 전</string>
-    <string name="format_diff_day">%d일 전</string>
-    <string name="format_diff_hour">%d시간 전</string>
-    <string name="format_diff_minute">%d분 전</string>
-    <string name="format_diff_second">%d초 전</string>
 
     <!-- Travel Spot Detail -->
     <string name="description_back_image">뒤로 가기 이미지</string>
