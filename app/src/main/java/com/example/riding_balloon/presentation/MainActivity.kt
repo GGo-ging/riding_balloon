@@ -70,18 +70,18 @@ class MainActivity : AppCompatActivity() {
             6 to "ZsgG9EOV4eE",
         )
 
-        layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
-            val randomIndex = (1..35).random()
-            val travelSpotItem = TravelSpotManager.getRandomItem(randomIndex)
-            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
-            findNavController(R.id.container_main).navigate(action)
-        }
-        layoutToolbarMain.btnToolbarVideo.setOnClickListener {
-            val randomIndex = (0..6).random()
-            val randomVideoId = videosMap[randomIndex] ?: "RSv0K4hQyV8"
-
-            val action = HomeFragmentDirections.actionGlobalVideoDetail(randomVideoId, "")
-            findNavController(R.id.container_main).navigate(action)
-        }
+//        layoutToolbarMain.btnToolbarTravelSpot.setOnClickListener {
+//            val randomIndex = (1..35).random()
+//            val travelSpotItem = TravelSpotManager.getRandomItem(randomIndex)
+//            val action = HomeFragmentDirections.actionGlobalTravelSpotDetail(travelSpotItem)
+//            findNavController(R.id.container_main).navigate(action)
+//        }
+//        layoutToolbarMain.btnToolbarVideo.setOnClickListener {
+//            val randomIndex = (0..6).random()
+//            val randomVideoId = videosMap[randomIndex] ?: "RSv0K4hQyV8"
+//
+//            val action = HomeFragmentDirections.actionGlobalVideoDetail(randomVideoId, "")
+//            findNavController(R.id.container_main).navigate(action)
+//        }
     }
 }
