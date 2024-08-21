@@ -130,7 +130,8 @@ class MyPageFragment : Fragment() {
     private fun initViewModel() {
         favoriteTravelSpotViewModel.favoriteTravelSpots.observe(viewLifecycleOwner) { favoriteTravelSpots ->
             if (favoriteTravelSpots.isNotEmpty()) {
-                favoriteTravelSpotListAdapter.submitList(favoriteTravelSpots)
+                // 나라 이름 순으로 정렬, 나라 이름이 같은 경우 도시 이름으로 정렬
+                favoriteTravelSpotListAdapter.submitList(favoriteTravelSpots.sortedWith(compareBy({ it.country }, { it.region })))
                 binding.tvEmptyFavoriteTravelSpots.visibility = View.INVISIBLE
             } else {
                 favoriteTravelSpotListAdapter.submitList(mutableListOf())

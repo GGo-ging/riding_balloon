@@ -237,11 +237,11 @@ class TravelSpotDetailFragment : Fragment(), OnTravelSpotClickListener<UiModel> 
                 if (favoriteTravelSpotViewModel.isFavorite(args.travelSpot.id)) {
                     // 좋아요 해제
                     favoriteTravelSpotViewModel.removeFavoriteItem(args.travelSpot)
-                    Toast.makeText(context, "좋아요 해제", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "좋아요 목록에 추가하였습니다.", Toast.LENGTH_SHORT).show()
                 } else {
                     // 좋아요 추가
                     favoriteTravelSpotViewModel.addFavoriteItem(args.travelSpot)
-                    Toast.makeText(context, "좋아요 추가", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "좋아요 취소하였습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
             is UiModel.ViewPagerModel -> {
