@@ -1,6 +1,5 @@
 package com.example.riding_balloon.presentation.videodetail
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -47,8 +46,10 @@ class VideoDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentVideoDetailBinding.inflate(inflater, container, false)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         binding.ivYoutubePlayer.apply {
             transitionName = "thumbnail_${args.videoId}"
             load(args.thumbnailUrl)
@@ -67,7 +68,7 @@ class VideoDetailFragment : Fragment() {
         //url = "https://youtu.be/_UyQLveYyzI?si=4Uh2TVQ1MNwvR7ik"
 
         val videoId = args.videoId
-            viewModel.videoDetailsGet(videoId)
+        viewModel.videoDetailsGet(videoId)
 
         val player = binding.ypYoutubePlayer
         lifecycle.addObserver(player)
@@ -77,7 +78,7 @@ class VideoDetailFragment : Fragment() {
                 super.onReady(youTubePlayer)
                 binding.ivYoutubePlayer.visibility = View.GONE
 
-                    youTubePlayer.loadVideo(videoId, 0F)
+                youTubePlayer.loadVideo(videoId, 0F)
             }
         })
 
@@ -94,7 +95,12 @@ class VideoDetailFragment : Fragment() {
 
             with(binding) {
                 tvDetailPageMainTitle.text = video.snippet?.title
-                tvDetailPageSubTitle.text = getString(R.string.video_detail_subtitle, video.snippet?.channelTitle, formatViewCount, dataTimeFormat)
+                tvDetailPageSubTitle.text = getString(
+                    R.string.video_detail_subtitle,
+                    video.snippet?.channelTitle,
+                    formatViewCount,
+                    dataTimeFormat
+                )
                 tvDetailText.text = video.snippet?.description
             }
         }
@@ -116,7 +122,7 @@ class VideoDetailFragment : Fragment() {
             startActivity(intent)
         }
 
-            initFavoriteButton(videoId)
+        initFavoriteButton(videoId)
     }
 
     override fun onDestroyView() {
