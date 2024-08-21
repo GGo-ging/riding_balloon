@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="4dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_favorite_travel_spot_thumbnail"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/description_favorite_travel_spot_thumbnail"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImage"
+        tools:background="@color/grey_shade_40" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/iv_favorite_travel_spot_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/iv_favorite_travel_spot_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/iv_favorite_travel_spot_thumbnail"
+        app:layout_constraintTop_toTopOf="@id/iv_favorite_travel_spot_thumbnail" />
+
+    <TextView
+        android:id="@+id/tv_favorite_travel_spot_country"
+        style="@style/TextTitle.S16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/tv_favorite_travel_spot_region"
+        app:layout_constraintEnd_toEndOf="@id/iv_favorite_travel_spot_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/tv_favorite_travel_spot_region"
+        tools:text="일본" />
+
+    <TextView
+        android:id="@+id/tv_favorite_travel_spot_region"
+        style="@style/TextBody.S12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/white_a80"
+        app:layout_constraintBottom_toBottomOf="@id/iv_favorite_travel_spot_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/iv_favorite_travel_spot_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/iv_favorite_travel_spot_thumbnail"
+        tools:text="오사카" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -130,21 +130,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:clipToPadding="false"
+                android:minHeight="120dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
+                android:paddingHorizontal="12dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_my_favorite_travel_spots"
                 tools:itemCount="6"
-                tools:listitem="@layout/item_best10_list" />
+                tools:listitem="@layout/item_favorite_travel_spot" />
 
             <TextView
                 android:id="@+id/tv_empty_favorite_travel_spots"
                 style="@style/TextCaption"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="@string/guide_message_empty_favorite_travel_spots"
@@ -179,7 +180,7 @@
                 android:text="@string/label_my_favorite_videos"
                 app:layout_constraintEnd_toStartOf="@id/tv_label_favorite_videos_delete"
                 app:layout_constraintStart_toEndOf="@id/checkbox_select_all_favorite_videos"
-                app:layout_constraintTop_toBottomOf="@id/tv_empty_favorite_travel_spots" />
+                app:layout_constraintTop_toBottomOf="@id/rv_favorite_travel_spots" />
 
             <TextView
                 android:id="@+id/tv_label_favorite_videos_delete"
@@ -218,7 +219,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_label_my_favorite_videos"
                 app:spanCount="2"
                 tools:itemCount="6"
-                tools:listitem="@layout/item_grid_video" />
+                tools:listitem="@layout/item_favorite_video" />
 
             <TextView
                 android:id="@+id/tv_empty_favorite_videos"

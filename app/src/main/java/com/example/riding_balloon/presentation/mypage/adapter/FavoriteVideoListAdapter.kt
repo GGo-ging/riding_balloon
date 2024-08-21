@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.riding_balloon.databinding.ItemGridVideoBinding
+import com.example.riding_balloon.databinding.ItemFavoriteVideoBinding
 import com.example.riding_balloon.presentation.extensions.load
 import com.example.riding_balloon.presentation.extensions.setPublishedDate
 import com.example.riding_balloon.presentation.model.FavoriteVideoInfo
@@ -56,31 +56,36 @@ class FavoriteVideoListAdapter(
         return selectedItems.toList()
     }
 
+    fun clearSelectedItems() {
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
     class FavoriteVideoHolder(
-        private val binding: ItemGridVideoBinding,
+        private val binding: ItemFavoriteVideoBinding,
         private val onClick: (View, FavoriteVideoInfo) -> Unit,
         private val selectedItems: MutableSet<FavoriteVideoInfo>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(video: FavoriteVideoInfo, isEditMode: Boolean) {
             with(binding) {
-                ivGridVideoThumbnail.transitionName = "thumbnail_${video.videoId}"
-                ivGridVideoThumbnail.setOnClickListener {
-                    onClick(it, video)
+                ivFavoriteVideoThumbnail.apply {
+                    transitionName = "thumbnail_${video.videoId}"
+                    setOnClickListener { onClick(it, video) }
+                    load(video.thumbnailUrl)
                 }
-                ivGridVideoThumbnail.load(video.thumbnailUrl)
-                tvGridVideoTitle.text = video.title
-                tvGridVideoChannel.text = video.channelTitle
-                tvGridVideoPublishDate.setPublishedDate(video.publishedAt)
+                tvFavoriteVideoTitle.text = video.title
+                tvFavoriteVideoChannel.text = video.channelTitle
+                tvFavoriteVideoPublishDate.setPublishedDate(video.publishedAt)
 
                 // 편집 모드에 따라 뷰의 가시성 조정
-                viewGridVideoAlpha.isVisible = isEditMode
+                viewFavoriteVideoAlpha.isVisible = isEditMode
                 checkboxFavoriteVideo.isVisible = isEditMode
 
                 checkboxFavoriteVideo.isChecked = selectedItems.contains(video)
 
                 // viewGridVideoAlpha 클릭 시 체크박스 상태를 변경
-                viewGridVideoAlpha.setOnClickListener {
+                viewFavoriteVideoAlpha.setOnClickListener {
                     val isChecked = !checkboxFavoriteVideo.isChecked
                     checkboxFavoriteVideo.isChecked = isChecked
                     if (isChecked) {
@@ -108,7 +113,7 @@ class FavoriteVideoListAdapter(
                 selectedItems: MutableSet<FavoriteVideoInfo>
             ): FavoriteVideoHolder {
                 return FavoriteVideoHolder(
-                    ItemGridVideoBinding.inflate(
+                    ItemFavoriteVideoBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false

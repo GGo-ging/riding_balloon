@@ -8,7 +8,7 @@
     android:paddingVertical="4dp">
 
     <ImageView
-        android:id="@+id/iv_grid_video_thumbnail"
+        android:id="@+id/iv_favorite_video_thumbnail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/description_youtube_video_thumbnail"
@@ -20,8 +20,8 @@
         tools:background="@color/grey_shade_40" />
 
     <TextView
-        android:id="@+id/tv_grid_video_title"
-        style="@style/TextBody.S18"
+        android:id="@+id/tv_favorite_video_title"
+        style="@style/TextBody.S16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -30,39 +30,42 @@
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_grid_video_thumbnail"
+        app:layout_constraintTop_toBottomOf="@id/iv_favorite_video_thumbnail"
         tools:text="한국식 오징어 낚싯배를 탄 우즈벡 형님들" />
 
     <TextView
-        android:id="@+id/tv_grid_video_channel"
+        android:id="@+id/tv_favorite_video_channel"
         style="@style/TextLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@id/tv_grid_video_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_grid_video_title"
+        android:ellipsize="end"
+        android:maxEms="7"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@id/tv_favorite_video_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_favorite_video_title"
         tools:text="곽튜브" />
 
     <TextView
-        android:id="@+id/tv_grid_video_publish_date"
+        android:id="@+id/tv_favorite_video_publish_date"
         style="@style/TextLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_grid_video_channel"
-        app:layout_constraintTop_toTopOf="@id/tv_grid_video_channel"
+        app:layout_constraintStart_toEndOf="@id/tv_favorite_video_channel"
+        app:layout_constraintTop_toTopOf="@id/tv_favorite_video_channel"
         tools:text="1개월 전" />
 
     <View
-        android:id="@+id/view_grid_video_alpha"
+        android:id="@+id/view_favorite_video_alpha"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/black_a50"
-        app:layout_constraintBottom_toBottomOf="@id/iv_grid_video_thumbnail"
-        app:layout_constraintEnd_toEndOf="@id/iv_grid_video_thumbnail"
-        app:layout_constraintStart_toStartOf="@id/iv_grid_video_thumbnail"
-        app:layout_constraintTop_toTopOf="@id/iv_grid_video_thumbnail" />
+        app:layout_constraintBottom_toBottomOf="@id/iv_favorite_video_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/iv_favorite_video_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/iv_favorite_video_thumbnail"
+        app:layout_constraintTop_toTopOf="@id/iv_favorite_video_thumbnail" />
 
     <CheckBox
         android:id="@+id/checkbox_favorite_video"
@@ -74,8 +77,8 @@
         android:checked="false"
         android:padding="0dp"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@id/iv_grid_video_thumbnail"
-        app:layout_constraintTop_toTopOf="@id/iv_grid_video_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/iv_favorite_video_thumbnail"
+        app:layout_constraintTop_toTopOf="@id/iv_favorite_video_thumbnail"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

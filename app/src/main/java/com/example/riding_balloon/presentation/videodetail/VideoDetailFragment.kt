@@ -153,23 +153,24 @@ class VideoDetailFragment : Fragment() {
     private fun initFavoriteButton(videoId: String) = with(binding) {
         var isFavorite = favoriteViewModel.isFavorite(videoId)
         Log.d("VideoDetailFragment", "isFavorite: $isFavorite")
-        if (isFavorite) {
-            ivBackBarHeart.setImageResource(R.drawable.ic_heart)
-        } else {
-            ivBackBarHeart.setImageResource(R.drawable.ic_heart_border)
-        }
+//        if (isFavorite) {
+//            ivBackBarHeart.setImageResource(R.drawable.ic_heart)
+//        } else {
+//            ivBackBarHeart.setImageResource(R.drawable.ic_heart_border)
+//        }
+        ivBackBarHeart.isSelected = isFavorite
         ivBackBarHeart.setOnClickListener {
             isFavorite = favoriteViewModel.isFavorite(videoId)
-            favoriteVideoItem = video.toFavoriteVideoInfo(isFavorite)
+            Log.d("VideoDetailFragment", "isFavorite: $isFavorite")
+            favoriteVideoItem = video.toFavoriteVideoInfo()
             if (isFavorite) {
                 Log.d("VideoDetailFragment", "removeFavoriteItem: $favoriteVideoItem")
                 favoriteViewModel.removeFavoriteItem(favoriteVideoItem)
-                ivBackBarHeart.setImageResource(R.drawable.ic_heart_border)
+                ivBackBarHeart.isSelected = false
                 Toast.makeText(requireContext(), "좋아요 취소하였습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                val favoriteItem = favoriteVideoItem.copy(isFavorite = true)
-                favoriteViewModel.addFavoriteItem(favoriteItem)
-                ivBackBarHeart.setImageResource(R.drawable.ic_heart)
+                favoriteViewModel.addFavoriteItem(favoriteVideoItem)
+                ivBackBarHeart.isSelected = true
                 Toast.makeText(requireContext(), "좋아요 목록에 추가하였습니다.", Toast.LENGTH_SHORT).show()
             }
         }
