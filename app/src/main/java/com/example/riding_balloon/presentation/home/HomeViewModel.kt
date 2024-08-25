@@ -5,23 +5,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.riding_balloon.data.mapper.toChannelListData
 import com.example.riding_balloon.data.mapper.toVideoListData
 import com.example.riding_balloon.data.model.TravelSpotInfo
 import com.example.riding_balloon.data.repository.channel.ChannelRepository
-import com.example.riding_balloon.data.repository.channel.ChannelRepositoryImpl
 import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.presentation.model.ChannelListModel
 import com.example.riding_balloon.presentation.model.PopularVideoListModel
 import com.example.riding_balloon.useCases.ChannelUseCase
-import kotlinx.coroutines.Job
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.async
-import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
-    private val channelRepository: ChannelRepository = ChannelRepositoryImpl(),
-    private val channelUseCase: ChannelUseCase = ChannelUseCase(ChannelRepositoryImpl())
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val channelRepository: ChannelRepository,
+    private val channelUseCase: ChannelUseCase
 ) : ViewModel() {
     private val idList = listOf(
         "@JBKWAK", "@PaniBottle", "@im1G", "@soy_the_world", "@tripcompany93", "@jojocamping", "@CHOMAD", "@Birdmoi", "@kimhanryang97", "@YongZinCamp",
@@ -37,44 +36,13 @@ class HomeViewModel(
     private val _popularVideoList = MutableLiveData<List<PopularVideoListModel>>()
     val popularVideoList: LiveData<List<PopularVideoListModel>> = _popularVideoList
 
-    /*
-    * Case1) Job을 활용한 해결방법
-    * */
-    val jobs = mutableListOf<Job>()
-
+    // 튜터님 제안 코드 예시 : https://kkevido.tistory.com/71
     fun fetchChannel() {
         val newIdList = idList.shuffled().slice(0..5)
-
-        // Case2
-        // Case2를 활용한 이유는 -> 비즈니스 로직 분리를 위해
         viewModelScope.launch {
             val list = channelUseCase.getChannelList(newIdList)
             _channelList.value = list
         }
-
-
-        // Case1 -> Coroutine Job 활용법
-//        val currentList = _channelList.value?.toMutableList() ?: mutableListOf()
-//        newIdList.forEach { it ->
-//            val job = viewModelScope.launch {
-//                runCatching {
-//                    // 용현 튜터님이 도와주신 코드
-//                    val fetchResult = async { return@async channelRepository.getChannel(it) }
-//                    val result = fetchResult.await()
-//                    currentList.add(result.toChannelListData())
-//                    _channelList.value = currentList
-//                }.onFailure {
-//                    Log.e("💡HomeViewModel fetchChannel", "fetchChannel() onFailure: ${it.message}")
-//                }
-//            }
-//
-//            jobs.add(job)
-//        }
-//
-//        viewModelScope.launch {
-//            jobs.joinAll()
-//            _channelList.value = currentList
-//        }
     }
 
     fun getBest10List() {
@@ -91,7 +59,7 @@ class HomeViewModel(
                 _popularVideoList.value = filteredResult?.map { it.toVideoListData() }
             }.onFailure {
                 Log.e(
-                    "💡HomeViewModel fetchPopularVideoList",
+                    "💡HomeViewModel",
                     "fetchPopularVideoList() onFailure: ${it.message}"
                 )
             }

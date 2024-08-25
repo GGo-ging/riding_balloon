@@ -17,7 +17,9 @@ import com.example.riding_balloon.presentation.home.adapters.ChannelListAdapter
 import com.example.riding_balloon.presentation.home.adapters.PopularVideoListAdapter
 import com.example.riding_balloon.presentation.model.ChannelListModel
 import com.example.riding_balloon.presentation.model.PopularVideoListModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
