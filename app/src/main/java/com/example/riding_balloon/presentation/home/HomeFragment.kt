@@ -19,7 +19,9 @@ import com.example.riding_balloon.presentation.home.adapters.ChannelListAdapter
 import com.example.riding_balloon.presentation.home.adapters.PopularVideoListAdapter
 import com.example.riding_balloon.presentation.model.ChannelListModel
 import com.example.riding_balloon.presentation.model.PopularVideoListModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -27,7 +29,7 @@ class HomeFragment : Fragment() {
     private val channelListAdapter by lazy { ChannelListAdapter() }
     private val best10ListAdapter by lazy { Best10ListAdapter() }
     private val popularVideoListAdapter by lazy { PopularVideoListAdapter() }
-    private val homeViewModel by viewModels<HomeViewModel>() // fragment의 생명주기를 따르는 viewmodel
+    private val homeViewModel : HomeViewModel by viewModels() // fragment의 생명주기를 따르는 viewmodel
 
     override fun onCreateView(
         inflater: LayoutInflater,

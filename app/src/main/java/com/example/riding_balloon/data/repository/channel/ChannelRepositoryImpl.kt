@@ -3,15 +3,14 @@ package com.example.riding_balloon.data.repository.channel
 import android.util.Log
 import com.example.riding_balloon.data.model.TrendingVideoResponse
 import com.example.riding_balloon.data.model.channel.ChannelDetailsResponse
-import com.example.riding_balloon.network.RetrofitClient.youtubeApi
+import com.example.riding_balloon.data.source.remote.YoutubeApi
 import com.example.riding_balloon.presentation.home.toListData
 import com.example.riding_balloon.presentation.model.ChannelListModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class ChannelRepositoryImpl() : ChannelRepository {
+class ChannelRepositoryImpl @Inject constructor(
+    private val youtubeApi: YoutubeApi
+) : ChannelRepository {
     override suspend fun getChannel(id: String): ChannelDetailsResponse {
         return youtubeApi.getChannelDetails(id = id)
 
@@ -22,7 +21,7 @@ class ChannelRepositoryImpl() : ChannelRepository {
     }
 }
 
-class ChannelUseCase(private val channelRepository: ChannelRepository) {
+class ChannelUseCase @Inject constructor(private val channelRepository: ChannelRepository) {
     suspend fun getData(idList: List<String>): List<ChannelListModel> {
         var list: MutableList<ChannelListModel> = mutableListOf<ChannelListModel>()
         for (i in 0 until idList.size) {

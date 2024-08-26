@@ -15,6 +15,7 @@ import com.example.riding_balloon.data.repository.channel.ChannelUseCase
 import com.example.riding_balloon.data.source.local.TravelSpotManager
 import com.example.riding_balloon.presentation.model.ChannelListModel
 import com.example.riding_balloon.presentation.model.PopularVideoListModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -22,6 +23,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import java.util.UUID
+import javax.inject.Inject
 
 fun ChannelDetailsResponse.toListData(): ChannelListModel {
     return ChannelListModel(
@@ -56,9 +58,10 @@ fun TrendingVideoResponse.toListData(): PopularVideoListModel {
     )
 }
 
-class HomeViewModel(
-    private val channelRepository: ChannelRepository = ChannelRepositoryImpl(),
-    private val channelUseCase: ChannelUseCase = ChannelUseCase(ChannelRepositoryImpl()),
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val channelRepository: ChannelRepository,
+    private val channelUseCase: ChannelUseCase
 ) : ViewModel() {
     private val idList = listOf(
         "@JBKWAK",

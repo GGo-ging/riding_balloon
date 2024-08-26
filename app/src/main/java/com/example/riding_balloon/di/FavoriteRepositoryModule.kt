@@ -3,6 +3,9 @@ package com.example.riding_balloon.di
 import android.content.Context
 import com.example.riding_balloon.data.repository.FavoriteRepository
 import com.example.riding_balloon.data.repository.FavoriteRepositoryImpl
+import com.example.riding_balloon.data.repository.channel.ChannelRepository
+import com.example.riding_balloon.data.repository.channel.ChannelRepositoryImpl
+import com.example.riding_balloon.data.source.remote.YoutubeApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,4 +22,10 @@ object FavoriteRepositoryModule {
     fun provideFavoriteRepository(
         @ApplicationContext context: Context
     ) : FavoriteRepository = FavoriteRepositoryImpl(context)
+
+    @ViewModelScoped
+    @Provides
+    fun provideChannelRepository(
+        youtubeApi: YoutubeApi
+    ) : ChannelRepository = ChannelRepositoryImpl(youtubeApi)
 }

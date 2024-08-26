@@ -1,11 +1,14 @@
 package com.example.riding_balloon.di
 
+import android.content.Context
 import com.example.riding_balloon.data.source.remote.YoutubeApi
 import com.example.riding_balloon.network.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,10 +23,14 @@ object YoutubeApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context : Context): OkHttpClient {
+        //TODO cacheSize change
+        val cacheSize = 10.toLong()
+        val cache = Cache(context.cacheDir, cacheSize)
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
+            .cache(cache)
             .addInterceptor(AuthorizationInterceptor())
             .addNetworkInterceptor(interceptor)
             .build()
